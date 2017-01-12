@@ -13,7 +13,6 @@ toc_footers:
 
 includes:
   - main
-  - _errors
 
 search: true
 

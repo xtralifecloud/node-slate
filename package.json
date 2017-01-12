@@ -6,7 +6,7 @@
   "scripts": {
     "start": "gulp serve",
     "build": "gulp",
-    "deploy": "./deploy.sh"
+    "upload": "tar Ccfz build - . | ssh root@xtralife.cloud \"cd /home/docs/backend && tar xfz -\""   
   },
   "repository": {
     "type": "git",
