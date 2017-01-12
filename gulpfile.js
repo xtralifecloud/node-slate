@@ -57,7 +57,10 @@ var getPageData = function() {
       return '<link href="stylesheets/' + name + '.css" rel="stylesheet" type="text/css" media="' + media + '" />';
     },
     langs: (config.language_tabs || []).map(function(lang) {
-      return typeof lang == 'string' ? lang : lang.keys.first;
+      return typeof lang == 'string' ? lang : Object.keys(lang)[0];
+    }),
+    languages: (config.language_tabs || []).map(function(lang) {
+      return typeof lang == 'string' ? lang : lang[Object.keys(lang)[0]];
     })
   };
 };
