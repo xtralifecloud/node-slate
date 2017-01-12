@@ -1,10 +1,11 @@
 title: API Reference
 
 language_tabs:
-  - bash
-  - ruby
-  - python
-  - javascript
+  - cpp: C++
+  - cs: Unity
+  - javascript: Javascript
+  - objectivec: Objective C
+  - html: REST
 
 toc_footers:
   - <a href='#'>Sign Up for a Developer Key</a>
