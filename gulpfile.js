@@ -47,8 +47,13 @@ var getPageData = function() {
     },
     page_classes: '',
     includes: includes,
-    image_tag: function(filename, alt, className) {
-      return '<img alt="' + alt + '" class="' + className + '" src="images/' + filename + '">';
+    image_tag: function(filename, alt, className, link) {
+      var imgtag = '<img src="images/' + filename + '"';
+      if (alt) imgtag += ' alt="' + alt + '"';
+      if (className) imgtag += ' class="' + className + '"';
+      imgtag += '>';
+      if (link) imgtag = '<a href="' + link + '"> ' + imgtag + '</a>';
+      return imgtag;
     },
     javascript_include_tag: function(name) {
       return '<script src="javascripts/' + name + '.js" type="text/javascript"></script>';
