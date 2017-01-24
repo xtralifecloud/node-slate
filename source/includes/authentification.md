@@ -138,7 +138,9 @@ This function returns a JSON with details from the created player including the 
 of games, different times (`server time`, registration `time`), the `profile`, `gamer_id`and `gamer_secret` which can
 be used to login again later, ...
 
-> Result JSON:
+<aside class="success">
+Result JSON:
+</aside>
 
 ```json
 {

@@ -625,3 +625,11 @@ html, body {
 .highlight, .highlight .w {
   background-color: $code-bg;
 }
+
+.highlight.json {
+  margin-right: 40%;
+  width: 60%;
+  clear: initial;
+  float: initial;
+  background-color: #555;
+}
