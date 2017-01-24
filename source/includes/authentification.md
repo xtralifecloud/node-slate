@@ -1,20 +1,17 @@
 # Authentication
 
-You have several ways to authenticate your players. The easiest and transparent way is to use
-an `Anonymous` account. Or you can ask your players to authenticate through `email/password` or
-through a `social network`. Currently, we support `Facebook`, `Google+` and `GameCenter`, but the
-system has been designed to support any other social network or even your `own user database` if you
-already have one.
-
-Anonymous accounts can at any time be converted to an authenticated account by calling the
-Convert function. This is useful if you want to store data right from the start, without
-asking the player to authenticate when he launches the game for the first time. You will
-only propose the Convert process when the player feels confident with the game.
-
-A single profile can also be linked to several social networks. This is useful if you wish
-to merge friends from several networks in XtraLife friends database. While a profile can be
-linked to several social networks, it will always remain primilarily attached to a "master"
-social network.
+Accounts can be managed in several ways:
+1. Anonymous: the user doesn't need to enter any credentials in order to create this kind of  profile.
+It is transparent for the user, but the disadvantage is it can not be reused on another device as is.
+2. E-mail/password: users input their e-mail and a password of their choices (which is encrypted on
+XtraLife servers) in order to authenticate.
+3. Use of social networks: a generic system which can support any kind of social network. It uses the
+identifier of the social network and a token authentification that is used by XtraLife to ensure the
+identity is legit. Currently we support Facebook, Google+ and GameCenter but more can be added if
+required.
+4. External databases: for developers who already have their users in their own databases, it is
+possible to create an XtraLife profile attached to these users. Developer can also provide a script
+to authenticate users on their servers.
 
 <aside class="notice">
 JSON returned by any of the Login functions have **gamer_id** and **gamer_secret** fields,
@@ -135,7 +132,7 @@ authenticated profile.
 
 Parameter | Type | Description
 --------- | ---- | -----------
-options | JSON | An optional JSON which can contain the `thenBatch` key, if a batch is to be invoked just after the login process.
+options | JSON | An optional JSON which can contain the `thenBatch` key, if a batch is to be invoked just after the login process
 
 This function returns a JSON with details from the created player including the `network`and `network ID`, the list
 of games, different times (`server time`, registration `time`), the `profile`, `gamer_id`and `gamer_secret` which can
@@ -300,10 +297,10 @@ already exists.
 
 Parameter | Type | Description
 --------- | ---- | -----------
-network | String, required | can be any of ["anonymous", "email", "facebook", "googleplus", "gamecenter"].
+network | String, required | can be any of ["anonymous", "email", "facebook", "googleplus", "gamecenter"]
 id | String, required | the user ID for this network
 secret | String, required | the user secret/token for this network
-options | JSON | An optional JSON which can contain the `thenBatch` and `preventRegistration` keys. `thenBatch` is used to invoke a batch just after the login process, and `preventRegistration` to control if Login can create new profiles.
+options | JSON | An optional JSON which can contain the `thenBatch` and `preventRegistration` keys. `thenBatch` is used to invoke a batch just after the login process, and `preventRegistration` to control if Login can create new profiles
 
 <aside class="warning">
 In the C++ SDK, you have to use "facebookId", "googleplusId" and "gamecenterId".

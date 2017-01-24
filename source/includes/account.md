@@ -1,5 +1,15 @@
 # Account
 
+The easiest way to create a profile is to use the Anonymous one, since there is no interaction for the
+player. Players do not always want to attach games to their social networks and generally prefer to wait
+and trust the game before doing so.
+XtraLife allows you to convert an anonymous profile at any time. This way, the player benefits from
+being able to connect on several devices, and all the data he has accumulated is not lost once he
+converts his profile.
+A player can also link several social networks to his profile in order to aggregate friends in
+XtraLife database. While a profile can be linked to several social networks, it will always remain
+primilarily attached to a "master" social network.
+
 ## Convert
 
 > To convert an anonymous user to a network, use this code:
@@ -44,7 +54,7 @@ public class MyClass
     {
         // currentGamer is an object retrieved after one of the different Login functions.
 
-        currentGamer.Account.Convert(LoginNetwork.Email, "myEmail@gmail.com", "myPassword");
+        currentGamer.Account.Convert(LoginNetwork.Email, "myEmail@gmail.com", "myPassword")
         .Done(convertRes => {
             Debug.Log("Convert succeeded: " + convertRes);
         })
@@ -200,7 +210,7 @@ public class MyClass
     {
         // currentGamer is an object retrieved after one of the different Login functions.
 
-        currentGamer.Account.Link(LoginNetwork.Facebook, "myFacebookID", "myFacebookToken");
+        currentGamer.Account.Link(LoginNetwork.Facebook, "myFacebookID", "myFacebookToken")
         .Done(linkRes => {
             Debug.Log("Link succeeded: " + linkRes);
         })
@@ -254,7 +264,7 @@ letting the developer aggregate friends in a single database.
  
 Parameter | Type | Description
 --------- | ---- | -----------
-network | String, required | can be any of ["facebook", "googleplus", "gamecenter"].
+network | String, required | can be any of ["facebook", "googleplus", "gamecenter"]
 id | String, required | the user ID for this network
 secret | String, required | the user secret/token for this network
 
@@ -315,7 +325,7 @@ public class MyClass
     {
         // currentGamer is an object retrieved after one of the different Login functions.
 
-        currentGamer.Account.Unlink(LoginNetwork.Facebook);
+        currentGamer.Account.Unlink(LoginNetwork.Facebook)
         .Done(unlinkRes => {
             Debug.Log("Unlink succeeded: " + unlinkRes);
         })
@@ -424,7 +434,7 @@ public class MyClass
     {
         // currentGamer is an object retrieved after one of the different Login functions.
 
-        currentGamer.Account.ChangeEmailAddress("myNewEmail@gmail.com");
+        currentGamer.Account.ChangeEmailAddress("myNewEmail@gmail.com")
         .Done(changeEmailRes => {
             Debug.Log("Change e-mail succeeded: " + changeEmailRes);
         })
@@ -479,7 +489,7 @@ This can only be applied to a profile with social network `email`.
 
 Parameter | Type | Description
 --------- | ---- | -----------
-newEmailAddress | String, required | The new e-mail which should be used to log in again with this profile.
+newEmailAddress | String, required | The new e-mail which should be used to log in again with this profile
 
 If the operation is a success, it returns a JSON with a single key, `done` with
 value `1`.
@@ -534,7 +544,7 @@ public class MyClass
     {
         // currentGamer is an object retrieved after one of the different Login functions.
 
-        currentGamer.Account.ChangePassword("myNewPassword");
+        currentGamer.Account.ChangePassword("myNewPassword")
         .Done(changePasswordRes => {
             Debug.Log("Change password succeeded: " + changePasswordRes);
         })
@@ -590,7 +600,7 @@ This can only be applied to a profile with social network `email`.
  
 Parameter | Type | Description
 --------- | ---- | -----------
-newPassword | String, required | The new password which should be used to log in again with this profile.
+newPassword | String, required | The new password which should be used to log in again with this profile
 
 If the operation is a success, it returns a JSON with a single key, `done` with
 value `1`.
@@ -645,7 +655,7 @@ public class MyClass
     {
         // currentGamer is an object retrieved after one of the different Login functions.
 
-        currentGamer.Profile.Outline();
+        currentGamer.Profile.Outline()
         .Done(outlineRes => {
             Debug.Log("Outline: " + outlineRes);
         })
@@ -784,7 +794,7 @@ public class MyClass
         string from = "support@myCompany.com";
         string title = "Reset your password";
         string body = "You can login with this shortcode: [[SHORTCODE]]";
-        cloud.SendResetPasswordEmail(email, from, title, body);
+        cloud.SendResetPasswordEmail(email, from, title, body)
         .Done(resetPasswordRes => {
             Debug.Log("Short code sent");
         })
@@ -829,9 +839,9 @@ Authorization: Basic gamer_id:gamer_secret
 
 BODY
 {
-    "from" : "support@myCompany.com";
-    "title" : "Reset your password";
-    "body" : "You can login with this shortcode: [[SHORTCODE]]";
+    "from" : "support@myCompany.com",
+    "title" : "Reset your password",
+    "body" : "You can login with this shortcode: [[SHORTCODE]]"
 }
 ```
 
