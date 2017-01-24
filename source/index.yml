@@ -5,7 +5,7 @@ language_tabs:
   - cs: Unity
   - javascript: Javascript
   - objectivec: Objective C
-  - html: REST
+  - http: REST
 
 toc_footers:
   - <a href='https://account.clanofthecloud.com'>Sign Up for a Developer Key</a>
@@ -13,6 +13,8 @@ toc_footers:
 
 includes:
   - main
+  - authentification
+  - account
 
 search: true
 
