@@ -27,7 +27,7 @@ class MyGame
             printf("Could not find users due to error: %d - %s\n", aErrorCode, aResult->GetErrorString());
     }
 };
-````
+```
 
 ```cs
 using CotcSdk;
@@ -104,7 +104,12 @@ skip = 5. In Unity, the object returned is a PagedList<> so you don't need to ca
 object has helper functions to do it for you.
 </aside>
 
-> Result JSON in case of success:
+---
+
+<aside class="success">
+Result JSON in case of success:
+</aside>
+
 ```json
 {
   "count": 1,
@@ -150,7 +155,7 @@ class MyGame
             printf("Could not check user due to error: %d - %s\n", aErrorCode, aResult->GetErrorString());
     }
 };
-````
+```
 
 ```cs
 using CotcSdk;
@@ -219,7 +224,11 @@ id | String, required | the network id of the user to check
 This function returns a JSON with the following keys: `network`, `networkid`, `registerTime`, `registerBy`,
 `games` as an array, `profile` and `gamer_id`. 
 
-> Result JSON in case of success:
+---
+
+<aside class="success">
+Result JSON in case of success:
+</aside>
 
 ```json
 {
@@ -243,7 +252,9 @@ This function returns a JSON with the following keys: `network`, `networkid`, `r
 }
 ```
 
-> Result JSON in case of failure:
+<aside class="warning">
+Result JSON in case of failure:
+</aside>
 
 ```json
 {

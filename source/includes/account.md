@@ -43,7 +43,7 @@ class MyGame
             printf("Could not convert account due to error: %d - %s\n", aErrorCode, aResult->GetErrorString());
     }
 };
-````
+```
 
 ```cs
 using CotcSdk;
@@ -121,7 +121,11 @@ This function returns a JSON with 2 keys. If the operation is a success, first k
 value `1`, and second key is `gamer` with value the same JSON as returned by one of the Login functions.
 If the operation is a failure, the JSON returned contains the keys `name` and `message`.
 
-> Result JSON in case of success:
+---
+
+<aside class="success">
+Result JSON in case of success:
+</aside>
 
 ```json
 {
@@ -163,7 +167,9 @@ If the operation is a failure, the JSON returned contains the keys `name` and `m
 	"_httpcode": 200
 }
 ```
-> Result JSON in case of failure:
+<aside class="warning">
+Result JSON in case of failure:
+</aside>
 
 ```json
 {
@@ -199,7 +205,7 @@ class MyGame
             printf("Link failed due to error: %d - %s\n", aErrorCode, aResult->GetErrorString());
     }
 };
-````
+```
 
 ```cs
 using CotcSdk;
@@ -276,14 +282,21 @@ If the operation is a success, it returns a JSON with a single key, `done` with
 value `1`.
 If the operation is a failure, the JSON returned contains the keys `name` and `message`.
 
-> Result JSON in case of success:
+---
+
+<aside class="success">
+Result JSON in case of success:
+</aside>
 
 ```json
 {
 	"done": 1
 }
+
 ```
-> Result JSON in case of failure:
+<aside class="warning">
+Result JSON in case of failure:
+</aside>
 
 ```json
 {
@@ -314,7 +327,7 @@ class MyGame
             printf("Unlink failed due to error: %d - %s\n", aErrorCode, aResult->GetErrorString());
     }
 };
-````
+```
 
 ```cs
 using CotcSdk;
@@ -385,14 +398,21 @@ If the operation is a success, it returns a JSON with a single key, `done` with
 value `1`.
 If the operation is a failure, the JSON returned contains the keys `name` and `message`.
 
-> Result JSON in case of success:
+---
+
+<aside class="success">
+Result JSON in case of success:
+</aside>
 
 ```json
 {
 	"done": 1
 }
+
 ```
-> Result JSON in case of failure:
+<aside class="warning">
+Result JSON in case of failure:
+</aside>
 
 ```json
 {
@@ -423,7 +443,7 @@ class MyGame
             printf("Change e-mail failed due to error: %d - %s\n", aErrorCode, aResult->GetErrorString());
     }
 };
-````
+```
 
 ```cs
 using CotcSdk;
@@ -495,14 +515,20 @@ If the operation is a success, it returns a JSON with a single key, `done` with
 value `1`.
 If the operation is a failure, the JSON returned contains the keys `name` and `message`.
 
-> Result JSON in case of success:
+---
+
+<aside class="success">
+Result JSON in case of success:
+</aside>
 
 ```json
 {
 	"done": 1
 }
 ```
-> Result JSON in case of failure:
+<aside class="warning">
+Result JSON in case of failure:
+</aside>
 
 ```json
 {
@@ -533,7 +559,7 @@ class MyGame
             printf("Change ChangePassword failed due to error: %d - %s\n", aErrorCode, aResult->GetErrorString());
     }
 };
-````
+```
 
 ```cs
 using CotcSdk;
@@ -606,14 +632,21 @@ If the operation is a success, it returns a JSON with a single key, `done` with
 value `1`.
 If the operation is a failure, the JSON returned contains the keys `name` and `message`.
 
-> Result JSON in case of success:
+---
+
+<aside class="success">
+Result JSON in case of success:
+</aside>
 
 ```json
 {
 	"done": 1
 }
 ```
-> Result JSON in case of failure:
+
+<aside class="warning">
+Result JSON in case of failure:
+</aside>
 
 ```json
 {
@@ -644,7 +677,7 @@ class MyGame
             printf("Outline failed due to error: %d - %s\n", aErrorCode, aResult->GetErrorString());
     }
 };
-````
+```
 
 ```cs
 using CotcSdk;
@@ -709,7 +742,11 @@ If the operation is a success, it returns a JSON with a single key, `outline` wi
 a JSON containing all the fields described above.
 If the operation is a failure, the JSON returned contains the keys `name` and `message`.
 
-> Result JSON in case of success:
+---
+
+<aside class="success">
+Result JSON in case of success:
+</aside>
 
 ```json
 {
@@ -742,7 +779,10 @@ If the operation is a failure, the JSON returned contains the keys `name` and `m
   }
 }
 ```
-> Result JSON in case of failure:
+
+<aside class="warning">
+Result JSON in case of failure:
+</aside>
 
 ```json
 {
@@ -779,7 +819,7 @@ class MyGame
             printf("Short code sending failed due to error: %d - %s\n", aErrorCode, aResult->GetErrorString());
     }
 };
-````
+```
 
 ```cs
 using CotcSdk;
@@ -864,7 +904,11 @@ body | String, required | the body of the e-mail being sent
 
 If the operation is a success, it returns a JSON with a single key, `done` with value 1.
 
-> Result JSON in case of success:
+---
+@
+<aside class="success">
+Result JSON in case of success:
+</aside>
 
 ```json
 {

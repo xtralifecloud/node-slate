@@ -51,7 +51,7 @@ class MyGame
             printf("Could not login due to error: %d - %s\n", aErrorCode, aResult->GetErrorString());
     }
 };
-````
+```
 
 ```cs
 using CotcSdk;
@@ -138,8 +138,10 @@ This function returns a JSON with details from the created player including the 
 of games, different times (`server time`, registration `time`), the `profile`, `gamer_id`and `gamer_secret` which can
 be used to login again later, ...
 
+---
+
 <aside class="success">
-Result JSON:
+Result JSON in case of success:
 </aside>
 
 ```json
@@ -202,7 +204,7 @@ class MyGame
             printf("Could not login due to error: %d - %s\n", aErrorCode, aResult->GetErrorString());
     }
 };
-````
+```
 
 ```cs
 using CotcSdk;
@@ -316,7 +318,11 @@ Since the profile may already exists, there is another key which can bereturned 
 has some keys in its GamerVFS, then these keys will be inserted just after the `profile`key, and ordered by domains.
 </aside>
 
-> Result JSON:
+---
+
+<aside class="success">
+Result JSON in case of success:
+</aside>
 
 ```json
 {
@@ -397,7 +403,7 @@ class MyGame
             printf("Could not resume session due to error: %d - %s\n", aErrorCode, aResult->GetErrorString());
     }
 };
-````
+```
 
 ```cs
 using CotcSdk;
@@ -502,7 +508,11 @@ Since the profile may already exists, there is another key which can bereturned 
 has some keys in its GamerVFS, then these keys will be inserted just after the `profile`key, and ordered by domains.
 </aside>
 
-> Result JSON:
+---
+
+<aside class="success">
+Result JSON in case of success:
+</aside>
 
 ```json
 {
@@ -582,7 +592,7 @@ class MyGame
             printf("Could not login due to error: %d - %s\n", aErrorCode, aResult->GetErrorString());
     }
 };
-````
+```
 
 ```cs
 using CotcSdk;
@@ -683,7 +693,11 @@ Since the profile may already exists, there is another key which can bereturned 
 has some keys in its GamerVFS, then these keys will be inserted just after the `profile`key, and ordered by domains.
 </aside>
 
-> Result JSON:
+---
+
+<aside class="success">
+Result JSON in case of success:
+</aside>
 
 ```json
 {
@@ -751,7 +765,7 @@ class MyGame
           printf("Could not log out due to error: %d - %s\n", aErrorCode, aResult->GetErrorString());
     }
 };
-````
+```
 
 ```cs
 using CotcSdk;
@@ -823,7 +837,11 @@ Parameter | Type | Description
 
 This function returns an empty JSON.
 
-> Result JSON:
+---
+
+<aside class="success">
+Result JSON in case of success:
+</aside>
 
 ```json
 {
