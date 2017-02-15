@@ -38,7 +38,7 @@ public class MyClass
     {
         // cloud is an object retrieved at the beginning of the game through the CotcGameObject object.
 
-        Cloud.ListUsers("matchPattern", 10, 0)
+        cloud.ListUsers("matchPattern", 10, 0)
         .Done(listUsersRes =>
         {
             foreach (var userInfo in listUsersRes)
@@ -166,7 +166,7 @@ public class MyClass
     {
         // cloud is an object retrieved at the beginning of the game through the CotcGameObject object.
 
-        Cloud.UserExists("email", "myEmail@gmail.com")
+        cloud.UserExists("email", "myEmail@gmail.com")
         .Done(userExistsRes =>
         {
             foreach (var userInfo in result)
