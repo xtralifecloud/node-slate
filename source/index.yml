@@ -23,6 +23,8 @@ includes:
   - friends
   - achievements
   - referral
+  - batch
+  - match
 
 search: true
 
