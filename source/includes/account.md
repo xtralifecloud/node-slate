@@ -57,8 +57,7 @@ public class MyClass
         currentGamer.Account.Convert(LoginNetwork.Email, "myEmail@gmail.com", "myPassword")
         .Done(convertRes => {
             Debug.Log("Convert succeeded: " + convertRes);
-        })
-        .Catch(ex => {
+        }, ex => {
             // The exception should always be CotcException
             CotcException error = (CotcException)ex;
             Debug.LogError("Failed to convert: " + error.ErrorCode + " (" + error.ErrorInformation + ")");
@@ -219,8 +218,7 @@ public class MyClass
         currentGamer.Account.Link(LoginNetwork.Facebook, "myFacebookID", "myFacebookToken")
         .Done(linkRes => {
             Debug.Log("Link succeeded: " + linkRes);
-        })
-        .Catch(ex => {
+        }, ex => {
             // The exception should always be CotcException
             CotcException error = (CotcException)ex;
             Debug.LogError("Failed to link: " + error.ErrorCode + " (" + error.ErrorInformation + ")");
@@ -341,8 +339,7 @@ public class MyClass
         currentGamer.Account.Unlink(LoginNetwork.Facebook)
         .Done(unlinkRes => {
             Debug.Log("Unlink succeeded: " + unlinkRes);
-        })
-        .Catch(ex => {
+        }, ex => {
             // The exception should always be CotcException
             CotcException error = (CotcException)ex;
             Debug.LogError("Failed to unlink: " + error.ErrorCode + " (" + error.ErrorInformation + ")");
@@ -457,8 +454,7 @@ public class MyClass
         currentGamer.Account.ChangeEmailAddress("myNewEmail@gmail.com")
         .Done(changeEmailRes => {
             Debug.Log("Change e-mail succeeded: " + changeEmailRes);
-        })
-        .Catch(ex => {
+        }, ex => {
             // The exception should always be CotcException
             CotcException error = (CotcException)ex;
             Debug.LogError("Failed to change e-mail: " + error.ErrorCode + " (" + error.ErrorInformation + ")");
@@ -573,8 +569,7 @@ public class MyClass
         currentGamer.Account.ChangePassword("myNewPassword")
         .Done(changePasswordRes => {
             Debug.Log("Change password succeeded: " + changePasswordRes);
-        })
-        .Catch(ex => {
+        }, ex => {
             // The exception should always be CotcException
             CotcException error = (CotcException)ex;
             Debug.LogError("Failed to change password: " + error.ErrorCode + " (" + error.ErrorInformation + ")");
@@ -691,8 +686,7 @@ public class MyClass
         currentGamer.Profile.Outline()
         .Done(outlineRes => {
             Debug.Log("Outline: " + outlineRes);
-        })
-        .Catch(ex => {
+        }, ex => {
             // The exception should always be CotcException
             CotcException error = (CotcException)ex;
             Debug.LogError("Outline failed due to error: " + error.ErrorCode + " (" + error.ErrorInformation + ")");
@@ -837,8 +831,7 @@ public class MyClass
         cloud.SendResetPasswordEmail(email, from, title, body)
         .Done(resetPasswordRes => {
             Debug.Log("Short code sent");
-        })
-        .Catch(ex => {
+        }, ex => {
             // The exception should always be CotcException
             CotcException error = (CotcException)ex;
             Debug.LogError("Short code sending failed due to error: " + error.ErrorCode + " (" + error.ErrorInformation + ")");

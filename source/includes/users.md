@@ -45,8 +45,7 @@ public class MyClass
             {
                 Debug.Log("User: " + userInfo);
             }
-        })
-        .Catch(ex => {
+        }, ex => {
             // The exception should always be CotcException
             CotcException error = (CotcException)ex;
             Debug.LogError("Failed to list users: " + error.ErrorCode + " (" + error.ErrorInformation + ")");
@@ -173,8 +172,7 @@ public class MyClass
             {
                 Debug.Log("User: " + userExistsRes);
             }
-        })
-        .Catch(ex => {
+        }, ex => {
             // The exception should always be CotcException
             CotcException error = (CotcException)ex;
             Debug.LogError("Failed to check user: " + error.ErrorCode + " (" + error.ErrorInformation + ")");

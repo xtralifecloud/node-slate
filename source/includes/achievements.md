@@ -46,8 +46,7 @@ public class MyClass
 			foreach (var achievement in listAchievementsRes) {
 				Debug.Log(achievement.Key + " : " + achievement.Value.Config.ToString());
 			}
-		})
-        .Catch(ex => {
+		}, ex => {
             // The exception should always be CotcException
             CotcException error = (CotcException)ex;
             Debug.LogError("Could not list achievements: " + error.ErrorCode + " (" + error.ErrorInformation + ")");
@@ -177,8 +176,7 @@ public class MyClass
         currentGamer.Achievements.Domain ("private").AssociateData ("TestAchievement", Bundle.CreateObject("OneShot", true)).Done(setAchievementDataRes => {
 			Debug.Log("Custom information" + setAchievementDataRes.GamerData);
 			}
-		})
-        .Catch(ex => {
+		}, ex => {
             // The exception should always be CotcException
             CotcException error = (CotcException)ex;
             Debug.LogError("Could not set custom information: " + error.ErrorCode + " (" + error.ErrorInformation + ")");

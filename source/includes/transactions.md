@@ -59,8 +59,7 @@ public class MyClass
         .Done(postTransactionRes =>
         {
             Debug.Log("Transaction posted: " + postTransactionRes);
-        })
-        .Catch(ex => {
+        }, ex => {
             // The exception should always be CotcException
             CotcException error = (CotcException)ex;
             Debug.LogError("Failed post transaction: " + error.ErrorCode + " (" + error.ErrorInformation + ")");
@@ -204,8 +203,7 @@ public class MyClass
         .Done(listTransactionsRes =>
         {
             Debug.Log("List of transactions: " + listTransactionsRes);
-        })
-        .Catch(ex => {
+        }, ex => {
             // The exception should always be CotcException
             CotcException error = (CotcException)ex;
             Debug.LogError("Could not list transactions: " + error.ErrorCode + " (" + error.ErrorInformation + ")");

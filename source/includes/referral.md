@@ -42,8 +42,7 @@ public class MyClass
 
         currentGamer.Godfather.Domain ("private").GenerateCode ().Done(getReferralCodeRes => {
 			Debug.Log("Referral code: " + getReferralCodeRes);
-		})
-        .Catch(ex => {
+		}, ex => {
             // The exception should always be CotcException
             CotcException error = (CotcException)ex;
             Debug.LogError("Could not get referral code: " + error.ErrorCode + " (" + error.ErrorInformation + ")");
@@ -149,8 +148,7 @@ public class MyClass
         currentGamer.Godfather.Domain ("private").UseCode ("nYCIOQ5v", bundle).Done(useReferralCodeRes => {
 			Debug.Log("Use referral code: " + useReferralCodeRes.GamerData);
 			}
-		})
-        .Catch(ex => {
+		}, ex => {
             // The exception should always be CotcException
             CotcException error = (CotcException)ex;
             Debug.LogError("Could not use referral code: " + error.ErrorCode + " (" + error.ErrorInformation + ")");
@@ -273,8 +271,7 @@ public class MyClass
 
         currentGamer.Godfather.Domain ("private").GetGodfather ().Done(getGodfatherRes => {
 			Debug.Log("Godfather: " + getGodfatherRes);
-		})
-        .Catch(ex => {
+		}, ex => {
             // The exception should always be CotcException
             CotcException error = (CotcException)ex;
             Debug.LogError("Could not get godfather: " + error.ErrorCode + " (" + error.ErrorInformation + ")");
@@ -377,8 +374,7 @@ public class MyClass
 
         currentGamer.Godfather.Domain ("private").GetGodchildren ().Done(getGodchildrenRes => {
 			Debug.Log("Godchildren: " + getGodchildrenRes);
-		})
-        .Catch(ex => {
+		}, ex => {
             // The exception should always be CotcException
             CotcException error = (CotcException)ex;
             Debug.LogError("Could not get godchildren: " + error.ErrorCode + " (" + error.ErrorInformation + ")");

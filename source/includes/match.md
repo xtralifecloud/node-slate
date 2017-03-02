@@ -111,10 +111,9 @@ public class MyClass
             array[i-1] = new Bundle(i);
         }
         currentGamer.Matches.Domain("private").Create(3, "Sample match for testing", Bundle.CreateObject("startup", "globalState"), Bundle.CreateObject("newRules", 1), Bundle.CreateArray(array))
-           .Done(createMatchRes => {
-               Debug.Log("Match created: " + createMatchRes);
-           })
-        .Catch(ex => {
+        .Done(createMatchRes => {
+            Debug.Log("Match created: " + createMatchRes);
+        }, ex => {
             // The exception should always be CotcException
             CotcException error = (CotcException)ex;
             Debug.LogError("Could not create match: " + error.ErrorCode + " (" + error.ErrorInformation + ")");
@@ -191,7 +190,7 @@ BODY
         "startup" : "globalState"
     },
     "customProperties" : {
-        newRules : 1
+        "newRules" : 1
     },
     "shoe" : [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 }
@@ -214,7 +213,7 @@ and its profile, the state of the match, the description, the global state, ... 
 
 ---
 
-<aside class="notice">
+<aside class="success">
 Result JSON in case of success:
 </aside>
 
@@ -314,8 +313,7 @@ public class MyClass
         currentGamer.Matches.Domain("private").List(true, false, true, false, 10, 0)
            .Done(listMatchesRes => {
                Debug.Log("List of matches: " + listMatchesRes);
-           })
-        .Catch(ex => {
+           }, ex => {
             // The exception should always be CotcException
             CotcException error = (CotcException)ex;
             Debug.LogError("Could not list matches: " + error.ErrorCode + " (" + error.ErrorInformation + ")");
@@ -391,7 +389,7 @@ to load it independently. List only gives some of the information.
 
 ---
 
-<aside class="notice">
+<aside class="success">
 Result JSON in case of success:
 </aside>
 
@@ -479,8 +477,7 @@ public class MyClass
         currentGamer.Matches.Fetch("589df42f98a6d4427971d66d")
            .Done(loadMatchRes => {
                Debug.Log("Match loaded: " + loadMatchRes);
-           })
-        .Catch(ex => {
+           }, ex => {
             // The exception should always be CotcException
             CotcException error = (CotcException)ex;
             Debug.LogError("Could not load: " + error.ErrorCode + " (" + error.ErrorInformation + ")");
@@ -550,7 +547,7 @@ participating players, `invited`, a JSON array of all invited players in the mat
 
 ---
 
-<aside class="notice">
+<aside class="success">
 Result JSON in case of success:
 </aside>
 
@@ -646,10 +643,9 @@ public class MyClass
 
         bool deleteMatch = false;
         match.Finish(deleteMatch, null)
-           .Done(finishMatchRes => {
-               Debug.Log("Match finished: " + finishMatchRes);
-           })
-        .Catch(ex => {
+        .Done(finishMatchRes => {
+            Debug.Log("Match finished: " + finishMatchRes);
+        }, ex => {
             // The exception should always be CotcException
             CotcException error = (CotcException)ex;
             Debug.LogError("Could not finish match: " + error.ErrorCode + " (" + error.ErrorInformation + ")");
@@ -724,7 +720,7 @@ This function returns a JSON with the key `match`, including only the `_id`, the
 
 ---
 
-<aside class="notice">
+<aside class="success">
 Result JSON in case of success:
 </aside>
 
@@ -789,10 +785,9 @@ public class MyClass
         // currentGamer is an object retrieved after one of the different Login functions.
 
         currentGamer.Matches.Delete("589df75598a6d4427971d66f")
-           .Done(deleteMatchRes => {
-               Debug.Log("Match deleted: " + deleteMatchRes);
-           })
-        .Catch(ex => {
+        .Done(deleteMatchRes => {
+            Debug.Log("Match deleted: " + deleteMatchRes);
+        }, ex => {
             // The exception should always be CotcException
             CotcException error = (CotcException)ex;
             Debug.LogError("Could not delete match: " + error.ErrorCode + " (" + error.ErrorInformation + ")");
@@ -858,7 +853,7 @@ This function returns a JSON with the key `done` and value 1.
 
 ---
 
-<aside class="notice">
+<aside class="success">
 Result JSON in case of success:
 </aside>
 
@@ -920,10 +915,9 @@ public class MyClass
         // match is a Match object retrieved after a call to GamerMatches::Create, GamerMatches::Fetch or GamerMatches::Join
 
         match.InvitePlayer("582ce75598a6d4937152d69a")
-           .Done(inviteToMatchRes => {
-               Debug.Log("Player invited: " + inviteToMatchRes);
-           })
-        .Catch(ex => {
+        .Done(inviteToMatchRes => {
+            Debug.Log("Player invited: " + inviteToMatchRes);
+        }, ex => {
             // The exception should always be CotcException
             CotcException error = (CotcException)ex;
             Debug.LogError("Could not invite player: " + error.ErrorCode + " (" + error.ErrorInformation + ")");
@@ -996,7 +990,7 @@ This function returns a JSON with the key `match`, including only the `_id`, the
 
 ---
 
-<aside class="notice">
+<aside class="success">
 Result JSON in case of success:
 </aside>
 
@@ -1061,10 +1055,9 @@ public class MyClass
         // currentGamer is an object retrieved after one of the different Login functions.
 
         currentGamer.Matches.Join("589df75598a6d4427971d66f")
-           .Done(joinMatchRes => {
+        .Done(joinMatchRes => {
                Debug.Log("Joined match: " + joinMatchRes);
-           })
-        .Catch(ex => {
+        }, ex => {
             // The exception should always be CotcException
             CotcException error = (CotcException)ex;
             Debug.LogError("Could not join match: " + error.ErrorCode + " (" + error.ErrorInformation + ")");
@@ -1137,7 +1130,7 @@ This function returns a JSON with the key `match`, with all the usual properties
 
 ---
 
-<aside class="notice">
+<aside class="success">
 Result JSON in case of success:
 </aside>
 
@@ -1260,10 +1253,9 @@ public class MyClass
         // currentGamer is an object retrieved after one of the different Login functions.
 
         currentGamer.Matches.DismissInvitation("589df75598a6d4427971d66f")
-           .Done(dismissInviteRes => {
-               Debug.Log("Invite dismissed: " + dismissInviteRes);
-           })
-        .Catch(ex => {
+        .Done(dismissInviteRes => {
+            Debug.Log("Invite dismissed: " + dismissInviteRes);
+        }, ex => {
             // The exception should always be CotcException
             CotcException error = (CotcException)ex;
             Debug.LogError("Could not dismiss invite: " + error.ErrorCode + " (" + error.ErrorInformation + ")");
@@ -1328,7 +1320,7 @@ This function returns a JSON with the key `match`, including only the `_id`, the
 
 ---
 
-<aside class="notice">
+<aside class="success">
 Result JSON in case of success:
 </aside>
 
@@ -1402,8 +1394,7 @@ public class MyClass
         match.PostMove(move, globalState)
            .Done(postMoveRes => {
                Debug.Log("Move posted: " + postMoveRes);
-           })
-        .Catch(ex => {
+        , ex => {
             // The exception should always be CotcException
             CotcException error = (CotcException)ex;
             Debug.LogError("Could not post move: " + error.ErrorCode + " (" + error.ErrorInformation + ")");
@@ -1492,7 +1483,7 @@ This function returns a JSON with the key `match`, including only the `_id`, the
 
 ---
 
-<aside class="notice">
+<aside class="success">
 Result JSON in case of success:
 </aside>
 
@@ -1561,8 +1552,7 @@ public class MyClass
         match.DrawFromShoe(3)
            .Done(drawFromShoeRes => {
                Debug.Log("Draw from shoe: " + drawFromShoeRes);
-           })
-        .Catch(ex => {
+        }, ex => {
             // The exception should always be CotcException
             CotcException error = (CotcException)ex;
             Debug.LogError("Could not draw from shoe: " + error.ErrorCode + " (" + error.ErrorInformation + ")");
@@ -1635,7 +1625,7 @@ This function returns a JSON with the keys `match`, including only the `_id`, th
 
 ---
 
-<aside class="notice">
+<aside class="success">
 Result JSON in case of success:
 </aside>
 
@@ -1706,8 +1696,7 @@ public class MyClass
         match.Leave()
            .Done(leaveMatchRes => {
                Debug.Log("Left the match: " + leaveMatchRes);
-           })
-        .Catch(ex => {
+           }, ex => {
             // The exception should always be CotcException
             CotcException error = (CotcException)ex;
             Debug.LogError("Could not leave the match: " + error.ErrorCode + " (" + error.ErrorInformation + ")");
@@ -1776,7 +1765,7 @@ This function returns a JSON with the key `match`, including only the `_id`, the
 
 ---
 
-<aside class="notice">
+<aside class="success">
 Result JSON in case of success:
 </aside>
 

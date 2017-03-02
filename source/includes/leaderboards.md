@@ -56,8 +56,7 @@ public class MyClass
         .Done(postScoreRes =>
         {
             Debug.Log("Post score: ") + postScoreRes;
-        })
-        .Catch(ex => {
+        }, ex => {
             // The exception should always be CotcException
             CotcException error = (CotcException)ex;
             Debug.LogError("Could not post score: " + error.ErrorCode + " (" + error.ErrorInformation + ")");
@@ -171,8 +170,8 @@ public class MyClass
         .Done(getRankRes =>
         {
             Debug.Log("Rank for score: ") + getRankRes["rank"];
-        })
-        .Catch(ex => {
+        }
+        ex => {
             // The exception should always be CotcException
             CotcException error = (CotcException)ex;
             Debug.LogError("Could not get rank for score: " + error.ErrorCode + " (" + error.ErrorInformation + ")");
@@ -277,8 +276,7 @@ public class MyClass
         {
             foreach(var score in bestHighScoresRes)
                 Debug.Log(score.Rank + ". " + score.GamerInfo["profile"]["displayName"] + ": " + score.Value);
-        })
-        .Catch(ex => {
+        }, ex => {
             // The exception should always be CotcException
             CotcException error = (CotcException)ex;
             Debug.LogError("Could not get best high scores: " + error.ErrorCode + " (" + error.ErrorInformation + ")");
@@ -425,8 +423,7 @@ public class MyClass
         {
             foreach(var score in friendsBestHighScoresRes)
                 Debug.Log(score.Rank + ". " + score.GamerInfo["profile"]["displayName"] + ": " + score.Value);
-        })
-        .Catch(ex => {
+        }, gex => {
             // The exception should always be CotcException
             CotcException error = (CotcException)ex;
             Debug.LogError("Could not get friends best high scores: " + error.ErrorCode + " (" + error.ErrorInformation + ")");
@@ -561,8 +558,7 @@ public class MyClass
         {
             foreach(var score in centeredScoresRes)
                 Debug.Log(score.Rank + ". " + score.GamerInfo["profile"]["displayName"] + ": " + score.Value);
-        })
-        .Catch(ex => {
+        }, ex => {
             // The exception should always be CotcException
             CotcException error = (CotcException)ex;
             Debug.LogError("Could not get centered scores: " + error.ErrorCode + " (" + error.ErrorInformation + ")");
@@ -707,9 +703,8 @@ public class MyClass
         .Done(listUserBestScoresRes =>
         {
             foreach(var score in listUserBestScoresRes)
-                Debug.Log(score.Key + ": " + score.Value["score"];
-        })
-        .Catch(ex => {
+                Debug.Log(score.Key + ": " + score.Value.Value);
+        }, ex => {
             // The exception should always be CotcException
             CotcException error = (CotcException)ex;
             Debug.LogError("Could not get user best scores: " + error.ErrorCode + " (" + error.ErrorInformation + ")");

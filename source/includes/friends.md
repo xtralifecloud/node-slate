@@ -44,8 +44,7 @@ public class MyClass
         .Done(listFriendsRes =>
         {
             Debug.Log("List of friends: " + listFriendsRes);
-        })
-        .Catch(ex => {
+        }, ex => {
             // The exception should always be CotcException
             CotcException error = (CotcException)ex;
             Debug.LogError("Could not list friends: " + error.ErrorCode + " (" + error.ErrorInformation + ")");
@@ -153,8 +152,7 @@ public class MyClass
         .Done(listFriendsRes =>
         {
             Debug.Log("List of blacklisted users: " + listFriendsRes);
-        })
-        .Catch(ex => {
+        }, ex => {
             // The exception should always be CotcException
             CotcException error = (CotcException)ex;
             Debug.LogError("Could not list blacklisted users: " + error.ErrorCode + " (" + error.ErrorInformation + ")");
@@ -266,8 +264,7 @@ public class MyClass
         .Done(addFriendRes =>
         {
             Debug.Log("Relationship modified: " + listTransactionsRes);
-        })
-        .Catch(ex => {
+        }, ex => {
             // The exception should always be CotcException
             CotcException error = (CotcException)ex;
             Debug.LogError("Could not modify relationship: " + error.ErrorCode + " (" + error.ErrorInformation + ")");
@@ -387,8 +384,7 @@ public class MyClass
         .Done(listNetworkFriendsRes =>
         {
             Debug.Log("Network friends: " + listNetworkFriendsRes);
-        })
-        .Catch(ex => {
+        }, ex => {
             // The exception should always be CotcException
             CotcException error = (CotcException)ex;
             Debug.LogError("Could not list network friends: " + error.ErrorCode + " (" + error.ErrorInformation + ")");

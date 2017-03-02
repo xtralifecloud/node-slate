@@ -57,8 +57,7 @@ public class MyClass
         cloud.Game.Batches.Domain("private").Run("myGameBatch", param)
         .Done(invokeGameBatchRes => {
             Debug.Log("Result of game batch: " + invokeGameBatchRes);
-		})
-        .Catch(ex => {
+		}, ex => {
             // The exception should always be CotcException
             CotcException error = (CotcException)ex;
             Debug.LogError("Could not invoke game batch: " + error.ErrorCode + " (" + error.ErrorInformation + ")");
@@ -169,8 +168,7 @@ public class MyClass
         currentGamer.Batches.Domain("private").Run("myUserBatch", param)
         .Done(invokeUserBatchRes => {
             Debug.Log("Result of user batch: " + invokeUserBatchRes);
-		})
-        .Catch(ex => {
+		}, ex => {
             // The exception should always be CotcException
             CotcException error = (CotcException)ex;
             Debug.LogError("Could not invoke user batch: " + error.ErrorCode + " (" + error.ErrorInformation + ")");

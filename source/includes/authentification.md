@@ -68,8 +68,7 @@ public class MyClass
                 Debug.Log("Signed in succeeded (ID = " + Gamer.GamerId + ")");
                 Debug.Log("Login data: " + Gamer);
                 Debug.Log("Server time: " + Gamer["servertime"]);
-            })
-            .Catch(ex => {
+            }, ex => {
                 // The exception should always be CotcException
                 CotcException error = (CotcException)ex;
                 Debug.LogError("Failed to login: " + error.ErrorCode + " (" + error.HttpStatusCode + ")");
@@ -224,8 +223,7 @@ public class MyClass
                 Debug.Log("Signed in succeeded (ID = " + Gamer.GamerId + ")");
                 Debug.Log("Login data: " + Gamer);
                 Debug.Log("Server time: " + Gamer["servertime"]);
-            })
-            .Catch(ex => {
+            }, ex => {
                 // The exception should always be CotcException
                 CotcException error = (CotcException)ex;
                 Debug.LogError("Failed to login: " + error.ErrorCode + " (" + error.HttpStatusCode + ")");
@@ -422,8 +420,7 @@ public class MyClass
                 Debug.Log("Signed in succeeded (ID = " + Gamer.GamerId + ")");
                 Debug.Log("Login data: " + Gamer);
                 Debug.Log("Server time: " + Gamer["servertime"]);
-            })
-            .Catch(ex => {
+            }, ex => {
                 // The exception should always be CotcException
                 CotcException error = (CotcException)ex;
                 Debug.LogError("Failed to login: " + error.ErrorCode + " (" + error.HttpStatusCode + ")");
@@ -609,8 +606,7 @@ public class MyClass
                 Debug.Log("Signed in succeeded (ID = " + Gamer.GamerId + ")");
                 Debug.Log("Login data: " + Gamer);
                 Debug.Log("Server time: " + Gamer["servertime"]);
-            })
-            .Catch(ex => {
+            }, ex => {
                 // The exception should always be CotcException
                 CotcException error = (CotcException)ex;
                 Debug.LogError("Failed to login: " + error.ErrorCode + " (" + error.HttpStatusCode + ")");
@@ -780,8 +776,7 @@ public class MyClass
             Cloud.Logout()
             .Done(result => {
                 Debug.Log("Logout succeeded");
-            })
-            .Catch(ex => {
+            }, ex => {
                 // The exception should always be CotcException
                 CotcException error = (CotcException)ex;
                 Debug.LogError("Failed to logout: " + error.ErrorCode + " (" + error.HttpStatusCode + ")");
