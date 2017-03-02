@@ -53,8 +53,7 @@ public class MyClass
         {
             Bundle result = getUserValueRes["result"];
             Debug.Log("User data: ") + result;
-        })
-        .Catch(ex => {
+        }, ex => {
             // The exception should always be CotcException
             CotcException error = (CotcException)ex;
             Debug.LogError("Could not get user data due to error: " + error.ErrorCode + " (" + error.ErrorInformation + ")");
@@ -64,6 +63,24 @@ public class MyClass
 ```
 
 ```objectivec
+#import "XLGamerVFS.h"
+
+void GetUserValue()
+{
+    // gamer is a XLGamer instance obtained by a call to one of the Login methods
+
+    XLGamerVFS* vfs = [[XLGamerVFS alloc] initWithGamer:gamer andDomain:@"private"];
+    [vfs getValue:@"myKey" completionHandler:^(NSError *error, NSInteger statusCode, NSDictionary *getUserValueRes) {
+        if(error == nil)
+        {
+            NSLog(@"User data: %@", [getUserValueRes description]);
+        }
+        else
+        {
+            NSLog(@"Could not get user data: %@", [error description]);
+        }
+    }];
+}
 ```
 
 ```javascript
@@ -173,8 +190,7 @@ public class MyClass
         .Done(setUserValueRes =>
         {
             Debug.Log("User data set: ") + setUserValueRes;
-        })
-        .Catch(ex => {
+        }, ex => {
             // The exception should always be CotcException
             CotcException error = (CotcException)ex;
             Debug.LogError("Could not set user data due to error: " + error.ErrorCode + " (" + error.ErrorInformation + ")");
@@ -184,6 +200,24 @@ public class MyClass
 ```
 
 ```objectivec
+#import "XLGamerVFS.h"
+
+void SetUserValue()
+{
+    // gamer is a XLGamer instance obtained by a call to one of the Login methods
+
+    XLGamerVFS* vfs = [[XLGamerVFS alloc] initWithGamer:gamer andDomain:@"private"];
+    [vfs setValue:@"myKey" withValue:@"myValue" completionHandler:^(NSError *error, NSInteger statusCode, NSDictionary *setUserValueRes) {
+        if(error == nil)
+        {
+            NSLog(@"User data set: %@", [setUserValueRes description]);
+        }
+        else
+        {
+            NSLog(@"Could not set user data: %@", [error description]);
+        }
+    }];
+}
 ```
 
 ```javascript
@@ -214,12 +248,16 @@ BODY
 "myValue"
 ```
 
-This function is used to store some user data in the User VFS.
+This function is used to store some user data in the User VFS. Storage uses JSON objects, which means that you can also pass a string
+(like in the samples above) or a number, or a boolean. `CHJSON` in C++ can be used to store full JSON objects or simple types, just like
+the `Bundle` in C#. For ObjectiveC, `NSDictionary` can not store simple types, which is why the ObjectiveC method take a `(id)` parameter
+for the value, and you can pass it a `NSDictionary`, a `NSString` or a `NSNumber` (which also manages the boolean).
 
 Parameter | Type | Description
 --------- | ---- | -----------
 domain | String, required | the domain in which you want to store the user data. By default, if not sent, it will be saved in the `private` domain
-key | String, optional | the key to store with its associated value inside the User VFS.
+key | String, optional | the key to store inside the User VFS. If not passed, all keys will be replaced
+value | JSON, required | the value to store in the user data
 
 This function returns a JSON with 1 key. Key `done` contains 1.
 
@@ -282,8 +320,7 @@ public class MyClass
         .Done(deleteUserValueRes =>
         {
             Debug.Log("User data deleted: ") + deleteUserValueRes;
-        })
-        .Catch(ex => {
+        }, ex => {
             // The exception should always be CotcException
             CotcException error = (CotcException)ex;
             Debug.LogError("Could not delete user data due to error: " + error.ErrorCode + " (" + error.ErrorInformation + ")");
@@ -293,6 +330,24 @@ public class MyClass
 ```
 
 ```objectivec
+#import "XLGamerVFS.h"
+
+void DeleteUserValue()
+{
+    // gamer is a XLGamer instance obtained by a call to one of the Login methods
+
+    XLGamerVFS* vfs = [[XLGamerVFS alloc] initWithGamer:gamer andDomain:@"private"];
+    [vfs deleteValue:@"myKey" completionHandler:^(NSError *error, NSInteger statusCode, NSDictionary *deleteUserValueRes) {
+        if(error == nil)
+        {
+            NSLog(@"User data deleted: %@", [deleteUserValueRes description]);
+        }
+        else
+        {
+            NSLog(@"Could not delete user data: %@", [error description]);
+        }
+    }];
+}
 ```
 
 ```javascript
@@ -357,7 +412,7 @@ class MyGame
     void GetUserBinary()
     {
         CHJSON json;
-        json.Put("key", "myKey");
+        json.Put("key", "myBinaryKey");
         json.Put("domain", "private");
         CloudBuilder::CUserManager::Instance()->GetBinary(&json, MakeResultHandler(this, &MyGame::GetUserBinaryHandler));
     }
@@ -384,14 +439,13 @@ public class MyClass
     {
         // currentGamer is an object retrieved after one of the different Login functions.
 
-        currentGamer.GamerVfs.Domain("private").GetBinary("myKey")
+        currentGamer.GamerVfs.Domain("private").GetBinary("myBinaryKey")
         .Done(getUserBinaryRes =>
         {
             // In case your binary data contains some text, you can transfer the byte[] result into a string
             string str = System.Text.Encoding.UTF8.GetString(getUserBinaryRes);
             Debug.Log(str);
-        })
-        .Catch(ex => {
+        }, ex => {
             // The exception should always be CotcException
             CotcException error = (CotcException)ex;
             Debug.LogError("Could not get user binary data due to error: " + error.ErrorCode + " (" + error.ErrorInformation + ")");
@@ -401,6 +455,26 @@ public class MyClass
 ```
 
 ```objectivec
+#import "XLGamerVFS.h"
+
+void GetUserBinary()
+{
+    // gamer is a XLGamer instance obtained by a call to one of the Login methods
+
+    XLGamerVFS* vfs = [[XLGamerVFS alloc] initWithGamer:gamer andDomain:@"private"];
+    [vfs getBinary:@"myBinaryKey" completionHandler:^(NSError *error, NSInteger statusCode, NSDictionary *getUserBinaryRes) {
+        if(error == nil)
+        {
+            NSData* text = [getUserBinaryRes objectForKey:@"result"];
+            const char* str = text.bytes;
+            NSLog(@"%s", str);
+         }
+        else
+        {
+            NSLog(@"Could not get user binary data: %@", [error description]);
+        }
+    }];
+}
 ```
 
 ```javascript
@@ -409,7 +483,7 @@ var gamer; // gamer was retrieved previously with a call to one of the Login met
 
 function GetUserBinary()
 {
-    clan.withGamer(gamer).gamervfs("private").getValue("myKey", function(error, getUserBinaryRes)
+    clan.withGamer(gamer).gamervfs("private").getValue("myBinaryKey", function(error, getUserBinaryRes)
     {
       if(error)
 		    ConsoleLog("Get user binary data error: " + JSON.stringify(error));
@@ -481,13 +555,13 @@ class MyGame
     void SetUserBinary()
     {
         CHJSON json;
-        json.Put("key", "myKey");
+        json.Put("key", "myBinaryKey");
         json.Put("domain", "private");
         const char* str = "This is some text that you want to store as binary. Could be a PNG, a MP3 or anything.";
         CloudBuilder::CUserManager::Instance()->SetBinary(&json, str, strlen(str), MakeResultHandler(this, &MyGame::SetUserBinaryHandler));
     }
 
-    void SetBinaryHandler(eErrorCode aErrorCode, const CloudBuilder::CCloudResult *aResult)
+    void SetUserBinaryHandler(eErrorCode aErrorCode, const CloudBuilder::CCloudResult *aResult)
     {
         if(aErrorCode == eErrorCode::enNoErr)
         {
@@ -509,12 +583,11 @@ public class MyClass
         // currentGamer is an object retrieved after one of the different Login functions.
 
         var bytes = System.Text.Encoding.UTF8.GetBytes("This is some text that you want to store as binary. Could be a PNG, a MP3 or anything.");
-        currentGamer.GamerVfs.Domain("private").SetValue("myKey", bytes)
+        currentGamer.GamerVfs.Domain("private").SetBinary("myBinaryKey", bytes)
         .Done(setUserBinaryRes =>
         {
             Debug.Log("User binary data set: ") + setUserBinaryRes;
-        })
-        .Catch(ex => {
+        }, ex => {
             // The exception should always be CotcException
             CotcException error = (CotcException)ex;
             Debug.LogError("Could not set user binary data due to error: " + error.ErrorCode + " (" + error.ErrorInformation + ")");
@@ -524,6 +597,26 @@ public class MyClass
 ```
 
 ```objectivec
+#import "XLGamerVFS.h"
+
+void SetUserBinary()
+{
+    // gamer is a XLGamer instance obtained by a call to one of the Login methods
+
+    XLGamerVFS* vfs = [[XLGamerVFS alloc] initWithGamer:gamer andDomain:@"private"];
+    const char* str = "This is some text that you want to store as binary. Could be a PNG, a MP3 or anything.";
+    NSData* data = [NSData dataWithBytes:str length:strlen(str)];
+    [vfs setBinary:@"myBinaryKey" withData:data completionHandler:^(NSError *error, NSInteger statusCode, NSDictionary *setUserBinaryRes) {
+        if(error == nil)
+        {
+            NSLog(@"User binary data set: %@", [setUserBinaryRes description]);
+         }
+        else
+        {
+            NSLog(@"Could not set user binary data: %@", [error description]);
+        }
+    }];
+}
 ```
 
 ```javascript
@@ -532,7 +625,7 @@ var gamer; // gamer was retrieved previously with a call to one of the Login met
 
 function SetUserBinary()
 {
-    clan.withGamer(gamer).gamervfs("private").setBinary("myKey", function(error, setUserBinaryRes)
+    clan.withGamer(gamer).gamervfs("private").setBinary("myBinaryKey", function(error, setUserBinaryRes)
     {
       if(error)
 		    ConsoleLog("Set user binary data error: " + JSON.stringify(error));
@@ -565,8 +658,8 @@ is the url to use to download the data once it's been uploaded.
 
 <aside class="notice">
 If using REST APIs or Javascript, you will not set the binary data directly. Instead, you will get the url where to store it, so it's
-up to you to provide the upload operation, depending on the context where you are. SDKs (C++, C# and ObjC) on the other hand, will hide that for you
-and will do both operations for you. As such, SDKs only return `getURL` since the upload is already done and `putURL` is not necessary.
+up to you to provide the upload operation, depending on the context where you are. SDKs (C++, C# and ObjC) on the other hand, will hide that
+for you and will do both operations for you. As such, SDKs only return `getURL` since the upload is already done and `putURL` is not necessary.
 </aside>
 
 ---

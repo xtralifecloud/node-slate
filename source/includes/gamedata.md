@@ -62,8 +62,7 @@ public class MyClass
         {
             Bundle result = getGameValueRes["result"];
             Debug.Log("Game data: ") + result;
-        })
-        .Catch(ex => {
+        }, ex => {
             // The exception should always be CotcException
             CotcException error = (CotcException)ex;
             Debug.LogError("Could not get game data due to error: " + error.ErrorCode + " (" + error.ErrorInformation + ")");
@@ -73,6 +72,22 @@ public class MyClass
 ```
 
 ```objectivec
+#import "XLGameVFS.h"
+
+void GetGameValue()
+{
+    XLGameVFS* vfs = [[XLGameVFS alloc] initWithDomain:@"private"];
+    [vfs getValue:@"myKey" completionHandler:^(NSError *error, NSInteger statusCode, NSDictionary *getGameValueRes) {
+        if(error == nil)
+        {
+            NSLog(@"Game data: %@", [getGameValueRes description]);
+        }
+        else
+        {
+            NSLog(@"Could not get game data: %@", [error description]);
+        }
+    }];
+}
 ```
 
 ```javascript
@@ -148,7 +163,7 @@ class MyGame
     void GetGameBinary()
     {
         CHJSON json;
-        json.Put("key", "myKey");
+        json.Put("key", "myBinaryKey");
         json.Put("domain", "private");
         CloudBuilder::CGameManager::Instance()->GetBinary(&json, MakeResultHandler(this, &MyGame::GetGameBinaryHandler));
     }
@@ -175,14 +190,13 @@ public class MyClass
     {
         // currentGamer is an object retrieved after one of the different Login functions.
 
-        currentGamer.GamerVfs.Domain("private").GetBinary("myKey")
+        currentGamer.GamerVfs.Domain("private").GetBinary("myBinaryKey")
         .Done(getGameBinaryRes =>
         {
             // In case your binary data contains some text, you can transfer the byte[] result into a string
             string str = System.Text.Encoding.UTF8.GetString(getGameBinaryRes);
             Debug.Log(str);
-        })
-        .Catch(ex => {
+        }, ex => {
             // The exception should always be CotcException
             CotcException error = (CotcException)ex;
             Debug.LogError("Could not get game binary data due to error: " + error.ErrorCode + " (" + error.ErrorInformation + ")");
@@ -192,6 +206,25 @@ public class MyClass
 ```
 
 ```objectivec
+#import "XLGameVFS.h"
+
+void GetGameBinary()
+{
+    XLGameVFS* vfs = [[XLGameVFS alloc] initWithDomain:@"private"];
+    [vfs getBinary:@"myBinaryKey" completionHandler:^(NSError *error, NSInteger statusCode, NSDictionary *getGameBinaryRes) {
+        if(error == nil)
+        {
+            // In case your binary data contains some text, you can transfer ask the NSData the string it holds
+            NSData* text = [getGameBinaryRes objectForKey:@"result"];
+            const char* str = text.bytes;
+            NSLog(@"%s: %s", "Binary retrieved: ", str);
+        }
+        else
+        {
+            NSLog(@"Could not get game data: %@", [error description]);
+        }
+    }];
+}
 ```
 
 ```javascript
@@ -199,7 +232,7 @@ var clan; // clan was retrieved previously with a constructor to `Clan`
 
 function GetGameBinary()
 {
-    clan.vfs("private").getValue("myKey", function(error, getGameBinaryRes)
+    clan.vfs("private").getValue("myBinaryKey", function(error, getGameBinaryRes)
     {
       if(error)
 		    ConsoleLog("Get game binary data error: " + JSON.stringify(error));
