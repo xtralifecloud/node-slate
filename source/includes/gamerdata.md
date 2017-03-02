@@ -49,8 +49,7 @@ public class MyClass
         // currentGamer is an object retrieved after one of the different Login functions.
 
         currentGamer.GamerVfs.Domain("private").GetValue("myKey")
-        .Done(getUserValueRes =>
-        {
+        .Done(getUserValueRes => {
             Bundle result = getUserValueRes["result"];
             Debug.Log("User data: ") + result;
         }, ex => {
@@ -187,8 +186,7 @@ public class MyClass
 
         Bundle value = new Bundle("myValue");
         currentGamer.GamerVfs.Domain("private").SetValue("myKey", value)
-        .Done(setUserValueRes =>
-        {
+        .Done(setUserValueRes => {
             Debug.Log("User data set: ") + setUserValueRes;
         }, ex => {
             // The exception should always be CotcException
@@ -317,8 +315,7 @@ public class MyClass
         // currentGamer is an object retrieved after one of the different Login functions.
 
         currentGamer.GamerVfs.Domain("private").DeleteValue("myKey")
-        .Done(deleteUserValueRes =>
-        {
+        .Done(deleteUserValueRes => {
             Debug.Log("User data deleted: ") + deleteUserValueRes;
         }, ex => {
             // The exception should always be CotcException
@@ -440,8 +437,7 @@ public class MyClass
         // currentGamer is an object retrieved after one of the different Login functions.
 
         currentGamer.GamerVfs.Domain("private").GetBinary("myBinaryKey")
-        .Done(getUserBinaryRes =>
-        {
+        .Done(getUserBinaryRes => {
             // In case your binary data contains some text, you can transfer the byte[] result into a string
             string str = System.Text.Encoding.UTF8.GetString(getUserBinaryRes);
             Debug.Log(str);
@@ -584,8 +580,7 @@ public class MyClass
 
         var bytes = System.Text.Encoding.UTF8.GetBytes("This is some text that you want to store as binary. Could be a PNG, a MP3 or anything.");
         currentGamer.GamerVfs.Domain("private").SetBinary("myBinaryKey", bytes)
-        .Done(setUserBinaryRes =>
-        {
+        .Done(setUserBinaryRes => {
             Debug.Log("User binary data set: ") + setUserBinaryRes;
         }, ex => {
             // The exception should always be CotcException

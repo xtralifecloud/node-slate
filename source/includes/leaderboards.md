@@ -53,8 +53,7 @@ public class MyClass
 
         currentGamer.Scores.Domain("private").Post(10000, "intermediateMode", ScoreOrder.HighToLow,
         "context for score", false)
-        .Done(postScoreRes =>
-        {
+        .Done(postScoreRes => {
             Debug.Log("Post score: ") + postScoreRes;
         }, ex => {
             // The exception should always be CotcException
@@ -167,11 +166,9 @@ public class MyClass
         // currentGamer is an object retrieved after one of the different Login functions.
 
         currentGamer.Scores.Domain("private").GetRank(10000, "intermediateMode")
-        .Done(getRankRes =>
-        {
+        .Done(getRankRes => {
             Debug.Log("Rank for score: ") + getRankRes["rank"];
-        }
-        ex => {
+        }, ex => {
             // The exception should always be CotcException
             CotcException error = (CotcException)ex;
             Debug.LogError("Could not get rank for score: " + error.ErrorCode + " (" + error.ErrorInformation + ")");
@@ -272,8 +269,7 @@ public class MyClass
         // currentGamer is an object retrieved after one of the different Login functions.
 
         currentGamer.Scores.Domain("private").BestHighScores("intermediateMode", 10, 1)
-        .Done(bestHighScoresRes =>
-        {
+        .Done(bestHighScoresRes => {
             foreach(var score in bestHighScoresRes)
                 Debug.Log(score.Rank + ". " + score.GamerInfo["profile"]["displayName"] + ": " + score.Value);
         }, ex => {
@@ -419,11 +415,10 @@ public class MyClass
         // currentGamer is an object retrieved after one of the different Login functions.
 
         currentGamer.Scores.Domain("private").FriendsBestHighScore("intermediateMode", 10, 1)
-        .Done(friendsBestHighScoresRes =>
-        {
+        .Done(friendsBestHighScoresRes => {
             foreach(var score in friendsBestHighScoresRes)
                 Debug.Log(score.Rank + ". " + score.GamerInfo["profile"]["displayName"] + ": " + score.Value);
-        }, gex => {
+        }, ex => {
             // The exception should always be CotcException
             CotcException error = (CotcException)ex;
             Debug.LogError("Could not get friends best high scores: " + error.ErrorCode + " (" + error.ErrorInformation + ")");
@@ -554,8 +549,7 @@ public class MyClass
         // currentGamer is an object retrieved after one of the different Login functions.
 
         currentGamer.Scores.Domain("private").CenteredScores("intermediateMode", 10)
-        .Done(centeredScoresRes =>
-        {
+        .Done(centeredScoresRes => {
             foreach(var score in centeredScoresRes)
                 Debug.Log(score.Rank + ". " + score.GamerInfo["profile"]["displayName"] + ": " + score.Value);
         }, ex => {
@@ -689,7 +683,7 @@ class MyGame
     }
 };
 ```
-z
+
 ```cs
 using CotcSdk;
 
@@ -700,8 +694,7 @@ public class MyClass
         // currentGamer is an object retrieved after one of the different Login functions.
 
         currentGamer.Scores.Domain("private").ListUserBestScores()
-        .Done(listUserBestScoresRes =>
-        {
+        .Done(listUserBestScoresRes => {
             foreach(var score in listUserBestScoresRes)
                 Debug.Log(score.Key + ": " + score.Value.Value);
         }, ex => {

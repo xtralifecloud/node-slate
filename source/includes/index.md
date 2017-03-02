@@ -58,12 +58,12 @@ public class MyClass
         Bundle properties = Bundle.CreateObject("ratioVictory", 50, "XP", 325, "level", 12);
         Bundle payload = Bundle.CreateObject("someData", "playerData");
         cloud.Index("dummyIndex", "private").IndexObject("587f5d844877a1734ec079e6", properties, payload).Done(setIndexRes => {
-                Debug.Log("Index set: " + setIndexRes);
-            }, ex => {
-                // The exception should always be CotcException
-                CotcException error = (CotcException)ex;
-                Debug.LogError("Could not set index: " + error.ErrorCode + " (" + error.ErrorInformation + ")");
-            });
+            Debug.Log("Index set: " + setIndexRes);
+        }, ex => {
+            // The exception should always be CotcException
+            CotcException error = (CotcException)ex;
+            Debug.LogError("Could not set index: " + error.ErrorCode + " (" + error.ErrorInformation + ")");
+        });
     }
 }
 ```
@@ -197,9 +197,9 @@ public class MyClass
             .Done(getIndexRes => {
                 Debug.Log("Got index: " + getIndexRes);
             }, ex => {
-            // The exception should always be CotcException
+                // The exception should always be CotcException
                 CotcException error = (CotcException)ex;
-                Debug.LogError("Could not get index: " + error.ErrorCode + " (" + error.ErrorInformation + ")");
+            Debug.LogError("Could not get index: " + error.ErrorCode + " (" + error.ErrorInformation + ")");
             });
     }
 }
@@ -321,8 +321,8 @@ public class MyClass
         // cloud is an object retrieved at the beginning of the game through the CotcGameObject object.
 
         cloud.Index("dummyIndex", "private").DeleteObject("587f5d844877a1734ec079e6")
-           .Done(deleteIndexRes => {
-               Debug.Log("Index deleted: " + deleteIndexRes);
+        .Done(deleteIndexRes => {
+            Debug.Log("Index deleted: " + deleteIndexRes);
         }, ex => {
             // The exception should always be CotcException
             CotcException error = (CotcException)ex;
@@ -447,8 +447,8 @@ public class MyClass
         sort.Add("ratioVictory");
         sort.Add("level");
         cloud.Index("dummyIndex", "private").Search("XP:325", sort, 5, 0)
-           .Done(searchIndexRes => {
-               Debug.Log("Index search: " + searchIndexRes);
+        .Done(searchIndexRes => {
+            Debug.Log("Index search: " + searchIndexRes);
         }, ex => {
             // The exception should always be CotcException
             CotcException error = (CotcException)ex;

@@ -147,7 +147,6 @@ public class MyClass
         Bundle bundle = Bundle.CreateObject("transaction", transaction, "description", "This is a transaction reward", "domain", "private");
         currentGamer.Godfather.Domain ("private").UseCode ("nYCIOQ5v", bundle).Done(useReferralCodeRes => {
 			Debug.Log("Use referral code: " + useReferralCodeRes.GamerData);
-			}
 		}, ex => {
             // The exception should always be CotcException
             CotcException error = (CotcException)ex;

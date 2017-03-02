@@ -56,8 +56,7 @@ public class MyClass
         // This transaction sells 10 "Gold" from the wallet (negative value), and buys 50 "Silver" (positive value)
         Bundle transaction = Bundle.CreateObject("Gold", -10, "Silver", 50);
         currentGamer.Transactions.Domain("private").Post(transaction, "Swap of Gold and Silver")
-        .Done(postTransactionRes =>
-        {
+        .Done(postTransactionRes => {
             Debug.Log("Transaction posted: " + postTransactionRes);
         }, ex => {
             // The exception should always be CotcException
@@ -200,8 +199,7 @@ public class MyClass
         // currentGamer is an object retrieved after one of the different Login functions.
 
         currentGamer.Transactions.Domain("private").History("Silver", 4, 0)
-        .Done(listTransactionsRes =>
-        {
+        .Done(listTransactionsRes => {
             Debug.Log("List of transactions: " + listTransactionsRes);
         }, ex => {
             // The exception should always be CotcException
@@ -345,11 +343,9 @@ public class MyClass
         // currentGamer is an object retrieved after one of the different Login functions.
 
         currentGamer.Transactions.Domain("private").Balance()
-        .Done(getBalanceRes =>
-        {
+        .Done(getBalanceRes => {
             Debug.Log("Current balance: " + getBalanceRes);
-        })
-        .Catch(ex => {
+        }, ex => {
             // The exception should always be CotcException
             CotcException error = (CotcException)ex;
             Debug.LogError("Could not get balance: " + error.ErrorCode + " (" + error.ErrorInformation + ")");

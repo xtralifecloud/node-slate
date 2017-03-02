@@ -1394,11 +1394,11 @@ public class MyClass
         match.PostMove(move, globalState)
            .Done(postMoveRes => {
                Debug.Log("Move posted: " + postMoveRes);
-        , ex => {
-            // The exception should always be CotcException
-            CotcException error = (CotcException)ex;
-            Debug.LogError("Could not post move: " + error.ErrorCode + " (" + error.ErrorInformation + ")");
-        });
+            }, ex => {
+                // The exception should always be CotcException
+                CotcException error = (CotcException)ex;
+               Debug.LogError("Could not post move: " + error.ErrorCode + " (" + error.ErrorInformation + ")");
+            });
     }
 }
 ```
@@ -1552,11 +1552,11 @@ public class MyClass
         match.DrawFromShoe(3)
            .Done(drawFromShoeRes => {
                Debug.Log("Draw from shoe: " + drawFromShoeRes);
-        }, ex => {
-            // The exception should always be CotcException
-            CotcException error = (CotcException)ex;
-            Debug.LogError("Could not draw from shoe: " + error.ErrorCode + " (" + error.ErrorInformation + ")");
-        });
+            }, ex => {
+                // The exception should always be CotcException
+                CotcException error = (CotcException)ex;
+                Debug.LogError("Could not draw from shoe: " + error.ErrorCode + " (" + error.ErrorInformation + ")");
+            });
     }
 }
 ```

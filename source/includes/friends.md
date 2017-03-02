@@ -41,8 +41,7 @@ public class MyClass
         // currentGamer is an object retrieved after one of the different Login functions.
 
         currentGamer.Community.Domain("private").ListFriends()
-        .Done(listFriendsRes =>
-        {
+        .Done(listFriendsRes => {
             Debug.Log("List of friends: " + listFriendsRes);
         }, ex => {
             // The exception should always be CotcException
@@ -149,8 +148,7 @@ public class MyClass
         // currentGamer is an object retrieved after one of the different Login functions.
 
         currentGamer.Community.Domain("private").ListFriends(true)
-        .Done(listFriendsRes =>
-        {
+        .Done(listFriendsRes => {
             Debug.Log("List of blacklisted users: " + listFriendsRes);
         }, ex => {
             // The exception should always be CotcException
@@ -261,8 +259,7 @@ public class MyClass
         // currentGamer is an object retrieved after one of the different Login functions.
 
         currentGamer.Community.Domain("private").ChangeRelationshipStatus("563a747bfcc7e918540a9937", FriendRelationshipStatus.Add, null)
-        .Done(addFriendRes =>
-        {
+        .Done(addFriendRes => {
             Debug.Log("Relationship modified: " + listTransactionsRes);
         }, ex => {
             // The exception should always be CotcException
@@ -381,8 +378,7 @@ public class MyClass
         // currentGamer is an object retrieved after one of the different Login functions.
 
         currentGamer.Community.Domain("private").ListNetworkFriends()
-        .Done(listNetworkFriendsRes =>
-        {
+        .Done(listNetworkFriendsRes => {
             Debug.Log("Network friends: " + listNetworkFriendsRes);
         }, ex => {
             // The exception should always be CotcException
