@@ -25,6 +25,8 @@ includes:
   - referral
   - batch
   - match
+  - index
+  - events
 
 search: true
 
