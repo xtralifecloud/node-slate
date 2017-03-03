@@ -112,7 +112,7 @@ public class MyClass
         }
         currentGamer.Matches.Domain("private").Create(3, "Sample match for testing", Bundle.CreateObject("startup", "globalState"), Bundle.CreateObject("newRules", 1), Bundle.CreateArray(array))
         .Done(createMatchRes => {
-            Debug.Log("Match created: " + createMatchRes);
+            Debug.Log("Match created: " + createMatchRes.ToString());
         }, ex => {
             // The exception should always be CotcException
             CotcException error = (CotcException)ex;
@@ -312,7 +312,7 @@ public class MyClass
 
         currentGamer.Matches.Domain("private").List(true, false, true, false, 10, 0)
            .Done(listMatchesRes => {
-               Debug.Log("List of matches: " + listMatchesRes);
+               Debug.Log("List of matches: " + listMatchesRes.ToString());
            }, ex => {
             // The exception should always be CotcException
             CotcException error = (CotcException)ex;
@@ -476,7 +476,7 @@ public class MyClass
 
         currentGamer.Matches.Fetch("589df42f98a6d4427971d66d")
            .Done(loadMatchRes => {
-               Debug.Log("Match loaded: " + loadMatchRes);
+               Debug.Log("Match loaded: " + loadMatchRes.ToString());
            }, ex => {
             // The exception should always be CotcException
             CotcException error = (CotcException)ex;
@@ -644,7 +644,7 @@ public class MyClass
         bool deleteMatch = false;
         match.Finish(deleteMatch, null)
         .Done(finishMatchRes => {
-            Debug.Log("Match finished: " + finishMatchRes);
+            Debug.Log("Match finished: " + finishMatchRes.ToString());
         }, ex => {
             // The exception should always be CotcException
             CotcException error = (CotcException)ex;
@@ -786,7 +786,7 @@ public class MyClass
 
         currentGamer.Matches.Delete("589df75598a6d4427971d66f")
         .Done(deleteMatchRes => {
-            Debug.Log("Match deleted: " + deleteMatchRes);
+            Debug.Log("Match deleted: " + deleteMatchRes.ToString());
         }, ex => {
             // The exception should always be CotcException
             CotcException error = (CotcException)ex;
@@ -916,7 +916,7 @@ public class MyClass
 
         match.InvitePlayer("582ce75598a6d4937152d69a")
         .Done(inviteToMatchRes => {
-            Debug.Log("Player invited: " + inviteToMatchRes);
+            Debug.Log("Player invited: " + inviteToMatchRes.ToString());
         }, ex => {
             // The exception should always be CotcException
             CotcException error = (CotcException)ex;
@@ -1056,7 +1056,7 @@ public class MyClass
 
         currentGamer.Matches.Join("589df75598a6d4427971d66f")
         .Done(joinMatchRes => {
-               Debug.Log("Joined match: " + joinMatchRes);
+               Debug.Log("Joined match: " + joinMatchRes.ToString());
         }, ex => {
             // The exception should always be CotcException
             CotcException error = (CotcException)ex;
@@ -1254,7 +1254,7 @@ public class MyClass
 
         currentGamer.Matches.DismissInvitation("589df75598a6d4427971d66f")
         .Done(dismissInviteRes => {
-            Debug.Log("Invite dismissed: " + dismissInviteRes);
+            Debug.Log("Invite dismissed: " + dismissInviteRes.ToString());
         }, ex => {
             // The exception should always be CotcException
             CotcException error = (CotcException)ex;
@@ -1393,7 +1393,7 @@ public class MyClass
         Bundle globalState = Bundle.CreateObject("board", "the board content");
         match.PostMove(move, globalState)
            .Done(postMoveRes => {
-               Debug.Log("Move posted: " + postMoveRes);
+               Debug.Log("Move posted: " + postMoveRes.ToString());
             }, ex => {
                 // The exception should always be CotcException
                 CotcException error = (CotcException)ex;
@@ -1551,7 +1551,7 @@ public class MyClass
 
         match.DrawFromShoe(3)
            .Done(drawFromShoeRes => {
-               Debug.Log("Draw from shoe: " + drawFromShoeRes);
+               Debug.Log("Draw from shoe: " + drawFromShoeRes.ToString());
             }, ex => {
                 // The exception should always be CotcException
                 CotcException error = (CotcException)ex;
@@ -1695,7 +1695,7 @@ public class MyClass
 
         match.Leave()
            .Done(leaveMatchRes => {
-               Debug.Log("Left the match: " + leaveMatchRes);
+               Debug.Log("Left the match: " + leaveMatchRes.ToString());
            }, ex => {
             // The exception should always be CotcException
             CotcException error = (CotcException)ex;

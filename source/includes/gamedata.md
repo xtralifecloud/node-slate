@@ -60,7 +60,7 @@ public class MyClass
         currentGamer.GamerVfs.Domain("private").GetValue("myKey")
         .Done(getGameValueRes => {
             Bundle result = getGameValueRes["result"];
-            Debug.Log("Game data: ") + result;
+            Debug.Log("Game data: " + result.ToString());
         }, ex => {
             // The exception should always be CotcException
             CotcException error = (CotcException)ex;

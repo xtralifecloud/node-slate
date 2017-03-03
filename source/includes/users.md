@@ -42,7 +42,7 @@ public class MyClass
         .Done(listUsersRes => {
             foreach (var userInfo in listUsersRes)
             {
-                Debug.Log("User: " + userInfo);
+                Debug.Log("User: " + userInfo.ToString());
             }
         }, ex => {
             // The exception should always be CotcException
@@ -168,7 +168,7 @@ public class MyClass
         .Done(userExistsRes => {
             foreach (var userInfo in result)
             {
-                Debug.Log("User: " + userExistsRes);
+                Debug.Log("User: " + userExistsRes.ToString());
             }
         }, ex => {
             // The exception should always be CotcException

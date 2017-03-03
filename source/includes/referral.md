@@ -41,7 +41,7 @@ public class MyClass
         // currentGamer is an object retrieved after one of the different Login functions.
 
         currentGamer.Godfather.Domain ("private").GenerateCode ().Done(getReferralCodeRes => {
-			Debug.Log("Referral code: " + getReferralCodeRes);
+			Debug.Log("Referral code: " + getReferralCodeRes.ToString());
 		}, ex => {
             // The exception should always be CotcException
             CotcException error = (CotcException)ex;
@@ -269,7 +269,7 @@ public class MyClass
         // currentGamer is an object retrieved after one of the different Login functions.
 
         currentGamer.Godfather.Domain ("private").GetGodfather ().Done(getGodfatherRes => {
-			Debug.Log("Godfather: " + getGodfatherRes);
+			Debug.Log("Godfather: " + getGodfatherRes.ToString());
 		}, ex => {
             // The exception should always be CotcException
             CotcException error = (CotcException)ex;
@@ -372,7 +372,7 @@ public class MyClass
         // currentGamer is an object retrieved after one of the different Login functions.
 
         currentGamer.Godfather.Domain ("private").GetGodchildren ().Done(getGodchildrenRes => {
-			Debug.Log("Godchildren: " + getGodchildrenRes);
+			Debug.Log("Godchildren: " + getGodchildrenRes.ToString());
 		}, ex => {
             // The exception should always be CotcException
             CotcException error = (CotcException)ex;

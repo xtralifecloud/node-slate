@@ -57,7 +57,7 @@ public class MyClass
         Bundle transaction = Bundle.CreateObject("Gold", -10, "Silver", 50);
         currentGamer.Transactions.Domain("private").Post(transaction, "Swap of Gold and Silver")
         .Done(postTransactionRes => {
-            Debug.Log("Transaction posted: " + postTransactionRes);
+            Debug.Log("Transaction posted: " + postTransactionRes.ToString());
         }, ex => {
             // The exception should always be CotcException
             CotcException error = (CotcException)ex;
@@ -200,7 +200,7 @@ public class MyClass
 
         currentGamer.Transactions.Domain("private").History("Silver", 4, 0)
         .Done(listTransactionsRes => {
-            Debug.Log("List of transactions: " + listTransactionsRes);
+            Debug.Log("List of transactions: " + listTransactionsRes.ToString());
         }, ex => {
             // The exception should always be CotcException
             CotcException error = (CotcException)ex;
@@ -344,7 +344,7 @@ public class MyClass
 
         currentGamer.Transactions.Domain("private").Balance()
         .Done(getBalanceRes => {
-            Debug.Log("Current balance: " + getBalanceRes);
+            Debug.Log("Current balance: " + getBalanceRes.ToString());
         }, ex => {
             // The exception should always be CotcException
             CotcException error = (CotcException)ex;

@@ -56,7 +56,7 @@ public class MyClass
         Bundle param = new Bundle("myParam1", "Some value", "myParam2", 1000);
         cloud.Game.Batches.Domain("private").Run("myGameBatch", param)
         .Done(invokeGameBatchRes => {
-            Debug.Log("Result of game batch: " + invokeGameBatchRes);
+            Debug.Log("Result of game batch: " + invokeGameBatchRes.ToString());
 		}, ex => {
             // The exception should always be CotcException
             CotcException error = (CotcException)ex;
@@ -167,7 +167,7 @@ public class MyClass
         Bundle param = new Bundle("myParam1", "Some value", "myParam2", 1000);
         currentGamer.Batches.Domain("private").Run("myUserBatch", param)
         .Done(invokeUserBatchRes => {
-            Debug.Log("Result of user batch: " + invokeUserBatchRes);
+            Debug.Log("Result of user batch: " + invokeUserBatchRes.ToString());
 		}, ex => {
             // The exception should always be CotcException
             CotcException error = (CotcException)ex;

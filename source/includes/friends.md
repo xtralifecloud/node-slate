@@ -42,7 +42,7 @@ public class MyClass
 
         currentGamer.Community.Domain("private").ListFriends()
         .Done(listFriendsRes => {
-            Debug.Log("List of friends: " + listFriendsRes);
+            Debug.Log("List of friends: " + listFriendsRes.ToString());
         }, ex => {
             // The exception should always be CotcException
             CotcException error = (CotcException)ex;
@@ -149,7 +149,7 @@ public class MyClass
 
         currentGamer.Community.Domain("private").ListFriends(true)
         .Done(listFriendsRes => {
-            Debug.Log("List of blacklisted users: " + listFriendsRes);
+            Debug.Log("List of blacklisted users: " + listFriendsRes.ToString());
         }, ex => {
             // The exception should always be CotcException
             CotcException error = (CotcException)ex;
@@ -260,7 +260,7 @@ public class MyClass
 
         currentGamer.Community.Domain("private").ChangeRelationshipStatus("563a747bfcc7e918540a9937", FriendRelationshipStatus.Add, null)
         .Done(addFriendRes => {
-            Debug.Log("Relationship modified: " + listTransactionsRes);
+            Debug.Log("Relationship modified: " + listTransactionsRes.ToString());
         }, ex => {
             // The exception should always be CotcException
             CotcException error = (CotcException)ex;
@@ -379,7 +379,7 @@ public class MyClass
 
         currentGamer.Community.Domain("private").ListNetworkFriends()
         .Done(listNetworkFriendsRes => {
-            Debug.Log("Network friends: " + listNetworkFriendsRes);
+            Debug.Log("Network friends: " + listNetworkFriendsRes.ToString());
         }, ex => {
             // The exception should always be CotcException
             CotcException error = (CotcException)ex;

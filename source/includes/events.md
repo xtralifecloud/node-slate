@@ -47,7 +47,7 @@ public class MyClass
         Bundle evt = Bundle.CreateObject("message", "Here is a gift to you!", "currency", 100);
         currentGamer.Community.Domain("private").SendEvent("587f5d844877a1734ec079e6", evt)
            .Done(sendEventRes => {
-               Debug.Log("Event sent: " + sendEventRes);
+               Debug.Log("Event sent: " + sendEventRes.ToString());
            }, ex => {
             // The exception should always be CotcException
             CotcException error = (CotcException)ex;

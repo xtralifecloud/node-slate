@@ -56,7 +56,7 @@ public class MyClass
 
         currentGamer.Account.Convert(LoginNetwork.Email, "myEmail@gmail.com", "myPassword")
         .Done(convertRes => {
-            Debug.Log("Convert succeeded: " + convertRes);
+            Debug.Log("Convert succeeded: " + convertRes.ToString());
         }, ex => {
             // The exception should always be CotcException
             CotcException error = (CotcException)ex;
@@ -217,7 +217,7 @@ public class MyClass
 
         currentGamer.Account.Link(LoginNetwork.Facebook, "myFacebookID", "myFacebookToken")
         .Done(linkRes => {
-            Debug.Log("Link succeeded: " + linkRes);
+            Debug.Log("Link succeeded: " + linkRes.ToString());
         }, ex => {
             // The exception should always be CotcException
             CotcException error = (CotcException)ex;
@@ -338,7 +338,7 @@ public class MyClass
 
         currentGamer.Account.Unlink(LoginNetwork.Facebook)
         .Done(unlinkRes => {
-            Debug.Log("Unlink succeeded: " + unlinkRes);
+            Debug.Log("Unlink succeeded: " + unlinkRes.ToString());
         }, ex => {
             // The exception should always be CotcException
             CotcException error = (CotcException)ex;
@@ -453,7 +453,7 @@ public class MyClass
 
         currentGamer.Account.ChangeEmailAddress("myNewEmail@gmail.com")
         .Done(changeEmailRes => {
-            Debug.Log("Change e-mail succeeded: " + changeEmailRes);
+            Debug.Log("Change e-mail succeeded: " + changeEmailRes.ToString());
         }, ex => {
             // The exception should always be CotcException
             CotcException error = (CotcException)ex;
@@ -568,7 +568,7 @@ public class MyClass
 
         currentGamer.Account.ChangePassword("myNewPassword")
         .Done(changePasswordRes => {
-            Debug.Log("Change password succeeded: " + changePasswordRes);
+            Debug.Log("Change password succeeded: " + changePasswordRes.ToString());
         }, ex => {
             // The exception should always be CotcException
             CotcException error = (CotcException)ex;
@@ -685,7 +685,7 @@ public class MyClass
 
         currentGamer.Profile.Outline()
         .Done(outlineRes => {
-            Debug.Log("Outline: " + outlineRes);
+            Debug.Log("Outline: " + outlineRes.ToString());
         }, ex => {
             // The exception should always be CotcException
             CotcException error = (CotcException)ex;

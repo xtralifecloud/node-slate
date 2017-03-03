@@ -64,7 +64,7 @@ public class MyClass
 
         cotc.GetCloud().Done(cloud => {
             cloud.LoginAnonymously()
-            .Then(gamer => {
+            .Done(gamer => {
                 Debug.Log("Signed in succeeded (ID = " + Gamer.GamerId + ")");
                 Debug.Log("Login data: " + Gamer);
                 Debug.Log("Server time: " + Gamer["servertime"]);

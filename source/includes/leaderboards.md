@@ -54,7 +54,7 @@ public class MyClass
         currentGamer.Scores.Domain("private").Post(10000, "intermediateMode", ScoreOrder.HighToLow,
         "context for score", false)
         .Done(postScoreRes => {
-            Debug.Log("Post score: ") + postScoreRes;
+            Debug.Log("Post score: " + postScoreRes.ToString());
         }, ex => {
             // The exception should always be CotcException
             CotcException error = (CotcException)ex;
