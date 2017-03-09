@@ -65,9 +65,9 @@ public class MyClass
         cotc.GetCloud().Done(cloud => {
             cloud.LoginAnonymously()
             .Done(gamer => {
-                Debug.Log("Signed in succeeded (ID = " + Gamer.GamerId + ")");
-                Debug.Log("Login data: " + Gamer);
-                Debug.Log("Server time: " + Gamer["servertime"]);
+                Debug.Log("Signed in succeeded (ID = " + gamer.GamerId + ")");
+                Debug.Log("Login data: " + gamer);
+                Debug.Log("Server time: " + gamer["servertime"]);
             }, ex => {
                 // The exception should always be CotcException
                 CotcException error = (CotcException)ex;
@@ -220,9 +220,9 @@ public class MyClass
                 networkId: "myEmail@gmail.com",
                 networkSecret: "myPassword")
             .Done(gamer => {
-                Debug.Log("Signed in succeeded (ID = " + Gamer.GamerId + ")");
-                Debug.Log("Login data: " + Gamer);
-                Debug.Log("Server time: " + Gamer["servertime"]);
+                Debug.Log("Signed in succeeded (ID = " + gamer.GamerId + ")");
+                Debug.Log("Login data: " + gamer);
+                Debug.Log("Server time: " + gamer["servertime"]);
             }, ex => {
                 // The exception should always be CotcException
                 CotcException error = (CotcException)ex;
@@ -417,9 +417,9 @@ public class MyClass
                 gamerId: "5873a117b69fa8c942c7df08",
                 gamerSecret: "c3b7c6fab599919b0c24487bf46d0e6069472df0")
             .Done(gamer => {
-                Debug.Log("Signed in succeeded (ID = " + Gamer.GamerId + ")");
-                Debug.Log("Login data: " + Gamer);
-                Debug.Log("Server time: " + Gamer["servertime"]);
+                Debug.Log("Signed in succeeded (ID = " + gamer.GamerId + ")");
+                Debug.Log("Login data: " + gamer);
+                Debug.Log("Server time: " + gamer["servertime"]);
             }, ex => {
                 // The exception should always be CotcException
                 CotcException error = (CotcException)ex;
@@ -603,9 +603,9 @@ public class MyClass
         cotc.GetCloud().Done(cloud => {
             Cloud.LoginWithShortCode("xxxxxxxx", null)
             .Done(gamer => {
-                Debug.Log("Signed in succeeded (ID = " + Gamer.GamerId + ")");
-                Debug.Log("Login data: " + Gamer);
-                Debug.Log("Server time: " + Gamer["servertime"]);
+                Debug.Log("Signed in succeeded (ID = " + gamer.GamerId + ")");
+                Debug.Log("Login data: " + gamer);
+                Debug.Log("Server time: " + gamer["servertime"]);
             }, ex => {
                 // The exception should always be CotcException
                 CotcException error = (CotcException)ex;
