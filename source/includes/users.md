@@ -78,7 +78,6 @@ Host: https://sandbox-api01.clanofthecloud.mobi
 Content-Type: application/json
 x-apikey: YourGameApiKey
 x-apisecret:YourGameApiSecret
-Authorization: Basic gamer_id:gamer_secret
 ```
 
 This function is used to retrieve a list of users from the XtraLife community. The match pattern will
