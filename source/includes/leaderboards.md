@@ -167,7 +167,7 @@ public class MyClass
 
         currentGamer.Scores.Domain("private").GetRank(10000, "intermediateMode")
         .Done(getRankRes => {
-            Debug.Log("Rank for score: ") + getRankRes["rank"];
+            Debug.Log("Rank for score: " + getRankRes);
         }, ex => {
             // The exception should always be CotcException
             CotcException error = (CotcException)ex;
