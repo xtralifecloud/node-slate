@@ -579,6 +579,21 @@ public class MyClass
 ```
 
 ```objectivec
+void ChangePassword()
+{
+    // gamer is a XLGamer instance obtained by a call to one of the Login methods
+    
+    [gamer changePassword:@"newpassword" completionHandler:^(NSError *error, NSInteger statusCode, NSDictionary *changePasswordRes) {
+        if(error == nil)
+        {
+            NSLog(@"Change password succeeded: %@", [changePasswordRes description]);
+        }
+        else
+        {
+            NSLog(@"Failed to change password: %@", [changePasswordRes description]);
+        }
+    ];
+}
 ```
 
 ```javascript
@@ -841,12 +856,26 @@ public class MyClass
 ```
 
 ```objectivec
+void ResetPassword()
+{
+    XLGamer* gamer = [[XLGamer alloc] init];
+    [gamer mailShortCode:@"myEmail@gmail.com" from:@"support@xtralife.cloud" withTitle:@"Password from XtraLife" withBody:@"Please connect using [[SHORTCODE]]" completionHandler:^(NSError *error, NSInteger statusCode, NSDictionary *resetPasswordRes) {
+        if(error == nil)
+        {
+            NSLog(@"Short code sent: %@", [resetPasswordRes description]);
+        }
+        else
+        {
+            NSLog(@"Short code sending error: %@", [resetPasswordRes description]);
+        }
+    ];
+}
 ```
 
 ```javascript
 var clan; // clan was retrieved previously with a constructor to `Clan`
 
-function ChangePassword()
+function ResetPassword()
 {
     var email = "myEmail@gmail.com";
     var from = "support@myCompany.com";
