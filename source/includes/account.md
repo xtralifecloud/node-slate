@@ -592,7 +592,7 @@ void ChangePassword()
         {
             NSLog(@"Failed to change password: %@", [changePasswordRes description]);
         }
-    ];
+    }];
 }
 ```
 
@@ -717,7 +717,7 @@ public class MyClass
 var clan; // clan was retrieved previously with a constructor to `Clan`
 var gamer; // gamer was retrieved previously with a call to one of the Login methods from `Clan`
 
-function ChangePassword()
+function FetchOutline()
 {
     clan.withGamer(gamer).outline(function(error, outlineRes)
     {
@@ -868,7 +868,7 @@ void ResetPassword()
         {
             NSLog(@"Short code sending error: %@", [resetPasswordRes description]);
         }
-    ];
+    }];
 }
 ```
 
