@@ -53,7 +53,7 @@ public class MyClass
     {
         // cloud is an object retrieved at the beginning of the game through the CotcGameObject object.
 
-        Bundle param = new Bundle("myParam1", "Some value", "myParam2", 1000);
+        Bundle param = Bundle.CreateObject("myParam1", "Some value", "myParam2", 1000);
         cloud.Game.Batches.Domain("private").Run("myGameBatch", param)
         .Done(invokeGameBatchRes => {
             Debug.Log("Result of game batch: " + invokeGameBatchRes.ToString());
@@ -164,7 +164,7 @@ public class MyClass
     {
         // currentGamer is an object retrieved after one of the different Login functions.
 
-        Bundle param = new Bundle("myParam1", "Some value", "myParam2", 1000);
+        Bundle param = Bundle.CreateObject("myParam1", "Some value", "myParam2", 1000);
         currentGamer.Batches.Domain("private").Run("myUserBatch", param)
         .Done(invokeUserBatchRes => {
             Debug.Log("Result of user batch: " + invokeUserBatchRes.ToString());
