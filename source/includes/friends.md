@@ -290,7 +290,7 @@ function AddFriend()
 ```
 
 ```http
-GET /v2.6/gamer/friends/{domain}?{gamer_id}?{status}
+POST /v2.6/gamer/friends/{domain}?{gamer_id}&{status}
 Host: https://sandbox-api01.clanofthecloud.mobi
 Content-Type: application/json
 x-apikey: YourGameApiKey
