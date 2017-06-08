@@ -258,11 +258,11 @@ function LoginNetwork()
 {
   var clan = Clan("YourGameApiKey", "YourGameApiSecret", "sandbox");
 
-  clan.login("email", "myEmail@gmail.com", "myPassword", nil, function(error, gamer)
+  clan.login("email", "myEmail@gmail.com", "myPassword", null, function(error, gamer)
   {
     if(!error)
     {
-      ConsoleLog("Display Name: " + gamer. profile.displayName);
+      ConsoleLog("Display Name: " + gamer.profile.displayName);
     }
     else
     {
