@@ -167,7 +167,7 @@ function UseReferralCode()
 {
     var transaction = { Gold : 100};
     var reward = { transaction, descritpion : "This is a transaction reward", domain : "private" };
-    clan.withGamer(gamer).referral("private").UseCode("nYCIOQ5v", reward, function(error, useReferralCodeRes)
+    clan.withGamer(gamer).referral("private").useCode("nYCIOQ5v", reward, function(error, useReferralCodeRes)
     {
       if(error)
 		    ConsoleLog("Could not use referral code: " + JSON.stringify(error));
