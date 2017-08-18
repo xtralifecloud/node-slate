@@ -897,7 +897,6 @@ Host: https://sandbox-api01.clanofthecloud.mobi
 Content-Type: application/json
 x-apikey: YourGameApiKey
 x-apisecret:YourGameApiSecret
-Authorization: Basic gamer_id:gamer_secret
 
 BODY
 {
