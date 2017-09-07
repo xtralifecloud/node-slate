@@ -768,21 +768,22 @@ using CotcSdk;
 
 public class MyClass
 {
-    void Logout()
-    {
-        var cotc = FindObjectOfType<CotcGameObject>();
+  void Logout()
+  {
+    var gamer; // gamer was retrieved previously with a call to one of the Login methods from `Clan`
+    var cotc = FindObjectOfType<CotcGameObject>();
 
-        cotc.GetCloud().Done(cloud => {
-            Cloud.Logout()
-            .Done(result => {
-                Debug.Log("Logout succeeded");
-            }, ex => {
-                // The exception should always be CotcException
-                CotcException error = (CotcException)ex;
-                Debug.LogError("Failed to logout: " + error.ErrorCode + " (" + error.HttpStatusCode + ")");
-            });
-        });  
-    }
+    cotc.GetCloud().Done(cloud => {
+      Cloud.Logout(gamer)
+      .Done(result => {
+        Debug.Log("Logout succeeded");
+      }, ex => {
+        // The exception should always be CotcException
+        CotcException error = (CotcException)ex;
+        Debug.LogError("Failed to logout: " + error.ErrorCode + " (" + error.HttpStatusCode + ")");
+      });
+    });  
+  }
 }
 ```
 
@@ -831,6 +832,10 @@ Parameter | Type | Description
 --------- | ---- | -----------
 
 This function returns an empty JSON.
+
+<aside class="notice">
+The C# and Javascript SDKs are a little different as you can have several users logged in at the same time. Because of this difference, you need to tell the `Logout` function which user will be affected (see sample code).
+</aside>
 
 ---
 
