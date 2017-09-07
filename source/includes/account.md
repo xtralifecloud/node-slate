@@ -859,7 +859,10 @@ public class MyClass
 void ResetPassword()
 {
     XLGamer* gamer = [[XLGamer alloc] init];
-    [gamer mailShortCode:@"myEmail@gmail.com" from:@"support@xtralife.cloud" withTitle:@"Password from XtraLife" withBody:@"Please connect using [[SHORTCODE]]" completionHandler:^(NSError *error, NSInteger statusCode, NSDictionary *resetPasswordRes) {
+    NSString* body = @"You can login with this shortcode: [[SHORTCODE]]";
+    NSString* html = @"You can login with this shortcode: <b>[[SHORTCODE]]</b>";
+
+    [gamer mailShortCode:@"myEmail@gmail.com" from:@"support@xtralife.cloud" withTitle:@"Password from XtraLife" withBody:body withHTML:html completionHandler:^(NSError *error, NSInteger statusCode, NSDictionary *resetPasswordRes) {
         if(error == nil)
         {
             NSLog(@"Short code sent: %@", [resetPasswordRes description]);
@@ -880,7 +883,7 @@ function ResetPassword()
     var email = "myEmail@gmail.com";
     var from = "support@myCompany.com";
     var title = "Reset your password";
-    var body = "You can login with this shortcode: [[SHORTCODE]]";
+    var body = { body: "You can login with this <b>[[SHORTCODE]]</b>", html: true };
     clan.sendResetMailPassword(email, from, title, body, function(error, resetPasswordRes)
     {
       if(error)
@@ -903,6 +906,7 @@ BODY
     "from" : "support@myCompany.com",
     "title" : "Reset your password",
     "body" : "You can login with this shortcode: [[SHORTCODE]]"
+    "html" : "You can login with this shortcode: <b>[[SHORTCODE]]</b>"
 }
 ```
 
@@ -922,6 +926,7 @@ email | String, required | the e-mail of the user who needs to reset his passwor
 from | String, required | the e-mail sender
 title | String, required | the title of the e-mail being sent
 body | String, required | the body of the e-mail being sent
+html | String, optional | a body in HTML format
 
 If the operation is a success, it returns a JSON with a single key, `done` with value 1.
 
