@@ -69,6 +69,25 @@ public class MyClass
 ```
 
 ```objectivec
+#import "XLIndex.h"
+
+void SetIndex()
+{
+    XLIndex* index = [[XLIndex alloc] initWithDomain:@"private" name:@"dummyIndex"];
+
+    NSMutableDictionary* properties = [NSMutableDictionary  dictionaryWithDictionary: @{@"ratioVictory" : @50, @"world" : @325, @"level" : @12 }];
+    NSMutableDictionary* payload = [NSMutableDictionary  dictionaryWithDictionary: @{@"someData" : @"playerData"}];
+    [index indexObject:payload withProperties:properties withObjectId:@"587f5d844877a1734ec079e6" completionHandler:^(NSError *error, NSInteger statusCode, NSDictionary *setIndexRes) {
+        if(error == nil)
+        {
+            NSLog(@"Index set: %@", [setIndexRes description]);
+        }
+        else
+        {
+            NSLog(@"Could not set index: %@", [error description]);
+        }
+    }];
+}
 ```
 
 ```javascript
@@ -206,6 +225,23 @@ public class MyClass
 ```
 
 ```objectivec
+#import "XLIndex.h"
+
+void GetIndex()
+{
+    XLIndex* index = [[XLIndex alloc] initWithDomain:@"private" name:@"dummyIndex"];
+
+    [index fetchObject:@"587f5d844877a1734ec079e6" completionHandler:^(NSError *error, NSInteger statusCode, NSDictionary *getIndexRes) {
+        if(error == nil)
+        {
+            NSLog(@"Got index: %@", [getIndexRes description]);
+        }
+        else
+        {
+            NSLog(@"Could not set index: %@", [error description]);
+        }
+    }];
+}
 ```
 
 ```javascript
@@ -333,6 +369,23 @@ public class MyClass
 ```
 
 ```objectivec
+#import "XLIndex.h"
+
+void DeleteIndex()
+{
+    XLIndex* index = [[XLIndex alloc] initWithDomain:@"private" name:@"dummyIndex"];
+
+    [index deleteObject:@"587f5d844877a1734ec079e6" completionHandler:^(NSError *error, NSInteger statusCode, NSDictionary *deleteIndexRes) {
+        if(error == nil)
+        {
+            NSLog(@"Index deleted: %@", [deleteIndexRes description]);
+        }
+        else
+        {
+            NSLog(@"Could not delete index: %@", [error description]);
+        }
+    }];
+}
 ```
 
 ```javascript
@@ -459,6 +512,23 @@ public class MyClass
 ```
 
 ```objectivec
+#import "XLIndex.h"
+
+void SearchIndex()
+{
+    XLIndex* index = [[XLIndex alloc] initWithDomain:@"private" name:@"dummyIndex"];
+
+    [index search:@"XP:325" sortBy:[[NSArray alloc] initWithObjects:@"ratioVictory", @"level", nil] withLimit:5 withOffset:0 completionHandler:^(NSError *error, NSInteger statusCode, NSDictionary *searchIndexRes) {
+        if(error == nil)
+        {
+            NSLog(@"Index search: %@", [searchIndexRes description]);
+        }
+        else
+        {
+            NSLog(@"Could not search index: %@", [error description]);
+        }
+    }];
+}
 ```
 
 ```javascript
