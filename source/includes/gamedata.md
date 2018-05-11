@@ -55,9 +55,9 @@ public class MyClass
 {
     void GetGameValue()
     {
-        // currentGamer is an object retrieved after one of the different Login functions.
+        // cloud is an object retrieved at the beginning of the game through the CotcGameObject object.
 
-        currentGamer.GamerVfs.Domain("private").GetValue("myKey")
+        cloud.Game.GameVfs.Domain("private").GetValue("myKey")
         .Done(getGameValueRes => {
             Bundle result = getGameValueRes["result"];
             Debug.Log("Game data: " + result.ToString());
@@ -189,7 +189,7 @@ public class MyClass
     {
         // currentGamer is an object retrieved after one of the different Login functions.
 
-        currentGamer.GamerVfs.Domain("private").GetBinary("myBinaryKey")
+        cloud.Game.GameVfs.Domain("private").GetBinary("myBinaryKey")
         .Done(getGameBinaryRes => {
             // In case your binary data contains some text, you can transfer the byte[] result into a string
             string str = System.Text.Encoding.UTF8.GetString(getGameBinaryRes);
