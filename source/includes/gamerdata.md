@@ -316,7 +316,7 @@ public class MyClass
 
         currentGamer.GamerVfs.Domain("private").DeleteValue("myKey")
         .Done(deleteUserValueRes => {
-            Debug.Log("User data deleted: ") + deleteUserValueRes.ToString();
+            Debug.Log("User data deleted: " + deleteUserValueRes.ToString());
         }, ex => {
             // The exception should always be CotcException
             CotcException error = (CotcException)ex;
@@ -581,7 +581,7 @@ public class MyClass
         var bytes = System.Text.Encoding.UTF8.GetBytes("This is some text that you want to store as binary. Could be a PNG, a MP3 or anything.");
         currentGamer.GamerVfs.Domain("private").SetBinary("myBinaryKey", bytes)
         .Done(setUserBinaryRes => {
-            Debug.Log("User binary data set: ") + setUserBinaryRes.ToString();
+            Debug.Log("User binary data set: " + setUserBinaryRes.ToString());
         }, ex => {
             // The exception should always be CotcException
             CotcException error = (CotcException)ex;
