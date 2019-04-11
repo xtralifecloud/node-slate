@@ -23,21 +23,21 @@ under the License.
 
 // BACKGROUND COLORS
 ////////////////////
-$nav-bg: #464646;
-$examples-bg: #464646;
-$code-bg: #333333;
-$code-annotation-bg: #1c1c1c;
-$nav-subitem-bg: #333333;
-$nav-active-bg: #2467af;
+$nav-bg: #113253;
+$examples-bg: $nav-bg;
+$code-bg: #00284c;
+$code-annotation-bg: #001b33;
+$nav-subitem-bg: $code-bg;
+$nav-active-bg: #7b0099;
 $lang-select-border: #000;
-$lang-select-bg: #222;
-$lang-select-active-bg: $examples-bg; // feel free to change this to blue or something
-$lang-select-pressed-bg: #111; // color of language tab bg when mouse is pressed
+$lang-select-bg: $code-annotation-bg;
+$lang-select-active-bg: $nav-active-bg; // feel free to change this to blue or something
+$lang-select-pressed-bg: #f4a31c; // color of language tab bg when mouse is pressed
 $main-bg: #e3e3e3;
-$aside-notice-bg: #8fbcd4;
-$aside-warning-bg: #c97a7e;
-$aside-success-bg: #6ac174;
-$search-notice-bg: #c97a7e;
+$aside-notice-bg: #9fc1d4;
+$aside-warning-bg: #d49fa2;
+$aside-success-bg: #9fd4a5;
+$search-notice-bg: $aside-warning-bg;
 
 
 // TEXT COLORS
