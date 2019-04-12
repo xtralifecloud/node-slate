@@ -18,6 +18,7 @@ includes:
   - users
   - gamerdata
   - gamedata
+  - kvstore
   - leaderboards
   - transactions
   - friends
