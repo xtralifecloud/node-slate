@@ -15,6 +15,7 @@ includes:
   - main
   - authentification
   - account
+  - profile
   - users
   - gamerdata
   - gamedata
