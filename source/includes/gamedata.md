@@ -48,7 +48,7 @@ class MyGame
 };
 ```
 
-```cs
+```csharp
 using CotcSdk;
 
 public class MyClass
@@ -70,7 +70,7 @@ public class MyClass
 }
 ```
 
-```objectivec
+```objective_c
 #import "XLGameVFS.h"
 
 void GetGameValue()
@@ -89,7 +89,7 @@ void GetGameValue()
 }
 ```
 
-```javascript
+```javascript--client
 var clan; // clan was retrieved previously with a constructor to `Clan`
 
 function GetGameValue()
@@ -180,7 +180,7 @@ class MyGame
 };
 ```
 
-```cs
+```csharp
 using CotcSdk;
 
 public class MyClass
@@ -203,7 +203,7 @@ public class MyClass
 }
 ```
 
-```objectivec
+```objective_c
 #import "XLGameVFS.h"
 
 void GetGameBinary()
@@ -225,7 +225,7 @@ void GetGameBinary()
 }
 ```
 
-```javascript
+```javascript--client
 var clan; // clan was retrieved previously with a constructor to `Clan`
 
 function GetGameBinary()

@@ -44,7 +44,7 @@ class MyGame
 };
 ```
 
-```cs
+```csharp
 using CotcSdk;
 
 public class MyClass
@@ -66,10 +66,10 @@ public class MyClass
 }
 ```
 
-```objectivec
+```objective_c
 ```
 
-```javascript
+```javascript--client
 var clan; // clan was retrieved previously with a constructor to `Clan`
 
 function InvokeGameBatch()
@@ -155,7 +155,7 @@ class MyGame
 };
 ```
 
-```cs
+```csharp
 using CotcSdk;
 
 public class MyClass
@@ -177,10 +177,10 @@ public class MyClass
 }
 ```
 
-```objectivec
+```objective_c
 ```
 
-```javascript
+```javascript--client
 var clan; // clan was retrieved previously with a constructor to `Clan`
 var gamer; // gamer was retrieved previously with a call to one of the Login methods from `Clan`
 

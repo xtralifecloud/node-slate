@@ -95,7 +95,7 @@ class MyGame
 };
 ```
 
-```cs
+```csharp
 using CotcSdk;
 
 public class MyClass
@@ -122,7 +122,7 @@ public class MyClass
 }
 ```
 
-```objectivec
+```objective_c
 #import "XLMatch.h"
 
 void CreateMatch()
@@ -147,7 +147,7 @@ void CreateMatch()
 }
 ```
 
-```javascript
+```javascript--client
 var clan; // clan was retrieved previously with a constructor to `Clan`
 var gamer; // gamer was retrieved previously with a call to one of the Login methods from `Clan`
 
@@ -301,7 +301,7 @@ class MyGame
 };
 ```
 
-```cs
+```csharp
 using CotcSdk;
 
 public class MyClass
@@ -322,7 +322,7 @@ public class MyClass
 }
 ```
 
-```objectivec
+```objective_c
 #import "XLMatch.h"
 
 void ListMatches()
@@ -343,7 +343,7 @@ void ListMatches()
 }
 ```
 
-```javascript
+```javascript--client
 var clan; // clan was retrieved previously with a constructor to `Clan`
 var gamer; // gamer was retrieved previously with a call to one of the Login methods from `Clan`
 
@@ -465,7 +465,7 @@ class MyGame
 };
 ```
 
-```cs
+```csharp
 using CotcSdk;
 
 public class MyClass
@@ -486,7 +486,7 @@ public class MyClass
 }
 ```
 
-```objectivec
+```objective_c
 #import "XLMatch.h"
 
 void LoadMatch()
@@ -507,7 +507,7 @@ void LoadMatch()
 }
 ```
 
-```javascript
+```javascript--client
 var clan; // clan was retrieved previously with a constructor to `Clan`
 var gamer; // gamer was retrieved previously with a call to one of the Login methods from `Clan`
 
@@ -632,7 +632,7 @@ class MyGame
 };
 ```
 
-```cs
+```csharp
 using CotcSdk;
 
 public class MyClass
@@ -654,7 +654,7 @@ public class MyClass
 }
 ```
 
-```objectivec
+```objective_c
 #import "XLMatch.h"
 
 void FinishMatch()
@@ -674,7 +674,7 @@ void FinishMatch()
 }
 ```
 
-```javascript
+```javascript--client
 var clan; // clan was retrieved previously with a constructor to `Clan`
 var gamer; // gamer was retrieved previously with a call to one of the Login methods from `Clan`
 
@@ -775,7 +775,7 @@ class MyGame
 };
 ```
 
-```cs
+```csharp
 using CotcSdk;
 
 public class MyClass
@@ -796,7 +796,7 @@ public class MyClass
 }
 ```
 
-```objectivec
+```objective_c
 #import "XLMatch.h"
 
 void DeleteMatch()
@@ -816,7 +816,7 @@ void DeleteMatch()
 }
 ```
 
-```javascript
+```javascript--client
 var clan; // clan was retrieved previously with a constructor to `Clan`
 var gamer; // gamer was retrieved previously with a call to one of the Login methods from `Clan`
 
@@ -905,7 +905,7 @@ class MyGame
 };
 ```
 
-```cs
+```csharp
 using CotcSdk;
 
 public class MyClass
@@ -926,7 +926,7 @@ public class MyClass
 }
 ```
 
-```objectivec
+```objective_c
 #import "XLMatch.h"
 
 void InviteToMatch()
@@ -946,7 +946,7 @@ void InviteToMatch()
 }
 ```
 
-```javascript
+```javascript--client
 var clan; // clan was retrieved previously with a constructor to `Clan`
 var gamer; // gamer was retrieved previously with a call to one of the Login methods from `Clan`
 
@@ -1045,7 +1045,7 @@ class MyGame
 };
 ```
 
-```cs
+```csharp
 using CotcSdk;
 
 public class MyClass
@@ -1066,7 +1066,7 @@ public class MyClass
 }
 ```
 
-```objectivec
+```objective_c
 #import "XLMatch.h"
 
 void JoinMatch()
@@ -1085,7 +1085,7 @@ void JoinMatch()
 }
 ```
 
-```javascript
+```javascript--client
 var clan; // clan was retrieved previously with a constructor to `Clan`
 var gamer; // gamer was retrieved previously with a call to one of the Login methods from `Clan`
 
@@ -1243,7 +1243,7 @@ class MyGame
 };
 ```
 
-```cs
+```csharp
 using CotcSdk;
 
 public class MyClass
@@ -1264,7 +1264,7 @@ public class MyClass
 }
 ```
 
-```objectivec
+```objective_c
 #import "XLMatch.h"
 
 void DismissInvite()
@@ -1285,7 +1285,7 @@ void DismissInvite()
 }
 ```
 
-```javascript
+```javascript--client
 var clan; // clan was retrieved previously with a constructor to `Clan`
 var gamer; // gamer was retrieved previously with a call to one of the Login methods from `Clan`
 
@@ -1380,7 +1380,7 @@ class MyGame
 };
 ```
 
-```cs
+```csharp
 using CotcSdk;
 
 public class MyClass
@@ -1403,7 +1403,7 @@ public class MyClass
 }
 ```
 
-```objectivec
+```objective_c
 #import "XLMatch.h"
 
 void PostMove()
@@ -1425,7 +1425,7 @@ void PostMove()
 }
 ```
 
-```javascript
+```javascript--client
 var clan; // clan was retrieved previously with a constructor to `Clan`
 var gamer; // gamer was retrieved previously with a call to one of the Login methods from `Clan`
 
@@ -1540,7 +1540,7 @@ class MyGame
 };
 ```
 
-```cs
+```csharp
 using CotcSdk;
 
 public class MyClass
@@ -1561,7 +1561,7 @@ public class MyClass
 }
 ```
 
-```objectivec
+```objective_c
 #import "XLMatch.h"
 
 void DrawFromShoe()
@@ -1581,7 +1581,7 @@ void DrawFromShoe()
 }
 ```
 
-```javascript
+```javascript--client
 var clan; // clan was retrieved previously with a constructor to `Clan`
 var gamer; // gamer was retrieved previously with a call to one of the Login methods from `Clan`
 
@@ -1684,7 +1684,7 @@ class MyGame
 };
 ```
 
-```cs
+```csharp
 using CotcSdk;
 
 public class MyClass
@@ -1705,7 +1705,7 @@ public class MyClass
 }
 ```
 
-```objectivec
+```objective_c
 #import "XLMatch.h"
 
 void LeaveMatch()
@@ -1725,7 +1725,7 @@ void LeaveMatch()
 }
 ```
 
-```javascript
+```javascript--client
 var clan; // clan was retrieved previously with a constructor to `Clan`
 var gamer; // gamer was retrieved previously with a call to one of the Login methods from `Clan`
 

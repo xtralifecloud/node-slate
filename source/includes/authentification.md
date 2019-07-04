@@ -53,7 +53,7 @@ class MyGame
 };
 ```
 
-```cs
+```csharp
 using CotcSdk;
 
 public class MyClass
@@ -78,7 +78,7 @@ public class MyClass
 }
 ```
 
-```objectivec
+```objective_c
 void LoginAnonymous()
 {
     XLGamer* gamer;
@@ -97,7 +97,7 @@ void LoginAnonymous()
 }
 ```
 
-```javascript
+```javascript--client
 function LoginAnonymous()
 {
   var clan = Clan("YourGameApiKey", "YourGameApiSecret", "sandbox");
@@ -145,8 +145,8 @@ Result JSON in case of success:
 
 ```json
 {
-  "network": "email",
-  "networkid": "myEmail@gmail.com",
+  "network": 1,
+  "networkid": true,
   "registerTime": "2017-01-09T14:41:27.423Z",
   "registerBy": "com.mycompany.mygame",
   "games": [
@@ -205,7 +205,7 @@ class MyGame
 };
 ```
 
-```cs
+```csharp
 using CotcSdk;
 
 public class MyClass
@@ -233,7 +233,7 @@ public class MyClass
 }
 ```
 
-```objectivec
+```objective_c
 void LoginNetwork()
 {
     XLGamer* gamer;
@@ -253,7 +253,7 @@ void LoginNetwork()
 }
 ```
 
-```javascript
+```javascript--client
 function LoginNetwork()
 {
   var clan = Clan("YourGameApiKey", "YourGameApiSecret", "sandbox");
@@ -403,7 +403,7 @@ class MyGame
 };
 ```
 
-```cs
+```csharp
 using CotcSdk;
 
 public class MyClass
@@ -430,7 +430,7 @@ public class MyClass
 }
 ```
 
-```objectivec
+```objective_c
 void ResumeSession()
 {
     XLGamer* gamer;
@@ -450,7 +450,7 @@ void ResumeSession()
 }
 ```
 
-```javascript
+```javascript--client
 function ResumeSession()
 {
   var clan = Clan("YourGameApiKey", "YourGameApiSecret", "sandbox");
@@ -591,7 +591,7 @@ class MyGame
 };
 ```
 
-```cs
+```csharp
 using CotcSdk;
 
 public class MyClass
@@ -616,7 +616,7 @@ public class MyClass
 }
 ```
 
-```objectivec
+```objective_c
 void LoginWithShortCode()
 {
     XLGamer* gamer;
@@ -635,7 +635,7 @@ void LoginWithShortCode()
 }
 ```
 
-```javascript
+```javascript--client
 function LoginWithShortCode()
 {
   var clan = Clan("YourGameApiKey", "YourGameApiSecret", "sandbox");
@@ -763,7 +763,7 @@ class MyGame
 };
 ```
 
-```cs
+```csharp
 using CotcSdk;
 
 public class MyClass
@@ -787,10 +787,10 @@ public class MyClass
 }
 ```
 
-```objectivec
+```objective_c
 ```
 
-```javascript
+```javascript--client
 var clan; // clan was retrieved previously with a constructor to `Clan`
 var gamer; // gamer was retrieved previously with a call to one of the Login methods from `Clan`
 

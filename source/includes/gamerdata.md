@@ -39,7 +39,7 @@ class MyGame
 };
 ```
 
-```cs
+```csharp
 using CotcSdk;
 
 public class MyClass
@@ -61,7 +61,7 @@ public class MyClass
 }
 ```
 
-```objectivec
+```objective_c
 #import "XLGamerVFS.h"
 
 void GetUserValue()
@@ -82,7 +82,7 @@ void GetUserValue()
 }
 ```
 
-```javascript
+```javascript--client
 var clan; // clan was retrieved previously with a constructor to `Clan`
 var gamer; // gamer was retrieved previously with a call to one of the Login methods from `Clan`
 
@@ -175,7 +175,7 @@ class MyGame
 };
 ```
 
-```cs
+```csharp
 using CotcSdk;
 
 public class MyClass
@@ -197,7 +197,7 @@ public class MyClass
 }
 ```
 
-```objectivec
+```objective_c
 #import "XLGamerVFS.h"
 
 void SetUserValue()
@@ -218,7 +218,7 @@ void SetUserValue()
 }
 ```
 
-```javascript
+```javascript--client
 var clan; // clan was retrieved previously with a constructor to `Clan`
 var gamer; // gamer was retrieved previously with a call to one of the Login methods from `Clan`
 
@@ -305,7 +305,7 @@ class MyGame
 };
 ```
 
-```cs
+```csharp
 using CotcSdk;
 
 public class MyClass
@@ -326,7 +326,7 @@ public class MyClass
 }
 ```
 
-```objectivec
+```objective_c
 #import "XLGamerVFS.h"
 
 void DeleteUserValue()
@@ -347,7 +347,7 @@ void DeleteUserValue()
 }
 ```
 
-```javascript
+```javascript--client
 var clan; // clan was retrieved previously with a constructor to `Clan`
 var gamer; // gamer was retrieved previously with a call to one of the Login methods from `Clan`
 
@@ -427,7 +427,7 @@ class MyGame
 };
 ```
 
-```cs
+```csharp
 using CotcSdk;
 
 public class MyClass
@@ -450,7 +450,7 @@ public class MyClass
 }
 ```
 
-```objectivec
+```objective_c
 #import "XLGamerVFS.h"
 
 void GetUserBinary()
@@ -473,7 +473,7 @@ void GetUserBinary()
 }
 ```
 
-```javascript
+```javascript--client
 var clan; // clan was retrieved previously with a constructor to `Clan`
 var gamer; // gamer was retrieved previously with a call to one of the Login methods from `Clan`
 
@@ -569,7 +569,7 @@ class MyGame
 };
 ```
 
-```cs
+```csharp
 using CotcSdk;
 
 public class MyClass
@@ -591,7 +591,7 @@ public class MyClass
 }
 ```
 
-```objectivec
+```objective_c
 #import "XLGamerVFS.h"
 
 void SetUserBinary()
@@ -614,7 +614,7 @@ void SetUserBinary()
 }
 ```
 
-```javascript
+```javascript--client
 var clan; // clan was retrieved previously with a constructor to `Clan`
 var gamer; // gamer was retrieved previously with a call to one of the Login methods from `Clan`
 

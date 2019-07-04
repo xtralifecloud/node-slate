@@ -29,7 +29,7 @@ Meaning:
 ```cpp
 ```
 
-```cs
+```csharp
 using CotcSdk;
 
 public class MyClass
@@ -61,10 +61,10 @@ public class MyClass
 }
 ```
 
-```objectivec
+```objective_c
 ```
 
-```javascript
+```javascript--client
 var clan; // clan was retrieved previously with a constructor to `Clan`
 var gamer; // gamer was retrieved previously with a call to one of the Login methods from `Clan`
 
@@ -105,7 +105,7 @@ BODY
 
 > The related sample batch script (Javascript) to create the KV Store key:
 
-```js
+```javascript--center
 function __KvStore_CreateKey(params, customData, mod) {
     "use strict";
     // don't edit above this line // must be on line 3
@@ -183,7 +183,7 @@ You should check for batch's returned value `n == 1` to ensure the key has been 
 ```cpp
 ```
 
-```cs
+```csharp
 using CotcSdk;
 
 public class MyClass
@@ -203,10 +203,10 @@ public class MyClass
 }
 ```
 
-```objectivec
+```objective_c
 ```
 
-```javascript
+```javascript--client
 var clan; // clan was retrieved previously with a constructor to `Clan`
 var gamer; // gamer was retrieved previously with a call to one of the Login methods from `Clan`
 
@@ -265,7 +265,7 @@ Result JSON in case of success:
 ```cpp
 ```
 
-```cs
+```csharp
 using CotcSdk;
 
 public class MyClass
@@ -287,10 +287,10 @@ public class MyClass
 }
 ```
 
-```objectivec
+```objective_c
 ```
 
-```javascript
+```javascript--client
 var clan; // clan was retrieved previously with a constructor to `Clan`
 var gamer; // gamer was retrieved previously with a call to one of the Login methods from `Clan`
 
@@ -351,7 +351,7 @@ You should check for request's returned value `n == 1` to ensure the key has bee
 ```cpp
 ```
 
-```cs
+```csharp
 using CotcSdk;
 
 public class MyClass
@@ -381,10 +381,10 @@ public class MyClass
 }
 ```
 
-```objectivec
+```objective_c
 ```
 
-```javascript
+```javascript--client
 var clan; // clan was retrieved previously with a constructor to `Clan`
 var gamer; // gamer was retrieved previously with a call to one of the Login methods from `Clan`
 
@@ -450,7 +450,7 @@ You should check for request's returned value `n == 1` to ensure the key has bee
 ```cpp
 ```
 
-```cs
+```csharp
 using CotcSdk;
 
 public class MyClass
@@ -470,10 +470,10 @@ public class MyClass
 }
 ```
 
-```objectivec
+```objective_c
 ```
 
-```javascript
+```javascript--client
 var clan; // clan was retrieved previously with a constructor to `Clan`
 var gamer; // gamer was retrieved previously with a call to one of the Login methods from `Clan`
 

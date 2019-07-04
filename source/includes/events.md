@@ -35,7 +35,7 @@ class MyGame
 };
 ```
 
-```cs
+```csharp
 using CotcSdk;
 
 public class MyClass
@@ -57,7 +57,7 @@ public class MyClass
 }
 ```
 
-```objectivec
+```objective_c
 #import "XLGamer.h"
 
 void SendEvent()
@@ -81,7 +81,7 @@ void SendEvent()
 }
 ```
 
-```javascript
+```javascript--client
 var clan; // clan was retrieved previously with a constructor to `Clan`
 var gamer; // gamer was retrieved previously with a call to one of the Login methods from `Clan`
 
@@ -181,7 +181,7 @@ class MyGame
 };
 ```
 
-```cs
+```csharp
 using CotcSdk;
 
 public class MyClass
@@ -205,7 +205,7 @@ public class MyClass
 }
 ```
 
-```objectivec
+```objective_c
 #import "XLGamer.h"
 
 @interface MyClass : NSObject<EventLoopDelegate>
@@ -229,7 +229,7 @@ public class MyClass
 @end
 ```
 
-```javascript
+```javascript--client
 var clan; // clan was retrieved previously with a constructor to `Clan`
 
 function listenForEvent()

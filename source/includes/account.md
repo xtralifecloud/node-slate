@@ -45,7 +45,7 @@ class MyGame
 };
 ```
 
-```cs
+```csharp
 using CotcSdk;
 
 public class MyClass
@@ -66,10 +66,10 @@ public class MyClass
 }
 ```
 
-```objectivec
+```objective_c
 ```
 
-```javascript
+```javascript--client
 var clan; // clan was retrieved previously with a constructor to `Clan`
 var gamer; // gamer was retrieved previously with a call to one of the Login methods from `Clan`
 
@@ -206,7 +206,7 @@ class MyGame
 };
 ```
 
-```cs
+```csharp
 using CotcSdk;
 
 public class MyClass
@@ -227,10 +227,10 @@ public class MyClass
 }
 ```
 
-```objectivec
+```objective_c
 ```
 
-```javascript
+```javascript--client
 var clan; // clan was retrieved previously with a constructor to `Clan`
 var gamer; // gamer was retrieved previously with a call to one of the Login methods from `Clan`
 
@@ -327,7 +327,7 @@ class MyGame
 };
 ```
 
-```cs
+```csharp
 using CotcSdk;
 
 public class MyClass
@@ -348,10 +348,10 @@ public class MyClass
 }
 ```
 
-```objectivec
+```objective_c
 ```
 
-```javascript
+```javascript--client
 var clan; // clan was retrieved previously with a constructor to `Clan`
 var gamer; // gamer was retrieved previously with a call to one of the Login methods from `Clan`
 
@@ -442,7 +442,7 @@ class MyGame
 };
 ```
 
-```cs
+```csharp
 using CotcSdk;
 
 public class MyClass
@@ -463,10 +463,10 @@ public class MyClass
 }
 ```
 
-```objectivec
+```objective_c
 ```
 
-```javascript
+```javascript--client
 var clan; // clan was retrieved previously with a constructor to `Clan`
 var gamer; // gamer was retrieved previously with a call to one of the Login methods from `Clan`
 
@@ -557,7 +557,7 @@ class MyGame
 };
 ```
 
-```cs
+```csharp
 using CotcSdk;
 
 public class MyClass
@@ -578,7 +578,7 @@ public class MyClass
 }
 ```
 
-```objectivec
+```objective_c
 void ChangePassword()
 {
     // gamer is a XLGamer instance obtained by a call to one of the Login methods
@@ -596,7 +596,7 @@ void ChangePassword()
 }
 ```
 
-```javascript
+```javascript--client
 var clan; // clan was retrieved previously with a constructor to `Clan`
 var gamer; // gamer was retrieved previously with a call to one of the Login methods from `Clan`
 
@@ -689,7 +689,7 @@ class MyGame
 };
 ```
 
-```cs
+```csharp
 using CotcSdk;
 
 public class MyClass
@@ -710,10 +710,10 @@ public class MyClass
 }
 ```
 
-```objectivec
+```objective_c
 ```
 
-```javascript
+```javascript--client
 var clan; // clan was retrieved previously with a constructor to `Clan`
 var gamer; // gamer was retrieved previously with a call to one of the Login methods from `Clan`
 
@@ -830,7 +830,7 @@ class MyGame
 };
 ```
 
-```cs
+```csharp
 using CotcSdk;
 
 public class MyClass
@@ -855,7 +855,7 @@ public class MyClass
 }
 ```
 
-```objectivec
+```objective_c
 void ResetPassword()
 {
     XLGamer* gamer = [[XLGamer alloc] init];
@@ -875,7 +875,7 @@ void ResetPassword()
 }
 ```
 
-```javascript
+```javascript--client
 var clan; // clan was retrieved previously with a constructor to `Clan`
 
 function ResetPassword()

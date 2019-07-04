@@ -1,11 +1,13 @@
+---
 title: API Reference
 
 language_tabs:
   - cpp: C++
-  - cs: Unity
-  - javascript: Javascript
-  - objectivec: Objective C
+  - csharp: Unity
+  - javascript--client: Javascript
+  - objective_c: Objective C
   - http: REST
+  - javascript--server: Cloud code
 
 toc_footers:
   - <a href='https://account.clanofthecloud.com'>Sign Up for a Developer Key</a>
@@ -33,3 +35,4 @@ includes:
 search: true
 
 highlight_theme: monokai
+---

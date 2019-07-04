@@ -46,7 +46,7 @@ class MyGame
 };
 ```
 
-```cs
+```csharp
 using CotcSdk;
 
 public class MyClass
@@ -68,7 +68,7 @@ public class MyClass
 }
 ```
 
-```objectivec
+```objective_c
 #import "XLIndex.h"
 
 void SetIndex()
@@ -90,7 +90,7 @@ void SetIndex()
 }
 ```
 
-```javascript
+```javascript--client
 var clan; // clan was retrieved previously with a constructor to `Clan`
 
 function SetIndex()
@@ -203,7 +203,7 @@ class MyGame
 };
 ```
 
-```cs
+```csharp
 using CotcSdk;
 
 public class MyClass
@@ -224,7 +224,7 @@ public class MyClass
 }
 ```
 
-```objectivec
+```objective_c
 #import "XLIndex.h"
 
 void GetIndex()
@@ -244,7 +244,7 @@ void GetIndex()
 }
 ```
 
-```javascript
+```javascript--client
 var clan; // clan was retrieved previously with a constructor to `Clan`
 
 function GetIndex()
@@ -347,7 +347,7 @@ class MyGame
 };
 ```
 
-```cs
+```csharp
 using CotcSdk;
 
 public class MyClass
@@ -368,7 +368,7 @@ public class MyClass
 }
 ```
 
-```objectivec
+```objective_c
 #import "XLIndex.h"
 
 void DeleteIndex()
@@ -388,7 +388,7 @@ void DeleteIndex()
 }
 ```
 
-```javascript
+```javascript--client
 var clan; // clan was retrieved previously with a constructor to `Clan`
 
 function DeleteIndex()
@@ -487,7 +487,7 @@ class MyGame
 };
 ```
 
-```cs
+```csharp
 using CotcSdk;
 
 public class MyClass
@@ -511,7 +511,7 @@ public class MyClass
 }
 ```
 
-```objectivec
+```objective_c
 #import "XLIndex.h"
 
 void SearchIndex()
@@ -531,7 +531,7 @@ void SearchIndex()
 }
 ```
 
-```javascript
+```javascript--client
 var clan; // clan was retrieved previously with a constructor to `Clan`
 
 function SearchIndex()

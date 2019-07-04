@@ -38,12 +38,12 @@ void MyGame::SetupDone(CloudBuilder::eErrorCode errorCode, const CloudBuilder::C
 }
 ```
 
-```cs
+```csharp
 // With Unity, there is no code involved in setting up the environment,
 // since it is done directly in the Settings Editor of the Clan of the Cloud object.
 ```
 
-```javascript
+```javascript--client
 //in your HTML file:
 <script src="js/bundle.min.js" type="text/javascript"></script>
 
@@ -51,7 +51,7 @@ void MyGame::SetupDone(CloudBuilder::eErrorCode errorCode, const CloudBuilder::C
 var clan = Clan("YourGameApiKey", "YourGameApiSecret", "sandbox");
 ```
 
-```objectivec
+```objective_c
 #import "XLClan.h"
 
 [[XLClan sharedInstance] configureWithApp:@"YourGameApiKey"
