@@ -99,7 +99,7 @@ function GetUserValue()
 ```
 
 ```http
-GET /v3.0/gamer/vfs/{domain}/{key}
+GET /v3.0/gamer/vfs/{domain}/{key} HTTP/1.1
 Host: https://sandbox-api01.clanofthecloud.mobi
 Content-Type: application/json
 x-apikey: YourGameApiKey
@@ -235,7 +235,7 @@ function SetUserValue()
 ```
 
 ```http
-PUT /v3.0/gamer/vfs/{domain}/{key}
+PUT /v3.0/gamer/vfs/{domain}/{key} HTTP/1.1
 Host: https://sandbox-api01.clanofthecloud.mobi
 Content-Type: application/json
 x-apikey: YourGameApiKey
@@ -364,7 +364,7 @@ function DeleteUserValue()
 ```
 
 ```http
-DELETE /v3.0/gamer/vfs/{domain}/{key}
+DELETE /v3.0/gamer/vfs/{domain}/{key} HTTP/1.1
 Host: https://sandbox-api01.clanofthecloud.mobi
 Content-Type: application/json
 x-apikey: YourGameApiKey
@@ -491,7 +491,7 @@ function GetUserBinary()
 ```
 
 ```http
-GET /v3.0/gamer/vfs/{domain}/{key}?binary
+GET /v3.0/gamer/vfs/{domain}/{key}?binary HTTP/1.1
 Host: https://sandbox-api01.clanofthecloud.mobi
 Content-Type: application/json
 x-apikey: YourGameApiKey
@@ -633,7 +633,7 @@ function SetUserBinary()
 ```
 
 ```http
-PUT /v3.0/gamer/vfs/{domain}/{key}?binary
+PUT /v3.0/gamer/vfs/{domain}/{key}?binary HTTP/1.1
 Host: https://sandbox-api01.clanofthecloud.mobi
 Content-Type: application/json
 x-apikey: YourGameApiKey

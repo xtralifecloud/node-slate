@@ -108,7 +108,7 @@ function SetIndex()
 ```
 
 ```http
-POST /v1/index/{domain}/{indexName}
+POST /v1/index/{domain}/{indexName} HTTP/1.1
 Host: https://sandbox-api01.clanofthecloud.mobi
 Content-Type: application/json
 x-apikey: YourGameApiKey
@@ -260,7 +260,7 @@ function GetIndex()
 ```
 
 ```http
-GET /v1/index/{domain}/{indexName}
+GET /v1/index/{domain}/{indexName} HTTP/1.1
 Host: https://sandbox-api01.clanofthecloud.mobi
 Content-Type: application/json
 x-apikey: YourGameApiKey
@@ -404,7 +404,7 @@ function DeleteIndex()
 ```
 
 ```http
-DELETE /v1/index/{domain}/{indexName}
+DELETE /v1/index/{domain}/{indexName} HTTP/1.1
 Host: https://sandbox-api01.clanofthecloud.mobi
 Content-Type: application/json
 x-apikey: YourGameApiKey
@@ -547,7 +547,7 @@ function SearchIndex()
 ```
 
 ```http
-POST /v1/index/{domain}/{indexName}/search?{query}&{sort}&{from}&{max}
+POST /v1/index/{domain}/{indexName}/search?{query}&{sort}&{from}&{max} HTTP/1.1
 Host: https://sandbox-api01.clanofthecloud.mobi
 Content-Type: application/json
 x-apikey: YourGameApiKey

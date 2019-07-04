@@ -175,7 +175,7 @@ function CreateMatch()
 ```
 
 ```http
-POST /v1/gamer/matches?{domain}
+POST /v1/gamer/matches?{domain} HTTP/1.1
 Host: https://sandbox-api01.clanofthecloud.mobi
 Content-Type: application/json
 x-apikey: YourGameApiKey
@@ -360,7 +360,7 @@ function ListMatches()
 ```
 
 ```http
-GET /v1/gamer/matches?{domain}{&participating}{&finished}{&invited}{&full}{&limit}{&skip}
+GET /v1/gamer/matches?{domain}{&participating}{&finished}{&invited}{&full}{&limit}{&skip} HTTP/1.1
 Host: https://sandbox-api01.clanofthecloud.mobi
 Content-Type: application/json
 x-apikey: YourGameApiKey
@@ -524,7 +524,7 @@ function LoadMatch()
 ```
 
 ```http
-GET /v1/gamer/matches/{matchId}
+GET /v1/gamer/matches/{matchId} HTTP/1.1
 Host: https://sandbox-api01.clanofthecloud.mobi
 Content-Type: application/json
 x-apikey: YourGameApiKey
@@ -694,7 +694,7 @@ function FinishMatch()
 ```
 
 ```http
-POST /v1/gamer/matches/{matchId}/finish?{lastEventId}
+POST /v1/gamer/matches/{matchId}/finish?{lastEventId} HTTP/1.1
 Host: https://sandbox-api01.clanofthecloud.mobi
 Content-Type: application/json
 x-apikey: YourGameApiKey
@@ -833,7 +833,7 @@ function DeleteMatch()
 ```
 
 ```http
-DELETE /v1/gamer/matches/{matchId}
+DELETE /v1/gamer/matches/{matchId} HTTP/1.1
 Host: https://sandbox-api01.clanofthecloud.mobi
 Content-Type: application/json
 x-apikey: YourGameApiKey
@@ -966,7 +966,7 @@ function InviteToMatch()
 ```
 
 ```http
-POST /v1/gamer/matches/{matchId}/invite/{friendId}
+POST /v1/gamer/matches/{matchId}/invite/{friendId} HTTP/1.1
 Host: https://sandbox-api01.clanofthecloud.mobi
 Content-Type: application/json
 x-apikey: YourGameApiKey
@@ -1102,7 +1102,7 @@ function JoinMatch()
 ```
 
 ```http
-POST /v1/gamer/matches/{matchId}/join
+POST /v1/gamer/matches/{matchId}/join HTTP/1.1
 Host: https://sandbox-api01.clanofthecloud.mobi
 Content-Type: application/json
 x-apikey: YourGameApiKey
@@ -1302,7 +1302,7 @@ function DismissInvite()
 ```
 
 ```http
-DELETE /v1/gamer/matches/{matchId}/invitation
+DELETE /v1/gamer/matches/{matchId}/invitation HTTP/1.1
 Host: https://sandbox-api01.clanofthecloud.mobi
 Content-Type: application/json
 x-apikey: YourGameApiKey
@@ -1446,7 +1446,7 @@ function PostMove()
 ```
 
 ```http
-POST /v1/gamer/matches/{matchId}/move?{lastEventId}
+POST /v1/gamer/matches/{matchId}/move?{lastEventId} HTTP/1.1
 Host: https://sandbox-api01.clanofthecloud.mobi
 Content-Type: application/json
 x-apikey: YourGameApiKey
@@ -1600,7 +1600,7 @@ function DrawFromShoe()
 ```
 
 ```http
-POST /v1/gamer/matches/{matchId}/shoe/draw?{lastEventId}&{count}
+POST /v1/gamer/matches/{matchId}/shoe/draw?{lastEventId}&{count} HTTP/1.1
 Host: https://sandbox-api01.clanofthecloud.mobi
 Content-Type: application/json
 x-apikey: YourGameApiKey
@@ -1742,7 +1742,7 @@ function LeaveMatch()
 ```
 
 ```http
-POST /v1/gamer/matches/{matchId}/leave
+POST /v1/gamer/matches/{matchId}/leave HTTP/1.1
 Host: https://sandbox-api01.clanofthecloud.mobi
 Content-Type: application/json
 x-apikey: YourGameApiKey

@@ -72,7 +72,7 @@ function ListFriends()
 ```
 
 ```http
-GET /v2.6/gamer/friends/{domain}
+GET /v2.6/gamer/friends/{domain} HTTP/1.1
 Host: https://sandbox-api01.clanofthecloud.mobi
 Content-Type: application/json
 x-apikey: YourGameApiKey
@@ -179,7 +179,7 @@ function Blacklisted()
 ```
 
 ```http
-GET /v2.6/gamer/friends/{domain}?status=blacklist
+GET /v2.6/gamer/friends/{domain}?status=blacklist HTTP/1.1
 Host: https://sandbox-api01.clanofthecloud.mobi
 Content-Type: application/json
 x-apikey: YourGameApiKey
@@ -290,7 +290,7 @@ function AddFriend()
 ```
 
 ```http
-POST /v2.6/gamer/friends/{domain}?{gamer_id}&{status}
+POST /v2.6/gamer/friends/{domain}?{gamer_id}&{status} HTTP/1.1
 Host: https://sandbox-api01.clanofthecloud.mobi
 Content-Type: application/json
 x-apikey: YourGameApiKey
@@ -409,7 +409,7 @@ function ListNetworkFriends()
 ```
 
 ```http
-POST /v2.12/gamer/friends/{domain}?{network}
+POST /v2.12/gamer/friends/{domain}?{network} HTTP/1.1
 Host: https://sandbox-api01.clanofthecloud.mobi
 Content-Type: application/json
 x-apikey: YourGameApiKey

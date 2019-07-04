@@ -117,7 +117,7 @@ function LoginAnonymous()
 ```
 
 ```http
-POST /v1/login/anonymous
+POST /v1/login/anonymous HTTP/1.1
 Host: https://sandbox-api01.clanofthecloud.mobi
 Content-Type: application/json
 x-apikey: YourGameApiKey
@@ -273,7 +273,7 @@ function LoginNetwork()
 ```
 
 ```http
-POST /v1/login
+POST /v1/login HTTP/1.1
 Host: https://sandbox-api01.clanofthecloud.mobi
 Content-Type: application/json
 x-apikey: YourGameApiKey
@@ -470,7 +470,7 @@ function ResumeSession()
 ```
 
 ```http
-POST /v1/login
+POST /v1/login HTTP/1.1
 Host: https://sandbox-api01.clanofthecloud.mobi
 Content-Type: application/json
 x-apikey: YourGameApiKey
@@ -655,7 +655,7 @@ function LoginWithShortCode()
 ```
 
 ```http
-POST /v1/login
+POST /v1/login HTTP/1.1
 Host: https://sandbox-api01.clanofthecloud.mobi
 Content-Type: application/json
 x-apikey: YourGameApiKey
@@ -813,7 +813,7 @@ function Logout()
 ```
 
 ```http
-POST /v1/gamer/logout
+POST /v1/gamer/logout HTTP/1.1
 Host: https://sandbox-api01.clanofthecloud.mobi
 Content-Type: application/json
 x-apikey: YourGameApiKey

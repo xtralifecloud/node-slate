@@ -105,7 +105,7 @@ function GetGameValue()
 ```
 
 ```http
-GET /v3.0/vfs/{domain}/{key}
+GET /v3.0/vfs/{domain}/{key} HTTP/1.1
 Host: https://sandbox-api01.clanofthecloud.mobi
 Content-Type: application/json
 x-apikey: YourGameApiKey
@@ -242,7 +242,7 @@ function GetGameBinary()
 ```
 
 ```http
-GET /v3.0/vfs/{domain}/{key}?binary
+GET /v3.0/vfs/{domain}/{key}?binary HTTP/1.1
 Host: https://sandbox-api01.clanofthecloud.mobi
 Content-Type: application/json
 x-apikey: YourGameApiKey

@@ -71,7 +71,7 @@ function GetReferralCode()
 ```
 
 ```http
-PUT /v2.6/gamer/referral/{domain}
+PUT /v2.6/gamer/referral/{domain} HTTP/1.1
 Host: https://sandbox-api01.clanofthecloud.mobi
 Content-Type: application/json
 x-apikey: YourGameApiKey
@@ -178,7 +178,7 @@ function UseReferralCode()
 ```
 
 ```http
-POST /v2.6/gamer/godfather/{domain}
+POST /v2.6/gamer/godfather/{domain} HTTP/1.1
 Host: https://sandbox-api01.clanofthecloud.mobi
 Content-Type: application/json
 x-apikey: YourGameApiKey
@@ -299,7 +299,7 @@ function GetGodfather()
 ```
 
 ```http
-GET /v2.6/gamer/godfather/{domain}
+GET /v2.6/gamer/godfather/{domain} HTTP/1.1
 Host: https://sandbox-api01.clanofthecloud.mobi
 Content-Type: application/json
 x-apikey: YourGameApiKey
@@ -402,7 +402,7 @@ function GetGodchildren()
 ```
 
 ```http
-GET /v2.6/gamer/godchildren/{domain}
+GET /v2.6/gamer/godchildren/{domain} HTTP/1.1
 Host: https://sandbox-api01.clanofthecloud.mobi
 Content-Type: application/json
 x-apikey: YourGameApiKey

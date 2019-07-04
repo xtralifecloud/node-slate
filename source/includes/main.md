@@ -61,8 +61,6 @@ var clan = Clan("YourGameApiKey", "YourGameApiSecret", "sandbox");
 ```http
 There is no Setup to do when accessing REST APIs directly. Identification of the game
 will be done instead by the headers of every request you send to the servers:
-x-apikey:YourGameApiKey
-x-apisecret:YourGameApiSecret
 ```
 
 Before making any actual request to the servers, you have to give the credentials

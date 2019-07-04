@@ -88,7 +88,7 @@ function InvokeCreateKvStoreKeyUserBatch()
 ```
 
 ```http
-POST /v1/gamer/batch/private/KvStore_CreateKey
+POST /v1/gamer/batch/private/KvStore_CreateKey HTTP/1.1
 Host: https://sandbox-api01.clanofthecloud.mobi
 Content-Type: application/json
 x-apikey: YourGameApiKey
@@ -223,7 +223,7 @@ function GetKvStoreKeyValue()
 ```
 
 ```http
-GET /v1/gamer/kv/{domain}/{key}
+GET /v1/gamer/kv/{domain}/{key} HTTP/1.1
 Host: https://sandbox-api01.clanofthecloud.mobi
 Content-Type: application/json
 x-apikey: YourGameApiKey
@@ -307,7 +307,7 @@ function SetKvStoreKeyValue()
 ```
 
 ```http
-POST /v1/gamer/kv/{domain}/{key}
+POST /v1/gamer/kv/{domain}/{key} HTTP/1.1
 Host: https://sandbox-api01.clanofthecloud.mobi
 Content-Type: application/json
 x-apikey: YourGameApiKey
@@ -406,7 +406,7 @@ function SetKvStoreKeyAcl()
 ```
 
 ```http
-POST /v1/gamer/kv/{domain}/{key}/acl
+POST /v1/gamer/kv/{domain}/{key}/acl HTTP/1.1
 Host: https://sandbox-api01.clanofthecloud.mobi
 Content-Type: application/json
 x-apikey: YourGameApiKey
@@ -490,7 +490,7 @@ function DeleteKvStoreKeyValue()
 ```
 
 ```http
-DELETE /v1/gamer/kv/{domain}/{key}
+DELETE /v1/gamer/kv/{domain}/{key} HTTP/1.1
 Host: https://sandbox-api01.clanofthecloud.mobi
 Content-Type: application/json
 x-apikey: YourGameApiKey

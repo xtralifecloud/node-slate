@@ -75,7 +75,7 @@ function ListAchievements()
 ```
 
 ```http
-GET /v1/gamer/achievements/{domain}
+GET /v1/gamer/achievements/{domain} HTTP/1.1
 Host: https://sandbox-api01.clanofthecloud.mobi
 Content-Type: application/json
 x-apikey: YourGameApiKey
@@ -205,7 +205,7 @@ function SetAchievementData()
 ```
 
 ```http
-GET /v1/gamer/achievements/{domain}/{achievement}/gamerdata
+GET /v1/gamer/achievements/{domain}/{achievement}/gamerdata HTTP/1.1
 Host: https://sandbox-api01.clanofthecloud.mobi
 Content-Type: application/json
 x-apikey: YourGameApiKey

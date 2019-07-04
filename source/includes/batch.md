@@ -85,7 +85,7 @@ function InvokeGameBatch()
 ```
 
 ```http
-POST /v1/batch/{domain}/{batchName}
+POST /v1/batch/{domain}/{batchName} HTTP/1.1
 Host: https://sandbox-api01.clanofthecloud.mobi
 Content-Type: application/json
 x-apikey: YourGameApiKey
@@ -197,7 +197,7 @@ function InvokeUserBatch()
 ```
 
 ```http
-POST /v1/gamer/batch/{domain}/{batchName}
+POST /v1/gamer/batch/{domain}/{batchName} HTTP/1.1
 Host: https://sandbox-api01.clanofthecloud.mobi
 Content-Type: application/json
 x-apikey: YourGameApiKey

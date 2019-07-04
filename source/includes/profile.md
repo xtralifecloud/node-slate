@@ -57,7 +57,7 @@ function GetProfileData()
 ```
 
 ```http
-GET /v1/gamer/profile
+GET /v1/gamer/profile HTTP/1.1
 Host: https://sandbox-api01.clanofthecloud.mobi
 Content-Type: application/json
 x-apikey: YourGameApiKey
@@ -138,7 +138,7 @@ function GetProfileData()
 ```
 
 ```http
-POST /v1/gamer/profile
+POST /v1/gamer/profile HTTP/1.1
 Host: https://sandbox-api01.clanofthecloud.mobi
 Content-Type: application/json
 x-apikey: YourGameApiKey

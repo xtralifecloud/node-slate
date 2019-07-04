@@ -86,7 +86,7 @@ function Convert()
 ```
 
 ```http
-POST /v1/gamer/convert
+POST /v1/gamer/convert HTTP/1.1
 Host: https://sandbox-api01.clanofthecloud.mobi
 Content-Type: application/json
 x-apikey: YourGameApiKey
@@ -247,7 +247,7 @@ function Link()
 ```
 
 ```http
-POST /v1/gamer/link
+POST /v1/gamer/link HTTP/1.1
 Host: https://sandbox-api01.clanofthecloud.mobi
 Content-Type: application/json
 x-apikey: YourGameApiKey
@@ -368,7 +368,7 @@ function Unlink()
 ```
 
 ```http
-POST /v1/gamer/unlink
+POST /v1/gamer/unlink HTTP/1.1
 Host: https://sandbox-api01.clanofthecloud.mobi
 Content-Type: application/json
 x-apikey: YourGameApiKey
@@ -483,7 +483,7 @@ function ChangeEmail()
 ```
 
 ```http
-POST /v1/gamer/email
+POST /v1/gamer/email HTTP/1.1
 Host: https://sandbox-api01.clanofthecloud.mobi
 Content-Type: application/json
 x-apikey: YourGameApiKey
@@ -613,7 +613,7 @@ function ChangePassword()
 ```
 
 ```http
-POST /v1/gamer/password
+POST /v1/gamer/password HTTP/1.1
 Host: https://sandbox-api01.clanofthecloud.mobi
 Content-Type: application/json
 x-apikey: YourGameApiKey
@@ -730,7 +730,7 @@ function FetchOutline()
 ```
 
 ```http
-GET /v1/gamer/outline
+GET /v1/gamer/outline HTTP/1.1
 Host: https://sandbox-api01.clanofthecloud.mobi
 Content-Type: application/json
 x-apikey: YourGameApiKey
@@ -895,7 +895,7 @@ function ResetPassword()
 ```
 
 ```http
-POST /v1/login/myEmail@gmail.com
+POST /v1/login/myEmail@gmail.com HTTP/1.1
 Host: https://sandbox-api01.clanofthecloud.mobi
 Content-Type: application/json
 x-apikey: YourGameApiKey

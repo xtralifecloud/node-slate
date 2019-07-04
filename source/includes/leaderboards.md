@@ -85,7 +85,7 @@ function PostScore()
 ```
 
 ```http
-POST /v2.6/gamer/scores/{domain}/{leaderboard}{?order}{&force}
+POST /v2.6/gamer/scores/{domain}/{leaderboard}{?order}{&force} HTTP/1.1
 Host: https://sandbox-api01.clanofthecloud.mobi
 Content-Type: application/json
 x-apikey: YourGameApiKey
@@ -197,7 +197,7 @@ function GetRank()
 ```
 
 ```http
-PUT /v2.6/gamer/scores/{domain}/{leaderboard}
+PUT /v2.6/gamer/scores/{domain}/{leaderboard} HTTP/1.1
 Host: https://sandbox-api01.clanofthecloud.mobi
 Content-Type: application/json
 x-apikey: YourGameApiKey
@@ -301,7 +301,7 @@ function BestHighScores()
 ```
 
 ```http
-GET /v2.6/gamer/scores/{domain}/{leaderboard}?page=1&count=10
+GET /v2.6/gamer/scores/{domain}/{leaderboard}?page=1&count=10 HTTP/1.1
 Host: https://sandbox-api01.clanofthecloud.mobi
 Content-Type: application/json
 x-apikey: YourGameApiKey
@@ -447,7 +447,7 @@ function BestFriendScores()
 ```
 
 ```http
-GET /v2.6/gamer/scores/{domain}/{leaderboard}?type=friendscore&page=1&count=10
+GET /v2.6/gamer/scores/{domain}/{leaderboard}?type=friendscore&page=1&count=10 HTTP/1.1
 Host: https://sandbox-api01.clanofthecloud.mobi
 Content-Type: application/json
 x-apikey: YourGameApiKey
@@ -581,7 +581,7 @@ function BestFriendScores()
 ```
 
 ```http
-GET /v2.6/gamer/scores/{domain}/{leaderboard}?page=me&count=10
+GET /v2.6/gamer/scores/{domain}/{leaderboard}?page=me&count=10 HTTP/1.1
 Host: https://sandbox-api01.clanofthecloud.mobi
 Content-Type: application/json
 x-apikey: YourGameApiKey
@@ -726,7 +726,7 @@ function UserBestScores()
 ```
 
 ```http
-GET /v2.6/gamer/bestscores/{domain}
+GET /v2.6/gamer/bestscores/{domain} HTTP/1.1
 Host: https://sandbox-api01.clanofthecloud.mobi
 Content-Type: application/json
 x-apikey: YourGameApiKey

@@ -73,7 +73,7 @@ function ListUsers()
 ```
 
 ```http
-GET /v1/gamer?q=matchPattern&limit=10&skip=0
+GET /v1/gamer?q=matchPattern&limit=10&skip=0 HTTP/1.1
 Host: https://sandbox-api01.clanofthecloud.mobi
 Content-Type: application/json
 x-apikey: YourGameApiKey
@@ -197,7 +197,7 @@ function CheckUser()
 ```
 
 ```http
-GET /v1/users/network/id
+GET /v1/users/network/id HTTP/1.1
 Host: https://sandbox-api01.clanofthecloud.mobi
 Content-Type: application/json
 x-apikey: YourGameApiKey

@@ -87,7 +87,7 @@ function PostTransaction()
 ```
 
 ```http
-POST /v2.2/gamer/tx/{domain}
+POST /v2.2/gamer/tx/{domain} HTTP/1.1
 Host: https://sandbox-api01.clanofthecloud.mobi
 Content-Type: application/json
 x-apikey: YourGameApiKey
@@ -230,7 +230,7 @@ function ListTransactions()
 ```
 
 ```http
-GET /v1/gamer/tx/{domain}?{unit}{skip}{limit}
+GET /v1/gamer/tx/{domain}?{unit}{skip}{limit} HTTP/1.1
 Host: https://sandbox-api01.clanofthecloud.mobi
 Content-Type: application/json
 x-apikey: YourGameApiKey
@@ -374,7 +374,7 @@ function GetBalance()
 ```
 
 ```http
-GET /v1/gamer/tx/{domain}/balance
+GET /v1/gamer/tx/{domain}/balance HTTP/1.1
 Host: https://sandbox-api01.clanofthecloud.mobi
 Content-Type: application/json
 x-apikey: YourGameApiKey

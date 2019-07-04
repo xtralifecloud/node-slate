@@ -99,7 +99,7 @@ function SendEvent()
 ```
 
 ```http
-POST /v1/gamer/event/{domain}/{gamer_id}
+POST /v1/gamer/event/{domain}/{gamer_id} HTTP/1.1
 Host: https://sandbox-api01.clanofthecloud.mobi
 Content-Type: application/json
 x-apikey: YourGameApiKey
@@ -245,7 +245,7 @@ function listenForEvent()
 ```
 
 ```http
-GET /v1/gamer/event/{domain}?ack=auto&timeout=60000
+GET /v1/gamer/event/{domain}?ack=auto&timeout=60000 HTTP/1.1
 Host: https://sandbox-api01.clanofthecloud.mobi
 Content-Type: application/json
 x-apikey: YourGameApiKey
