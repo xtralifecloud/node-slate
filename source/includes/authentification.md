@@ -145,8 +145,8 @@ Result JSON in case of success:
 
 ```json
 {
-  "network": 1,
-  "networkid": true,
+  "network": "anonymous",
+  "networkid": "5873a117b69fa8c942c7df07",
   "registerTime": "2017-01-09T14:41:27.423Z",
   "registerBy": "com.mycompany.mygame",
   "games": [
