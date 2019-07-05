@@ -7,7 +7,7 @@ language_tabs:
   - javascript--client: Javascript
   - objective_c: Objective C
   - http: REST
-  - javascript--server: Cloud code
+  - javascript--server: Hooks/Batches
 
 toc_footers:
   - <a href='https://account.clanofthecloud.com'>Sign Up for a Developer Key</a>
