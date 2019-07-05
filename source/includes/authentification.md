@@ -14,7 +14,7 @@ possible to create an XtraLife profile attached to these users. Developer can al
 to authenticate users on their servers.
 
 <aside class="notice">
-JSON returned by any of the Login functions have **gamer_id** and **gamer_secret** fields,
+JSON returned by any of the Login functions have <b>gamer_id</b> and <b>gamer_secret</b> fields,
 which are internal credentials managed by XtraLife. It is a good practice to store these
 two fields locally on the device after the first Login, so you can reuse on subsequent
 logins, without worrying of the social network which was used.
