@@ -29,17 +29,17 @@ class MyGame
 {
     void GetGameValue()
     {
-        CHJSON json;
+        XtraLife::Helpers::CHJSON json;
         json.Put("key", "myKey");
         json.Put("domain", "private");
-        CloudBuilder::CGameManager::Instance()->GetValue(&json, MakeResultHandler(this, &MyGame::GetGameValueHandler));
+        XtraLife::CGameManager::Instance()->GetValue(&json, XtraLife::MakeResultHandler(this, &MyGame::GetGameValueHandler));
     }
 
-    void GetGameValueHandler(eErrorCode aErrorCode, const CloudBuilder::CCloudResult *aResult)
+    void GetGameValueHandler(XtraLife::eErrorCode aErrorCode, const XtraLife::CCloudResult *aResult)
     {
-        if(aErrorCode == eErrorCode::enNoErr)
+        if(aErrorCode == XtraLife::eErrorCode::enNoErr)
         {
-            const CHJSON* result = aResult->GetJSON()->Get("result");
+            const XtraLife::Helpers::CHJSON* result = aResult->GetJSON()->Get("result");
             printf("Game data: %s\n", result->print_formatted().c_str());
         }
         else
@@ -112,6 +112,22 @@ x-apikey: YourGameApiKey
 x-apisecret:YourGameApiSecret
 ```
 
+```javascript--server
+function __GetGameValue(params, customData, mod) {
+    "use strict";
+    // don't edit above this line // must be on line 3
+  
+    return this.gamevfs.read(this.game.getPrivateDomain(), "myKey")
+    .then(res => {
+        mod.debug("Game data: " + JSON.stringify(res));
+        return res;
+    })
+    .catch(error => {
+  	    throw new Error("Get game data error: " + error);
+    });
+} // must be on last line, no CR
+```
+
 This function is used to retrieve some game data stored in the Game VFS. If you want to retrieve a binary object, you should use
 method GetBinary instead because otherwise you will only have the url to the binary object, not the binary object itself.
 
@@ -161,15 +177,15 @@ class MyGame
 {
     void GetGameBinary()
     {
-        CHJSON json;
+        XtraLife::Helpers::CHJSON json;
         json.Put("key", "myBinaryKey");
         json.Put("domain", "private");
-        CloudBuilder::CGameManager::Instance()->GetBinary(&json, MakeResultHandler(this, &MyGame::GetGameBinaryHandler));
+        XtraLife::CGameManager::Instance()->GetBinary(&json, XtraLife::MakeResultHandler(this, &MyGame::GetGameBinaryHandler));
     }
 
-    void GetGameBinaryHandler(eErrorCode aErrorCode, const CloudBuilder::CCloudResult *aResult)
+    void GetGameBinaryHandler(XtraLife::eErrorCode aErrorCode, const XtraLife::CCloudResult *aResult)
     {
-        if(aErrorCode == eErrorCode::enNoErr)
+        if(aErrorCode == XtraLife::eErrorCode::enNoErr)
         {
             const void* buffer = result->BinaryPtr();
             size_t sizeBuffer = result->BinarySize();
@@ -236,7 +252,7 @@ function GetGameBinary()
 		    ConsoleLog("Get game binary data error: " + JSON.stringify(error));
 	    else
             // This call returns the url where to download your binary data. Use it depending the context you are in (web page, nodejs, ...)
-		    ConsoleLog("Url to binary data: " + getGameBinaryRes.result.myKey);
+		    ConsoleLog("Url to binary data: " + getGameBinaryRes.result.myBinaryKey);
     });
 }
 ```

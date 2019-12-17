@@ -15,17 +15,16 @@ You have access to code examples in the right area, and you can switch easily th
 
 void MyGame::Startup()
 {
-    CotCHelpers::CHJSON json;
+    XtraLife::Helpers::CHJSON json;
     json.Put("key", "YourGameApiKey");
     json.Put("secret", "YourGameApiSecret");
     json.Put("env", "sandbox");
-    CloudBuilder::CClan::Instance()->Setup(&json,
-      CloudBuilder::MakeResultHandler(this, &MyGame::SetupDone));
+    XtraLife::CClan::Instance()->Setup(&json, XtraLife::MakeResultHandler(this, &MyGame::SetupDone));
 }
 
-void MyGame::SetupDone(CloudBuilder::eErrorCode errorCode, const CloudBuilder::CCloudResult *result)
+void MyGame::SetupDone(XtraLife::eErrorCode errorCode, const XtraLife::CCloudResult *result)
 {
-    if (errorCode == CloudBuilder::enNoErr)
+    if (errorCode == XtraLife::eErrorCode::enNoErr)
     {
         printf("Setup complete! %s\n",
           result->GetJSON()->printFormatted().c_str());
@@ -61,6 +60,11 @@ var clan = Clan("YourGameApiKey", "YourGameApiSecret", "sandbox");
 ```http
 There is no Setup to do when accessing REST APIs directly. Identification of the game
 will be done instead by the headers of every request you send to the servers:
+```
+
+```javascript--client
+There is no Setup to do when accessing APIs in server side scripts. The context is
+already decided by the game calling the script from a client application:
 ```
 
 Before making any actual request to the servers, you have to give the credentials

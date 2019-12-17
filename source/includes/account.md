@@ -21,21 +21,21 @@ class MyGame
 {
     void Convert()
     {
-      CotCHelpers::CHJSON json;
+      XtraLife::Helpers::CHJSON json;
 
       json.Put("network", "email");
       json.Put("id", "myEmail@gmail.com");
       json.Put("secret", "myPassword");
-      CloudBuilder::CUserManager::Instance()->Convert(&json, MakeResultHandler(this, &MyGame::ConvertHandler));
+      XtraLife::CUserManager::Instance()->Convert(&json, XtraLife::MakeResultHandler(this, &MyGame::ConvertHandler));
     }
 
-    void ConvertHandler(eErrorCode aErrorCode, const CloudBuilder::CCloudResult *aResult)
+    void ConvertHandler(XtraLife::eErrorCode aErrorCode, const XtraLife::CCloudResult *aResult)
     {
         //  Conversion succeeded.
-        if(aErrorCode == eErrorCode::enNoErr)
+        if(aErrorCode == XtraLife::eErrorCode::enNoErr)
         {
             //  From the result, we get the embedded JSON, which could be displayed with a call to result->printFormatted();
-            const CHJSON* json = aResult->GetJSON();
+            const XtraLife::Helpers::CHJSON* json = aResult->GetJSON();
             //  Inside this JSON, we can display the network id used for conversion.
             std::string id = json->GetString("network_id");
         }
@@ -99,6 +99,26 @@ BODY
   "id" : "myEmail@gmail.com",
   "secret" : "myPassword"
 }
+```
+
+```javascript--server
+function __Convert(params, customData, mod) {
+    "use strict";
+    // don't edit above this line // must be on line 3
+  
+    // The two parameters are retrieved from the request object when invoking the batch.
+    const email = params.request.email;
+    const password = params.request.password;
+
+    return this.user.account.convert(params.user_id, "email", email, password)
+    .then(res => {
+        mod.debug("Convert succeeded: " + JSON.stringify(res));
+        return res;
+    })
+    .catch(error => {
+  	    throw new Error("Convert error: " + error);
+    });
+} // must be on last line, no CR
 ```
 
 This function is used to convert an anonymous profile to a profile linked to a social network. The main advantage
@@ -188,17 +208,17 @@ class MyGame
 {
     void Link()
     {
-      CotCHelpers::CHJSON json;
+      XtraLife::Helpers::CHJSON json;
 
       json.Put("network", "facebookId");
       json.Put("id", "myFacebookID");
       json.Put("secret", "myFacebookToken");
-      CloudBuilder::CUserManager::Instance()->Link(&json, MakeResultHandler(this, &MyGame::LinkHandler));
+      XtraLife::CUserManager::Instance()->Link(&json, XtraLife::MakeResultHandler(this, &MyGame::LinkHandler));
     }
 
-    void LinkHandler(eErrorCode aErrorCode, const CloudBuilder::CCloudResult *aResult)
+    void LinkHandler(eErrorCode XtraLife::aErrorCode, const XtraLife::CCloudResult *aResult)
     {
-        if(aErrorCode == eErrorCode::enNoErr)
+        if(aErrorCode == XtraLife::eErrorCode::enNoErr)
             printf("Link succeeded\n");
         else
             printf("Link failed due to error: %d - %s\n", aErrorCode, aResult->GetErrorString());
@@ -314,12 +334,12 @@ class MyGame
 {
     void Unlink()
     {
-      CloudBuilder::CUserManager::Instance()->Unlink("facebookId", MakeResultHandler(this, &MyGame::UnlinkHandler));
+      XtraLife::CUserManager::Instance()->Unlink("facebookId", XtraLife::MakeResultHandler(this, &MyGame::UnlinkHandler));
     }
 
-    void UnlinkHandler(eErrorCode aErrorCode, const CloudBuilder::CCloudResult *aResult)
+    void UnlinkHandler(XtraLife::eErrorCode aErrorCode, const XtraLife::CCloudResult *aResult)
     {
-        if(aErrorCode == eErrorCode::enNoErr)
+        if(aErrorCode == XtraLife::eErrorCode::enNoErr)
             printf("Unlink succeeded\n");
         else
             printf("Unlink failed due to error: %d - %s\n", aErrorCode, aResult->GetErrorString());
@@ -429,12 +449,12 @@ class MyGame
 {
     void ChangeEmail()
     {
-      CloudBuilder::CUserManager::Instance()->ChangeEmail("myNewEmail@gmail.com", MakeResultHandler(this, &MyGame::ChangeEmailHandler));
+      XtraLife::CUserManager::Instance()->ChangeEmail("myNewEmail@gmail.com", XtraLife::MakeResultHandler(this, &MyGame::ChangeEmailHandler));
     }
 
-    void ChangeEmailHandler(eErrorCode aErrorCode, const CloudBuilder::CCloudResult *aResult)
+    void ChangeEmailHandler(XtraLife::eErrorCode aErrorCode, const XtraLife::CCloudResult *aResult)
     {
-        if(aErrorCode == eErrorCode::enNoErr)
+        if(aErrorCode == XtraLife::eErrorCode::enNoErr)
             printf("Change e-mail succeeded\n");
         else
             printf("Change e-mail failed due to error: %d - %s\n", aErrorCode, aResult->GetErrorString());
@@ -496,6 +516,25 @@ BODY
 }
 ```
 
+```javascript--server
+function __ChangeEmail(params, customData, mod) {
+    "use strict";
+    // don't edit above this line // must be on line 3
+  
+    // The email parameter is retrieved from the request object when invoking the batch.
+    const email = params.request.email;
+  
+    return this.user.account.changeEmail(params.user_id, email)
+    .then(res => {
+  	    mod.debug("Change e-mail succeeded: " + JSON.stringify(res));
+        return res;
+    })
+    .catch(error => {
+  	    throw new Error("Change e-mail error: " + error);
+    });
+} // must be on last line, no CR
+```
+
 This function is used to modify the e-mail address of a profile. It will modify the credentials used
 to log in. It will not modify the e-mail address in the `profile` section of the user.
  
@@ -544,12 +583,12 @@ class MyGame
 {
     void ChangePassword()
     {
-      CloudBuilder::CUserManager::Instance()->ChangePassword("myNewPassword", MakeResultHandler(this, &MyGame::ChangePasswordHandler));
+      XtraLife::CUserManager::Instance()->ChangePassword("myNewPassword", XtraLife::MakeResultHandler(this, &MyGame::ChangePasswordHandler));
     }
 
-    void ChangePasswordHandler(eErrorCode aErrorCode, const CloudBuilder::CCloudResult *aResult)
+    void ChangePasswordHandler(XtraLife::eErrorCode aErrorCode, const XtraLife::CCloudResult *aResult)
     {
-        if(aErrorCode == eErrorCode::enNoErr)
+        if(aErrorCode == XtraLife::eErrorCode::enNoErr)
             printf("Change password succeeded\n");
         else
             printf("Change ChangePassword failed due to error: %d - %s\n", aErrorCode, aResult->GetErrorString());
@@ -676,12 +715,12 @@ class MyGame
 {
     void FetchOutline()
     {
-      CloudBuilder::CUserManager::Instance()->Outline(MakeResultHandler(this, &MyGame::OutlineHandler));
+      XtraLife::CUserManager::Instance()->Outline(XtraLife::MakeResultHandler(this, &MyGame::OutlineHandler));
     }
 
-    void OutlineHandler(eErrorCode aErrorCode, const CloudBuilder::CCloudResult *aResult)
+    void OutlineHandler(XtraLife::eErrorCode aErrorCode, const XtraLife::CCloudResult *aResult)
     {
-        if(aErrorCode == eErrorCode::enNoErr)
+        if(aErrorCode == XtraLife::eErrorCode::enNoErr)
             printf("Outline: %s\n", aResult->GetJSON()->printFormatted().c_str());
         else
             printf("Outline failed due to error: %d - %s\n", aErrorCode, aResult->GetErrorString());
@@ -811,18 +850,18 @@ class MyGame
 {
     void ResetPassword()
     {
-      CotCHelpers::CHJSON json;
+      XtraLife::Helpers::CHJSON json;
 
       json.Put("email", "myEmail@gmail.com");
       json.Put("from", "support@myCompany.com");
       json.Put("title", "Reset your password");
       json.Put("body", "You can login with this shortcode: [[SHORTCODE]]");
-      CloudBuilder::CUserManager::Instance()->MailPassword(&json, MakeResultHandler(this, &MyGame::MailPasswordHandler));
+      XtraLife::CUserManager::Instance()->MailPassword(&json, XtraLife::MakeResultHandler(this, &MyGame::MailPasswordHandler));
     }
 
-    void MailPasswordHandler(eErrorCode aErrorCode, const CloudBuilder::CCloudResult *aResult)
+    void MailPasswordHandler(XtraLife::eErrorCode aErrorCode, const XtraLife::CCloudResult *aResult)
     {
-        if(aErrorCode == eErrorCode::enNoErr)
+        if(aErrorCode == XtraLife::eErrorCode::enNoErr)
             printf("Short code sent\n");
         else
             printf("Short code sending failed due to error: %d - %s\n", aErrorCode, aResult->GetErrorString());

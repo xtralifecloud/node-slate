@@ -15,14 +15,14 @@ class MyGame
 {
     void GetReferralCode()
     {
-        CloudBuilder::CUserManager::Instance()->GetGodfatherCode("private", MakeResultHandler(this, &MyGame::GetReferralCodeHandler);
+        XtraLife::CUserManager::Instance()->GetGodfatherCode("private", XtraLife::MakeResultHandler(this, &MyGame::GetReferralCodeHandler);
     }
 
-    void GetReferralCodeHandler(eErrorCode aErrorCode, const CloudBuilder::CCloudResult *aResult)
+    void GetReferralCodeHandler(XtraLife::eErrorCode aErrorCode, const XtraLife::CCloudResult *aResult)
     {
-        if(aErrorCode == eErrorCode::enNoErr)
+        if(aErrorCode == XtraLife::eErrorCode::enNoErr)
         {
-            const CHJSON* json = aResult->GetJSON();
+            const XtraLife::Helpers::CHJSON* json = aResult->GetJSON();
             printf("Referral code: %s\n", aResult->GetJSON()->print_formatted().c_str());
         }
         else
@@ -79,6 +79,22 @@ x-apisecret:YourGameApiSecret
 Authorization: Basic gamer_id:gamer_secret
 ```
 
+```javascript--server
+function __GetReferralCode(params, customData, mod) {
+    "use strict";
+    // don't edit above this line // must be on line 3
+  
+    return this.user.relations.godfather.getCode(this.game.getPrivateDomain(), params.user_id)
+    .then(res => {
+        mod.debug("Referral code: " + JSON.stringify(res));
+        return res;
+    })
+    .catch(error => {
+  	    throw new Error("Could not get referral code: " + error);
+    });
+} // must be on last line, no CR
+```
+
 This function is used to generate a referral code. This generated code can then be shared on social networks to bring new players in the game.
 
 Parameter | Type | Description
@@ -111,21 +127,20 @@ class MyGame
 {
     void UseReferralCode()
     {
-        CHJSON json, reward, transaction;
+        XtraLife::Helpers::CHJSON json, reward, transaction;
         transaction.Put("Gold", 100);
         reward.Put("transaction", transaction.Duplicate());
-        reward.Put("domain", "private");
         reward.Put("description", "This is a transaction reward");
         json.Put("reward", reward.Duplicate());
         json.Put("domain", "private");
-        CloudBuilder::CUserManager::Instance()->SetGodfather("nYCIOQ5v", &json, MakeResultHandler(this, &MyGame::UseReferralCodeHandler);
+        XtraLife::CUserManager::Instance()->SetGodfather("nYCIOQ5v", &json, XtraLife::MakeResultHandler(this, &MyGame::UseReferralCodeHandler);
     }
 
-    void UseReferralCodeHandler(eErrorCode aErrorCode, const CloudBuilder::CCloudResult *aResult)
+    void UseReferralCodeHandler(XtraLife::eErrorCode aErrorCode, const XtraLife::CCloudResult *aResult)
     {
-        if(aErrorCode == eErrorCode::enNoErr)
+        if(aErrorCode == XtraLife::eErrorCode::enNoErr)
         {
-            const CHJSON* json = aResult->GetJSON();
+            const XtraLife::Helpers::CHJSON* json = aResult->GetJSON();
             printf("Use referral code: %s\n", aResult->GetJSON()->print_formatted().c_str());
         }
         else
@@ -144,7 +159,7 @@ public class MyClass
         // currentGamer is an object retrieved after one of the different Login functions.
 
         Bundle transaction = Bundle.CreateObject("Gold", 100);
-        Bundle bundle = Bundle.CreateObject("transaction", transaction, "description", "This is a transaction reward", "domain", "private");
+        Bundle bundle = Bundle.CreateObject("transaction", transaction, "description", "This is a transaction reward");
         currentGamer.Godfather.Domain ("private").UseCode ("nYCIOQ5v", bundle).Done(useReferralCodeRes => {
 			Debug.Log("Use referral code: " + useReferralCodeRes.GamerData);
 		}, ex => {
@@ -165,8 +180,8 @@ var gamer; // gamer was retrieved previously with a call to one of the Login met
 
 function UseReferralCode()
 {
-    var transaction = { Gold : 100};
-    var reward = { transaction, descritpion : "This is a transaction reward", domain : "private" };
+    const transaction = { Gold : 100};
+    const reward = { transaction, description : "This is a transaction reward" };
     clan.withGamer(gamer).referral("private").useCode("nYCIOQ5v", reward, function(error, useReferralCodeRes)
     {
       if(error)
@@ -192,10 +207,27 @@ BODY
         "transaction" : {
             "Gold" : "100"
         },
-        "description" : "This is a transaction reward",
-        "domain" : "private"
+        "description" : "This is a transaction reward"
     }
 }
+```
+
+```javascript--server
+function __UseReferralCode(params, customData, mod) {
+    "use strict";
+    // don't edit above this line // must be on line 3
+  
+    const transaction = { Gold : 100};
+    const reward = { transaction, description : "This is a transaction reward" };
+    return this.user.relations.godfather.set(this.game.getPrivateDomain(), params.user_id, "nYCIOQ5v", reward)
+    .then(res => {
+        mod.debug("Referral code succeeded: " + JSON.stringify(res));
+        return res;
+    })
+    .catch(error => {
+  	    throw new Error("Could not use referral code: " + error);
+    });
+} // must be on last line, no CR
 ```
 
 This function associates a user to his godfather by using a shortcode generated previously by the godfather. When the relationship is
@@ -243,14 +275,14 @@ class MyGame
 {
     void GetGodfather()
     {
-        CloudBuilder::CUserManager::Instance()->GetGodfather("private", MakeResultHandler(this, &MyGame::GetGodfatherHandler);
+        XtraLife::CUserManager::Instance()->GetGodfather("private", XtraLife::MakeResultHandler(this, &MyGame::GetGodfatherHandler);
     }
 
-    void GetGodfatherHandler(eErrorCode aErrorCode, const CloudBuilder::CCloudResult *aResult)
+    void GetGodfatherHandler(XtraLife::eErrorCode aErrorCode, const XtraLife::CCloudResult *aResult)
     {
-        if(aErrorCode == eErrorCode::enNoErr)
+        if(aErrorCode == XtraLife::eErrorCode::enNoErr)
         {
-            const CHJSON* json = aResult->GetJSON();
+            const XtraLife::Helpers::CHJSON* json = aResult->GetJSON();
             printf("Godfather: %s\n", aResult->GetJSON()->print_formatted().c_str());
         }
         else
@@ -307,6 +339,22 @@ x-apisecret:YourGameApiSecret
 Authorization: Basic gamer_id:gamer_secret
 ```
 
+```javascript--server
+function __GetGodfather(params, customData, mod) {
+    "use strict";
+    // don't edit above this line // must be on line 3
+  
+    return this.user.relations.godfather.get(this.game.getPrivateDomain(), params.user_id)
+    .then(res => {
+        mod.debug("Godfather: " + JSON.stringify(res));
+        return res;
+    })
+    .catch(error => {
+  	    throw new Error("Could not get godfather: " + error);
+    });
+} // must be on last line, no CR
+```
+
 This function is used to retrieve a user's godfather.
 
 Parameter | Type | Description
@@ -346,14 +394,14 @@ class MyGame
 {
     void GetGodchildren()
     {
-        CloudBuilder::CUserManager::Instance()->GetGodchildren("private", MakeResultHandler(this, &MyGame::GetGodchildrenHandler);
+        XtraLife::CUserManager::Instance()->GetGodchildren("private", XtraLife::MakeResultHandler(this, &MyGame::GetGodchildrenHandler);
     }
 
-    void GetGodchildrenHandler(eErrorCode aErrorCode, const CloudBuilder::CCloudResult *aResult)
+    void GetGodchildrenHandler(XtraLife::eErrorCode aErrorCode, const XtraLife::CCloudResult *aResult)
     {
-        if(aErrorCode == eErrorCode::enNoErr)
+        if(aErrorCode == XtraLife::eErrorCode::enNoErr)
         {
-            const CHJSON* json = aResult->GetJSON();
+            const XtraLife::Helpers::CHJSON* json = aResult->GetJSON();
             printf("Godchildren: %s\n", aResult->GetJSON()->print_formatted().c_str());
         }
         else
@@ -408,6 +456,22 @@ Content-Type: application/json
 x-apikey: YourGameApiKey
 x-apisecret:YourGameApiSecret
 Authorization: Basic gamer_id:gamer_secret
+```
+
+```javascript--server
+function __GetGodchildren(params, customData, mod) {
+    "use strict";
+    // don't edit above this line // must be on line 3
+  
+    return this.user.relations.godfather.getChildren(this.game.getPrivateDomain(), params.user_id)
+    .then(res => {
+        mod.debug("Godchildren: " + JSON.stringify(res));
+        return res;
+    })
+    .catch(error => {
+  	    throw new Error("Could not get godchildren: " + error);
+    });
+} // must be on last line, no CR
 ```
 
 This function is used to retrieve a user's godchildren.

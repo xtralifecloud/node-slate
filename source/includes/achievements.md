@@ -17,14 +17,14 @@ class MyGame
 {
     void ListAchievements()
     {
-        CloudBuilder::CUserManager::Instance()->ListAchievements("private", MakeResultHandler(this, &MyGame::ListAchievementsHandler);
+        XtraLife::CUserManager::Instance()->ListAchievements("private", XtraLife::MakeResultHandler(this, &MyGame::ListAchievementsHandler);
     }
 
-    void ListAchievements(eErrorCode aErrorCode, const CloudBuilder::CCloudResult *aResult)
+    void ListAchievementsHandler(XtraLife::eErrorCode aErrorCode, const XtraLife::CCloudResult *aResult)
     {
-        if(aErrorCode == eErrorCode::enNoErr)
+        if(aErrorCode == XtraLife::eErrorCode::enNoErr)
         {
-            const CHJSON* json = aResult->GetJSON();
+            const XtraLife::Helpers::CHJSON* json = aResult->GetJSON();
             printf("List of achievements: %s\n", aResult->GetJSON()->print_formatted().c_str());
         }
         else
@@ -81,6 +81,22 @@ Content-Type: application/json
 x-apikey: YourGameApiKey
 x-apisecret:YourGameApiSecret
 Authorization: Basic gamer_id:gamer_secret
+```
+
+```javascript--server
+function __ListAchievements(params, customData, mod) {
+    "use strict";
+    // don't edit above this line // must be on line 3
+  
+    return this.achievement.getUserAchievements(this.game.getPrivateDomain(), params.user_id)
+    .then(res => {
+  	    mod.debug("Achievements: " + JSON.stringify(res));
+        return res;
+    })
+  .catch(error => {
+  	  throw new Error("Could not list achievements: " + error);
+  });
+} // must be on last line, no CR
 ```
 
 This function is used to get a list of all the achievements for a domain.
@@ -143,19 +159,19 @@ class MyGame
 {
     void SetAchievementData()
     {
-        CHJSON json, data;
+        XtraLife::Helpers::CHJSON json, data;
         data.Put("OneShot", true);
         json.Put("domain", "private");
         json.Put("name", "Kill 10 Monsters");
         json.Put("data", data.Duplicate());
-        CloudBuilder::CUserManager::Instance()->SetAchievementData(&json, MakeResultHandler(this, &MyGame::SetAchievementDataHandler);
+        XtraLife::CUserManager::Instance()->SetAchievementData(&json, XtraLife::MakeResultHandler(this, &MyGame::SetAchievementDataHandler);
     }
 
-    void SetAchievementData(eErrorCode aErrorCode, const CloudBuilder::CCloudResult *aResult)
+    void SetAchievementDataHandler(XtraLife::eErrorCode aErrorCode, const XtraLife::CCloudResult *aResult)
     {
-        if(aErrorCode == eErrorCode::enNoErr)
+        if(aErrorCode == XtraLife::eErrorCode::enNoErr)
         {
-            const CHJSON* json = aResult->GetJSON();
+            const XtraLife::Helpers::CHJSON* json = aResult->GetJSON();
             printf("Achievement custom information: %s\n", aResult->GetJSON()->print_formatted().c_str());
         }
         else
@@ -216,6 +232,22 @@ BODY
 {
     "OneShot" : true
 }
+```
+
+```javascript--server
+function __SetAchievementData(params, customData, mod) {
+    "use strict";
+    // don't edit above this line // must be on line 3
+  
+    return this.achievement.modifyUserAchievementData(this.game.getPrivateDomain(), params.user_id, "TestAchievement", { OneShot : true})
+    .then(res => {
+        mod.debug("Custom information: " + JSON.stringify(res));
+        return res;
+    })
+    .catch(error => {
+  	    throw new Error("Could not set custom information: " + error);
+    });
+} // must be on last line, no CR
 ```
 
 This function allows to associate some custom information to an achievement for the user. You can call it multiple times with different JSONs,

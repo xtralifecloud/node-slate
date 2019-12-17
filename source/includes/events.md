@@ -15,18 +15,18 @@ class MyGame
 {
     void SendEvent()
     {
-        CotCHelpers::CHJSON json;
+        XtraLife::Helpers::CHJSON json;
 
         json.Put("message", "Here is a gift to you!");
         json.Put("currency", 100);
-        CloudBuilder::CUserManager::Instance()->PushEvent("private", "587f5d844877a1734ec079e6", &json, MakeResultHandler(this, &MyGame::SendEventDone));
+        XtraLife::CUserManager::Instance()->PushEvent("private", "587f5d844877a1734ec079e6", &json, XtraLife::MakeResultHandler(this, &MyGame::SendEventDone));
     }
 
-    void SendEventDone(eErrorCode aErrorCode, const CloudBuilder::CCloudResult *aResult)
+    void SendEventDone(XtraLife::eErrorCode aErrorCode, const XtraLife::CCloudResult *aResult)
     {
-        if(aErrorCode == eErrorCode::enNoErr)
+        if(aErrorCode == XtraLife::eErrorCode::enNoErr)
         {
-            const CHJSON* json = aResult->GetJSON();
+            const XtraLife::Helpers::CHJSON* json = aResult->GetJSON();
             printf("Event sent: %s\n", aResult->GetJSON()->print_formatted().c_str());
         }
         else
@@ -87,7 +87,7 @@ var gamer; // gamer was retrieved previously with a call to one of the Login met
 
 function SendEvent()
 {
-    evt = { message : "Here is a gift to you!", currency : 100 };
+    const evt = { message : "Here is a gift to you!", currency : 100 };
     clan.withGamer(gamer).events("private").send("587f5d844877a1734ec079e6", evt, null, function(error, sendEventRes)
     {
       if(error)
@@ -111,6 +111,23 @@ BODY
     "message" : "Here is a gift to you!",
     "currency" : 100
 }
+```
+
+```javascript--server
+function __SendEvent(params, customData, mod) {
+    "use strict";
+    // don't edit above this line // must be on line 3
+  
+    const evt = { message : "Here is a gift to you!", currency : 100 };
+    return this.game.sendEvent(this.game.getPrivateDomain(), mod.ObjectID("587f5d844877a1734ec079e6"), evt)
+    .then(res => {
+        mod.debug("Event sent: " + JSON.stringify(res));
+        return res;
+    })
+    .catch(error => {
+  	    throw new Error("Could not send event: " + error);
+    });
+} // must be on last line, no CR
 ```
 
 This function is used to send a message to another user. It can be any user in the game, no need to be a friend to be able
@@ -155,15 +172,15 @@ Result JSON in case of success:
 ```cpp
 #include "CUserManager.h"
 
-struct EventHandler : CloudBuilder::CEventListener
+struct EventHandler : XtraLife::CEventListener
 {
     // Function called every time a message is received
-    virtual void onEventReceived(const char *aDomain, const CloudBuilder::CCloudResult *aEvent)
+    virtual void onEventReceived(const char *aDomain, const XtraLife::CCloudResult *aEvent)
     {
         printf("Received event on domain %s: %s", aDomain, aEvent->GetJSON()->printFormatted().c_str());
     }
     
-    virtual void onEventError(CloudBuilder::eErrorCode aErrorCode, const char *aDomain, const CloudBuilder::CCloudResult *result)
+    virtual void onEventError(XtraLife::eErrorCode aErrorCode, const char *aDomain, const XtraLife::CCloudResult *result)
     {
         printf("Received error %d on domain %s: %s", aErrorCode, aDomain, result->GetJSON()->printFormatted().c_str());
     }

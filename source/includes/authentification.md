@@ -31,20 +31,20 @@ class MyGame
 {
     void LoginAnonymous()
     {
-        CloudBuilder::CUserManager::Instance()->LoginAnonymous(NULL, MakeResultHandler(this, &MyGame::LoginHandler));
+        XtraLife::CUserManager::Instance()->LoginAnonymous(NULL, XtraLife::MakeResultHandler(this, &MyGame::LoginHandler));
     }
 
-    void LoginHandler(eErrorCode aErrorCode, const CloudBuilder::CCloudResult *aResult)
+    void LoginHandler(XtraLife::eErrorCode aErrorCode, const XtraLife::CCloudResult *aResult)
     {
         //  If anonymous account creation succeeded, then we can dive in the data returned.
-        if(aErrorCode == eErrorCode::enNoErr)
+        if(aErrorCode == XtraLife::eErrorCode::enNoErr)
         {
             //  From the result, we get the embedded JSON, which could be displayed with a call to result->printFormatted();
-            const CHJSON* json = aResult->GetJSON();
+            const XtraLife::Helpers::CHJSON* json = aResult->GetJSON();
             //  Inside this JSON, we have lots of data that you can browse, for example here we'll grab profile and credentials.
             std::string id = json->GetString("gamer_id");
             std::string secret = json->GetString("gamer_secret");
-            const CHJSON* profile = json->Get("profile");
+            const XtraLife::Helpers::CHJSON* profile = json->Get("profile");
             std::string name = profile->GetString("displayName");
         }
         else
@@ -178,25 +178,25 @@ class MyGame
 {
     void LoginNetwork()
     {
-      CotCHelpers::CHJSON json;
+      XtraLife::Helpers::CHJSON json;
 
       json.Put("network", "email");
       json.Put("id", "myEmail@gmail.com");
       json.Put("secret", "myPassword");
-      CloudBuilder::CUserManager::Instance()->LoginNetwork(&json, MakeResultHandler(this, &MyGame::LoginNetworkHandler));
+      XtraLife::CUserManager::Instance()->LoginNetwork(&json, XtraLife::MakeResultHandler(this, &MyGame::LoginNetworkHandler));
     }
 
-    void LoginNetworkHandler(eErrorCode aErrorCode, const CloudBuilder::CCloudResult *aResult)
+    void LoginNetworkHandler(XtraLife::eErrorCode aErrorCode, const XtraLife::CCloudResult *aResult)
     {
         //  If login succeeded, then we can dive in the data returned.
-        if(aErrorCode == eErrorCode::enNoErr)
+        if(aErrorCode == XtraLife::eErrorCode::enNoErr)
         {
             //  From the result, we get the embedded JSON, which could be displayed with a call to result->printFormatted();
-            const CHJSON* json = aResult->GetJSON();
+            const XtraLife::Helpers::CHJSON* json = aResult->GetJSON();
             //  Inside this JSON, we have lots of data that you can browse, for example here we'll grab profile and credentials.
             std::string id = json->GetString("gamer_id");
             std::string secret = json->GetString("gamer_secret");
-            const CHJSON* profile = json->Get("profile");
+            const XtraLife::Helpers::CHJSON* profile = json->Get("profile");
             std::string name = profile->GetString("displayName");
         }
         else
@@ -377,24 +377,24 @@ class MyGame
 {
     void ResumeSession()
     {
-      CotCHelpers::CHJSON json;
+      XtraLife::Helpers::CHJSON json;
 
       json.Put("id", "5873a117b69fa8c942c7df08");
       json.Put("secret", "c3b7c6fab599919b0c24487bf46d0e6069472df0");
-      CloudBuilder::CUserManager::Instance()->ResumeSession(&json, MakeResultHandler(this, &MyGame::ResumeSessionHandler));
+      XtraLife::CUserManager::Instance()->ResumeSession(&json, XtraLife::MakeResultHandler(this, &MyGame::ResumeSessionHandler));
     }
 
-    void ResumeSessionHandler(eErrorCode aErrorCode, const CloudBuilder::CCloudResult *aResult)
+    void ResumeSessionHandler(XtraLife::eErrorCode aErrorCode, const XtraLife::CCloudResult *aResult)
     {
         //  If login succeeded, then we can dive in the data returned.
-        if(aErrorCode == eErrorCode::enNoErr)
+        if(aErrorCode == XtraLife::eErrorCode::enNoErr)
         {
             //  From the result, we get the embedded JSON, which could be displayed with a call to result->printFormatted();
-            const CHJSON* json = aResult->GetJSON();
+            const XtraLife::Helpers::CHJSON* json = aResult->GetJSON();
             //  Inside this JSON, we have lots of data that you can browse, for example here we'll grab profile and credentials.
             std::string id = json->GetString("gamer_id");
             std::string secret = json->GetString("gamer_secret");
-            const CHJSON* profile = json->Get("profile");
+            const XtraLife::Helpers::CHJSON* profile = json->Get("profile");
             std::string name = profile->GetString("displayName");
         }
         else
@@ -566,23 +566,23 @@ class MyGame
 {
     void LoginWithShortCode()
     {
-      CotCHelpers::CHJSON json;
+      XtraLife::Helpers::CHJSON json;
 
       json.Put("shortcode", "xxxxxxxx");
-      CloudBuilder::CUserManager::Instance()->Logout(&json, MakeResultHandler(this, &MyGame::LoginWithShortCodeHandler));
+      XtraLife::CUserManager::Instance()->Logout(&json, XtraLife::MakeResultHandler(this, &MyGame::LoginWithShortCodeHandler));
     }
 
-    void LoginWithShortCodeHandler(eErrorCode aErrorCode, const CloudBuilder::CCloudResult *aResult)
+    void LoginWithShortCodeHandler(XtraLife::eErrorCode aErrorCode, const XtraLife::CCloudResult *aResult)
     {
         //  If login with short code succeeded, then we can dive in the data returned.
-        if(aErrorCode == eErrorCode::enNoErr)
+        if(aErrorCode == XtraLife::eErrorCode::enNoErr)
         {
             //  From the result, we get the embedded JSON, which could be displayed with a call to result->printFormatted();
-            const CHJSON* json = aResult->GetJSON();
+            const XtraLife::Helpers::CHJSON* json = aResult->GetJSON();
             //  Inside this JSON, we have lots of data that you can browse, for example here we'll grab profile and credentials.
             std::string id = json->GetString("gamer_id");
             std::string secret = json->GetString("gamer_secret");
-            const CHJSON* profile = json->Get("profile");
+            const XtraLife::Helpers::CHJSON* profile = json->Get("profile");
             std::string name = profile->GetString("displayName");
         }
         else
@@ -750,12 +750,12 @@ class MyGame
 {
     void Logout()
     {
-      CloudBuilder::CUserManager::Instance()->Logout(MakeResultHandler(this, &MyGame::LogouHandler));
+      XtraLife::CUserManager::Instance()->Logout(XtraLife::MakeResultHandler(this, &MyGame::LogouHandler));
     }
 
-    void LogouHandler(eErrorCode aErrorCode, const CloudBuilder::CCloudResult *aResult)
+    void LogouHandler(XtraLife::eErrorCode aErrorCode, const XtraLife::CCloudResult *aResult)
     {
-        if(aErrorCode == eErrorCode::enNoErr)
+        if(aErrorCode == XtraLife::eErrorCode::enNoErr)
           printf("Logout succeeded\n");
         else
           printf("Could not log out due to error: %d - %s\n", aErrorCode, aResult->GetErrorString());

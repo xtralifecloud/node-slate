@@ -25,15 +25,15 @@ class MyGame
 {
     void PostScore()
     {
-        CloudBuilder::CGameManager::Instance()->Score(10000, "intermediateMode", "hightolow", "context for score",
-        false, "private", MakeResultHandler(this, &MyGame::PostScoreHandler));
+        XtraLife::CGameManager::Instance()->Score(10000, "intermediateMode", "hightolow", "context for score",
+        false, "private", XtraLife::MakeResultHandler(this, &MyGame::PostScoreHandler));
     }
 
-    void PostScoreHandler(eErrorCode aErrorCode, const CloudBuilder::CCloudResult *aResult)
+    void PostScoreHandler(XtraLife::eErrorCode aErrorCode, const XtraLife::CCloudResult *aResult)
     {
-        if(aErrorCode == eErrorCode::enNoErr)
+        if(aErrorCode == XtraLife::eErrorCode::enNoErr)
         {
-            const CHJSON* result = aResult->GetJSON();
+            const XtraLife::Helpers::CHJSON* result = aResult->GetJSON();
             printf("Score posted: %s\n", result->print_formatted().c_str());
         }
         else
@@ -99,6 +99,23 @@ BODY
 }
 ```
 
+```javascript--server
+function __PostScore(params, customData, mod) {
+    "use strict";
+    // don't edit above this line // must be on line 3
+  
+    return this.leaderboard.score(this.game.getPrivateDomain(), params.user_id, "intermediateMode",
+        "hightolow", 10000, "context for score", false)
+    .then(res => {
+        mod.debug("Post score succeeded: " + JSON.stringify(res));
+        return res;
+    })
+    .catch(error => {
+  	    throw new Error("Post score error: " + error);
+    });
+} // must be on last line, no CR
+```
+
 This function is used to send a score to a leaderboard.
 
 Parameter | Type | Description
@@ -140,14 +157,14 @@ class MyGame
 {
     void GetRank()
     {
-        CloudBuilder::CGameManager::Instance()->GetRank(10000, "intermediateMode", "private", MakeResultHandler(this, &MyGame::GetRankHandler));
+        XtraLife::CGameManager::Instance()->GetRank(10000, "intermediateMode", "private", XtraLife::MakeResultHandler(this, &MyGame::GetRankHandler));
     }
 
-    void GetRankHandler(eErrorCode aErrorCode, const CloudBuilder::CCloudResult *aResult)
+    void GetRankHandler(XtraLife::eErrorCode aErrorCode, const XtraLife::CCloudResult *aResult)
     {
-        if(aErrorCode == eErrorCode::enNoErr)
+        if(aErrorCode == XtraLife::eErrorCode::enNoErr)
         {
-            const CHJSON* result = aResult->GetJSON();
+            const XtraLife::Helpers::CHJSON* result = aResult->GetJSON();
             printf("Rank for score: %d\n", result->GetInt("rank");
         }
         else
@@ -243,14 +260,14 @@ class MyGame
 {
     void BestHighScores()
     {
-        CloudBuilder::CGameManager::Instance()->BestHighScore(10, 1, "intermediateMode", "private", MakeResultHandler(this, &MyGame::BestHighScoresHandler));
+        XtraLife::CGameManager::Instance()->BestHighScore(10, 1, "intermediateMode", "private", XtraLife::MakeResultHandler(this, &MyGame::BestHighScoresHandler));
     }
 
-    void BestHighScoresHandler(eErrorCode aErrorCode, const CloudBuilder::CCloudResult *aResult)
+    void BestHighScoresHandler(XtraLife::eErrorCode aErrorCode, const XtraLife::CCloudResult *aResult)
     {
-        if(aErrorCode == eErrorCode::enNoErr)
+        if(aErrorCode == XtraLife::eErrorCode::enNoErr)
         {
-            const CHJSON* result = aResult->GetJSON();
+            const XtraLife::Helpers::CHJSON* result = aResult->GetJSON();
             printf("Best high scores: %s\n", result->print_formatted().c_str());
         }
         else
@@ -307,6 +324,24 @@ Content-Type: application/json
 x-apikey: YourGameApiKey
 x-apisecret:YourGameApiSecret
 Authorization: Basic gamer_id:gamer_secret
+```
+
+```javascript--server
+function __BestHighScores(params, customData, mod) {
+    "use strict";
+    // don't edit above this line // must be on line 3
+  
+    // Passing 'null' as user id means we want the best scores, not the one centered around
+    // the user.
+    return this.leaderboard.highscore(this.game.getPrivateDomain(), null, "intermediateMode", 10)
+    .then(res => {
+        mod.debug("Best high scores error: " + JSON.stringify(res));
+        return res;
+    })
+    .catch(error => {
+  	    throw new Error("Best high scores: " + error);
+    });
+} // must be on last line, no CR
 ```
 
 This function is used to retrieve the best global scores from a leaderboard.
@@ -389,14 +424,14 @@ class MyGame
 {
     void BestFriendScores()
     {
-        CloudBuilder::CTribeManager::Instance()->FriendsBestHighScore(10, 1, "intermediateMode", "private", MakeResultHandler(this, &MyGame::BestFriendScoresHandler));
+        XtraLife::CTribeManager::Instance()->FriendsBestHighScore(10, 1, "intermediateMode", "private", XtraLife::MakeResultHandler(this, &MyGame::BestFriendScoresHandler));
     }
 
-    void BestFriendScoresHandler(eErrorCode aErrorCode, const CloudBuilder::CCloudResult *aResult)
+    void BestFriendScoresHandler(XtraLife::eErrorCode aErrorCode, const XtraLife::CCloudResult *aResult)
     {
-        if(aErrorCode == eErrorCode::enNoErr)
+        if(aErrorCode == XtraLife::eErrorCode::enNoErr)
         {
-            const CHJSON* result = aResult->GetJSON();
+            const XtraLife::Helpers::CHJSON* result = aResult->GetJSON();
             printf("Best friend scores: %s\n", result->print_formatted().c_str());
         }
         else
@@ -523,14 +558,14 @@ class MyGame
 {
     void CenteredScores()
     {
-        CloudBuilder::CGameManager::Instance()->CenteredScore(10, "intermediateMode", "private", MakeResultHandler(this, &MyGame::CenteredScoresHandler));
+        XtraLife::CGameManager::Instance()->CenteredScore(10, "intermediateMode", "private", XtraLife::MakeResultHandler(this, &MyGame::CenteredScoresHandler));
     }
 
-    void CenteredScoresHandler(eErrorCode aErrorCode, const CloudBuilder::CCloudResult *aResult)
+    void CenteredScoresHandler(XtraLife::eErrorCode aErrorCode, const XtraLife::CCloudResult *aResult)
     {
-        if(aErrorCode == eErrorCode::enNoErr)
+        if(aErrorCode == XtraLife::eErrorCode::enNoErr)
         {
-            const CHJSON* result = aResult->GetJSON();
+            const XtraLife::Helpers::CHJSON* result = aResult->GetJSON();
             printf("Centered scores: %s\n", result->print_formatted().c_str());
         }
         else
@@ -568,7 +603,7 @@ public class MyClass
 var clan; // clan was retrieved previously with a constructor to `Clan`
 var gamer; // gamer was retrieved previously with a call to one of the Login methods from `Clan`
 
-function BestFriendScores()
+function CenteredScores()
 {
     clan.withGamer(gamer).leaderboards("private").getCenteredHighscores("intermediateMode", 10, function(error, centeredHighScoresRes)
     {
@@ -587,6 +622,22 @@ Content-Type: application/json
 x-apikey: YourGameApiKey
 x-apisecret:YourGameApiSecret
 Authorization: Basic gamer_id:gamer_secret
+```
+
+```javascript--server
+function __CenteredScores(params, customData, mod) {
+    "use strict";
+    // don't edit above this line // must be on line 3
+  
+    return this.leaderboard.highscore(this.game.getPrivateDomain(), params.user_id, "intermediateMode", 10)
+    .then(res => {
+        mod.debug("Centered scores: " + JSON.stringify(res));
+        return res;
+    })
+    .catch(error => {
+  	    throw new Error("Centered scores error: " + error);
+    });
+} // must be on last line, no CR
 ```
 
 This function is used to retrieve the scores around the user score in the leaderboard.
@@ -668,14 +719,14 @@ class MyGame
 {
     void UserBestScores()
     {
-        CloudBuilder::CGameManager::Instance()->UserBestScores("private", MakeResultHandler(this, &MyGame::UserBestScoresHandler));
+        XtraLife::CGameManager::Instance()->UserBestScores("private", XtraLife::MakeResultHandler(this, &MyGame::UserBestScoresHandler));
     }
 
-    void UserBestScoresHandler(eErrorCode aErrorCode, const CloudBuilder::CCloudResult *aResult)
+    void UserBestScoresHandler(XtraLife::eErrorCode aErrorCode, const XtraLife::CCloudResult *aResult)
     {
-        if(aErrorCode == eErrorCode::enNoErr)
+        if(aErrorCode == XtraLife::eErrorCode::enNoErr)
         {
-            const CHJSON* result = aResult->GetJSON();
+            const XtraLife::Helpers::CHJSON* result = aResult->GetJSON();
             printf("User best scores: %s\n", result->print_formatted().c_str());
         }
         else
@@ -732,6 +783,22 @@ Content-Type: application/json
 x-apikey: YourGameApiKey
 x-apisecret:YourGameApiSecret
 Authorization: Basic gamer_id:gamer_secret
+```
+
+```javascript--server
+function __UserBestScores(params, customData, mod) {
+    "use strict";
+    // don't edit above this line // must be on line 3
+  
+    return this.leaderboard.bestscores(this.game.getPrivateDomain(), params.user_id)
+    .then(res => {
+        mod.debug("User best scores: " + JSON.stringify(res));
+        return res;
+    })
+    .catch(error => {
+  	    throw new Error("User best scores error: " + error);
+    });
+} // must be on last line, no CR
 ```
 
 This function is used to retrieve the scores from all leaderboards for the user.

@@ -68,7 +68,7 @@ class MyGame
 {
     void CreateMatch()
     {
-        CotCHelpers::CHJSON match, global, custom, shoe;
+        XtraLife::Helpers::CHJSON match, global, custom, shoe;
         int shoeArray[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 
         global.Put("startup", "globalState");
@@ -79,14 +79,14 @@ class MyGame
         match.Put("globalState", global.Duplicate());
         match.Put("customProperties", custom.Duplicate());
         match.Put("shoe", CotCHelpers::CHJSON::Array(shoeArray, 10));
-        CloudBuilder::CMatchManager::Instance()->CreateMatch(&match, MakeResultHandler(this, &MyGame::CreateMatchDone));
+        XtraLife::CMatchManager::Instance()->CreateMatch(&match, XtraLife::MakeResultHandler(this, &MyGame::CreateMatchDone));
     }
 
-    void CreateMatchDone(eErrorCode aErrorCode, const CloudBuilder::CCloudResult *aResult)
+    void CreateMatchDone(XtraLife::eErrorCode aErrorCode, const XtraLife::CCloudResult *aResult)
     {
-        if(aErrorCode == eErrorCode::enNoErr)
+        if(aErrorCode == XtraLife::eErrorCode::enNoErr)
         {
-            const CHJSON* json = aResult->GetJSON();
+            const XtraLife::Helpers::CHJSON* json = aResult->GetJSON();
             printf("Match created: %s\n", aResult->GetJSON()->print_formatted().c_str());
         }
         else
@@ -196,6 +196,23 @@ BODY
 }
 ```
 
+```javascript--server
+function __CreateMatch(params, customData, mod) {
+    "use strict";
+    // don't edit above this line // must be on line 3
+  
+    return this.match.createMatch(this.game.getPrivateDomain(), params.user_id, "Sample match for testing",
+        3, { newRules: 1}, { startup: "globalState }, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+    .then(res => {
+        mod.debug("Match created: " + JSON.stringify(res));
+        return res;
+    })
+    .catch(error => {
+  	    throw new Error("Could not create match: " + error);
+    });
+} // must be on last line, no CR
+```
+
 This function is used to create a new match, which will then be available to invite other players. Once created,
 any other request can be made (invite players, post a move, finish match, ...).
 
@@ -278,21 +295,21 @@ class MyGame
 {
     void ListMatches()
     {
-        CotCHelpers::CHJSON json;
+        XtraLife::Helpers::CHJSON json;
 
         json.Put("domain", "private");
         json.Put("participating", true);
         json.Put("finished", true);
         json.Put("limit", 10);
         json.Put("skip", 0);
-        CloudBuilder::CMatchManager::Instance()->ListMatches(&json, MakeResultHandler(this, &MyGame::ListMatchesDone));
+        XtraLife::CMatchManager::Instance()->ListMatches(&json, XtraLife::MakeResultHandler(this, &MyGame::ListMatchesDone));
     }
 
-    void ListMatchesDone(eErrorCode aErrorCode, const CloudBuilder::CCloudResult *aResult)
+    void ListMatchesDone(XtraLife::eErrorCode aErrorCode, const XtraLife::CCloudResult *aResult)
     {
-        if(aErrorCode == eErrorCode::enNoErr)
+        if(aErrorCode == XtraLife::eErrorCode::enNoErr)
         {
-            const CHJSON* json = aResult->GetJSON();
+            const XtraLife::Helpers::CHJSON* json = aResult->GetJSON();
             printf("List of matches: %s\n", aResult->GetJSON()->print_formatted().c_str());
         }
         else
@@ -446,17 +463,17 @@ class MyGame
 {
     void LoadMatch()
     {
-        CotCHelpers::CHJSON json;
+        XtraLife::Helpers::CHJSON json;
 
         json.Put("id", "589df42f98a6d4427971d66d");
-        CloudBuilder::CMatchManager::Instance()->FetchMatch(&json, MakeResultHandler(this, &MyGame::LoadMatchDone));
+        XtraLife::CMatchManager::Instance()->FetchMatch(&json, XtraLife::MakeResultHandler(this, &MyGame::LoadMatchDone));
     }
 
-    void LoadMatch(eErrorCode aErrorCode, const CloudBuilder::CCloudResult *aResult)
+    void LoadMatch(XtraLife::eErrorCode aErrorCode, const XtraLife::CCloudResult *aResult)
     {
-        if(aErrorCode == eErrorCode::enNoErr)
+        if(aErrorCode == XtraLife::eErrorCode::enNoErr)
         {
-            const CHJSON* json = aResult->GetJSON();
+            const XtraLife::Helpers::CHJSON* json = aResult->GetJSON();
             printf("Match loaded: %s\n", aResult->GetJSON()->print_formatted().c_str());
         }
         else
@@ -530,6 +547,24 @@ Content-Type: application/json
 x-apikey: YourGameApiKey
 x-apisecret:YourGameApiSecret
 Authorization: Basic gamer_id:gamer_secret
+```
+
+```javascript--server
+function __LoadMatch(params, customData, mod) {
+    "use strict";
+    // don't edit above this line // must be on line 3
+  
+    // Parameter is retrieved from the request object when invoking the batch.
+    const matchId = mod.ObjectID(params.request.matchId);
+    return this.match.getMatch(matchId)
+    .then(res => {
+        mod.debug("Match loaded: " + JSON.stringify(res));
+        return res;
+    })
+    .catch(error => {
+  	    throw new Error("Could not load match: " + error);
+    });
+} // must be on last line, no CR
 ```
 
 This function is used to fully load a match with all its properties. Typically, you will first use List function or index
@@ -612,18 +647,18 @@ class MyGame
 {
     void FinishMatch()
     {
-        CotCHelpers::CHJSON json;
+        XtraLife::Helpers::CHJSON json;
 
         json.Put("id", "589df75598a6d4427971d66f");
         json.Put("lastEventId", "589df75598a6d4427971d66e");
-        CloudBuilder::CMatchManager::Instance()->FinishMatch(&json, MakeResultHandler(this, &MyGame::FinishMatchDone));
+        XtraLife::CMatchManager::Instance()->FinishMatch(&json, XtraLife::MakeResultHandler(this, &MyGame::FinishMatchDone));
     }
 
-    void FinishMatchDone(eErrorCode aErrorCode, const CloudBuilder::CCloudResult *aResult)
+    void FinishMatchDone(XtraLife::eErrorCode aErrorCode, const XtraLife::CCloudResult *aResult)
     {
-        if(aErrorCode == eErrorCode::enNoErr)
+        if(aErrorCode == XtraLife::eErrorCode::enNoErr)
         {
-            const CHJSON* json = aResult->GetJSON();
+            const XtraLife::Helpers::CHJSON* json = aResult->GetJSON();
             printf("Match finished: %s\n", aResult->GetJSON()->print_formatted().c_str());
         }
         else
@@ -680,8 +715,8 @@ var gamer; // gamer was retrieved previously with a call to one of the Login met
 
 function FinishMatch()
 {
-    var id = "589df75598a6d4427971d66f";
-    var lastEventId = "589df75598a6d4427971d66e";
+    const id = "589df75598a6d4427971d66f";
+    const lastEventId = "589df75598a6d4427971d66e";
 
     clan.withGamer(gamer).matches("private").finish(id, lastEventId, null, function(error, finishMatchRes)
     {
@@ -704,6 +739,24 @@ Authorization: Basic gamer_id:gamer_secret
 BODY
 {
 }
+```
+
+```javascript--server
+function __FinishMatch(params, customData, mod) {
+    "use strict";
+    // don't edit above this line // must be on line 3
+  
+    const id = "589df75598a6d4427971d66f";
+    const lastEventId = "589df75598a6d4427971d66e";
+    return this.match.finishMatch(id, params.user_id, {}, lastEventId)
+    .then(res => {
+        mod.debug("Match finished: " + JSON.stringify(res));
+        return res;
+    })
+    .catch(error => {
+  	    throw new Error("Could not finish match: " + error);
+    });
+} // must be on last line, no CR
 ```
 
 This function is used to finish a match. Once this is done, you can consider the match as being frozen. You can not interact
@@ -756,17 +809,17 @@ class MyGame
 {
     void DeleteMatch()
     {
-        CotCHelpers::CHJSON json;
+        XtraLife::Helpers::CHJSON json;
 
         json.Put("id", "589df75598a6d4427971d66f");
-        CloudBuilder::CMatchManager::Instance()->DeleteMatch(&json, MakeResultHandler(this, &MyGame::DeleteMatchDone));
+        XtraLife::CMatchManager::Instance()->DeleteMatch(&json, XtraLife::MakeResultHandler(this, &MyGame::DeleteMatchDone));
     }
 
-    void DeleteMatchDone(eErrorCode aErrorCode, const CloudBuilder::CCloudResult *aResult)
+    void DeleteMatchDone(XtraLife::eErrorCode aErrorCode, const XtraLife::CCloudResult *aResult)
     {
-        if(aErrorCode == eErrorCode::enNoErr)
+        if(aErrorCode == XtraLife::eErrorCode::enNoErr)
         {
-            const CHJSON* json = aResult->GetJSON();
+            const XtraLife::Helpers::CHJSON* json = aResult->GetJSON();
             printf("Match deleted: %s\n", aResult->GetJSON()->print_formatted().c_str());
         }
         else
@@ -841,6 +894,24 @@ x-apisecret:YourGameApiSecret
 Authorization: Basic gamer_id:gamer_secret
 ```
 
+```javascript--server
+function __DeleteMatch(params, customData, mod) {
+    "use strict";
+    // don't edit above this line // must be on line 3
+  
+    const id = "589df75598a6d4427971d66f";
+    const creatorId = "589df75598a6d4427971d66e";   // Id of the user who created the match
+    return this.match.deleteMatch(id, creatorId)
+    .then(res => {
+        mod.debug("Match deleted: " + JSON.stringify(res));
+        return res;
+    })
+    .catch(error => {
+  	    throw new Error("Could not delete match: " + error);
+    });
+} // must be on last line, no CR
+```
+
 This function is used to delete a match. This is only possible if the match has been declared as finished before. Use this
 method only if you don't need to access it later. It will be erased from XtraLife databases. Only the creator of a match
 can delete it. No other user or even participating users are allowed to perform this operation.
@@ -885,18 +956,18 @@ class MyGame
 {
     void InviteToMatch()
     {
-        CotCHelpers::CHJSON json;
+        XtraLife::Helpers::CHJSON json;
 
         json.Put("id", "589df75598a6d4427971d66f");
         json.Put("gamer_id", "582ce75598a6d4937152d69a");
-        CloudBuilder::CMatchManager::Instance()->InvitePlayer(&json, MakeResultHandler(this, &MyGame::InviteToMatchDone));
+        XtraLife::CMatchManager::Instance()->InvitePlayer(&json, XtraLife::MakeResultHandler(this, &MyGame::InviteToMatchDone));
     }
 
-    void InviteToMatchDone(eErrorCode aErrorCode, const CloudBuilder::CCloudResult *aResult)
+    void InviteToMatchDone(XtraLife::eErrorCode aErrorCode, const XtraLife::CCloudResult *aResult)
     {
-        if(aErrorCode == eErrorCode::enNoErr)
+        if(aErrorCode == XtraLife::eErrorCode::enNoErr)
         {
-            const CHJSON* json = aResult->GetJSON();
+            const XtraLife::Helpers::CHJSON* json = aResult->GetJSON();
             printf("Player invited: %s\n", aResult->GetJSON()->print_formatted().c_str());
         }
         else
@@ -952,8 +1023,8 @@ var gamer; // gamer was retrieved previously with a call to one of the Login met
 
 function InviteToMatch()
 {
-    var id = "589df75598a6d4427971d66f";
-    var friendId = "582ce75598a6d4937152d69a";
+    const id = "589df75598a6d4427971d66f";
+    const friendId = "582ce75598a6d4937152d69a";
 
     clan.withGamer(gamer).matches("private").invite(id, friendId, null, function(error, inviteToMatchRes)
     {
@@ -976,6 +1047,25 @@ Authorization: Basic gamer_id:gamer_secret
 BODY
 {
 }
+```
+
+```javascript--server
+function __InviteToMatch(params, customData, mod) {
+    "use strict";
+    // don't edit above this line // must be on line 3
+  
+    const id = "589df75598a6d4427971d66f";
+    const creatorId = "589df75598a6d4427971d66e";   // Id of the user who created the match
+    const invitedId = "589df75598a6d4427971d66d";   // Id of the user invited to the match
+    return this.match.inviteToMatch(id, creatorId, invitedId)
+    .then(res => {
+        mod.debug("Player invited: " + JSON.stringify(res));
+        return res;
+    })
+    .catch(error => {
+  	    throw new Error("Could not invite player: " + error);
+    });
+} // must be on last line, no CR
 ```
 
 This function is used to invite a user to a match. It can be called at any time, just after creation or even after the
@@ -1026,17 +1116,17 @@ class MyGame
 {
     void JoinMatch()
     {
-        CotCHelpers::CHJSON json;
+        XtraLife::Helpers::CHJSON json;
 
         json.Put("id", "589df75598a6d4427971d66f");
-        CloudBuilder::CMatchManager::Instance()->JoinMatch(&json, MakeResultHandler(this, &MyGame::JoinMatchDone));
+        XtraLife::CMatchManager::Instance()->JoinMatch(&json, XtraLife::MakeResultHandler(this, &MyGame::JoinMatchDone));
     }
 
-    void JoinMatchDone(eErrorCode aErrorCode, const CloudBuilder::CCloudResult *aResult)
+    void JoinMatchDone(XtraLife::eErrorCode aErrorCode, const XtraLife::CCloudResult *aResult)
     {
-        if(aErrorCode == eErrorCode::enNoErr)
+        if(aErrorCode == XtraLife::eErrorCode::enNoErr)
         {
-            const CHJSON* json = aResult->GetJSON();
+            const XtraLife::Helpers::CHJSON* json = aResult->GetJSON();
             printf("Joined match: %s\n", aResult->GetJSON()->print_formatted().c_str());
         }
         else
@@ -1112,6 +1202,24 @@ Authorization: Basic gamer_id:gamer_secret
 BODY
 {
 }
+```
+
+```javascript--server
+function __JoinMatch(params, customData, mod) {
+    "use strict";
+    // don't edit above this line // must be on line 3
+  
+    const id = "589df75598a6d4427971d66f";
+    const gamerId = "589df75598a6d4427971d66e";   // Id of the user to join the match
+    return this.match.joinMatch(id, gamerId)
+    .then(res => {
+        mod.debug("Joined match: " + JSON.stringify(res));
+        return res;
+    })
+    .catch(error => {
+  	    throw new Error("Could not join match: " + error);
+    });
+} // must be on last line, no CR
 ```
 
 This function is used to join a match at any time. A user doesn't need to be invited to be able to join a match. It's up to
@@ -1224,17 +1332,17 @@ class MyGame
 {
     void DismissInvite()
     {
-        CotCHelpers::CHJSON json;
+        XtraLife::Helpers::CHJSON json;
 
         json.Put("id", "589df75598a6d4427971d66f");
-        CloudBuilder::CMatchManager::Instance()->InvitePlayer(&json, MakeResultHandler(this, &MyGame::DismissInviteDone));
+        XtraLife::CMatchManager::Instance()->InvitePlayer(&json, XtraLife::MakeResultHandler(this, &MyGame::DismissInviteDone));
     }
 
-    void DismissInviteDone(eErrorCode aErrorCode, const CloudBuilder::CCloudResult *aResult)
+    void DismissInviteDone(XtraLife::eErrorCode aErrorCode, const XtraLife::CCloudResult *aResult)
     {
-        if(aErrorCode == eErrorCode::enNoErr)
+        if(aErrorCode == XtraLife::eErrorCode::enNoErr)
         {
-            const CHJSON* json = aResult->GetJSON();
+            const XtraLife::Helpers::CHJSON* json = aResult->GetJSON();
             printf("Invite dismissed: %s\n", aResult->GetJSON()->print_formatted().c_str());
         }
         else
@@ -1310,6 +1418,24 @@ x-apisecret:YourGameApiSecret
 Authorization: Basic gamer_id:gamer_secret
 ```
 
+```javascript--server
+function __DismissInvite(params, customData, mod) {
+    "use strict";
+    // don't edit above this line // must be on line 3
+  
+    const id = "589df75598a6d4427971d66f";
+    const gamerId = "589df75598a6d4427971d66e";   // Id of the user declining to join the match
+    return this.match.dismissInvitation(id, gamerId)
+    .then(res => {
+        mod.debug("Invite dismissed: " + JSON.stringify(res));
+        return res;
+    })
+    .catch(error => {
+  	    throw new Error("Could not dismiss invite: " + error);
+    });
+} // must be on last line, no CR
+```
+
 This function is used to decline an invitation to a match.
 
 Parameter | Type | Description
@@ -1356,7 +1482,7 @@ class MyGame
 {
     void PostMove()
     {
-        CotCHelpers::CHJSON json, move, globalState;
+        XtraLife::Helpers::CHJSON json, move, globalState;
 
         move.Put("pawn1", "A2-A4");
         globalState.Put("board"), "the board content";
@@ -1364,14 +1490,14 @@ class MyGame
         json.Put("lastEventId", "58a2f0bdf5973cc2647e29ca");
         json.Put("move", move.Duplicate());
         json.Put("globalState", globalState.Duplicate());
-        CloudBuilder::CMatchManager::Instance()->JoinMatch(&json, MakeResultHandler(this, &MyGame::PostMoveDone));
+        XtraLife::CMatchManager::Instance()->JoinMatch(&json, XtraLife::MakeResultHandler(this, &MyGame::PostMoveDone));
     }
 
-    void PostMoveDone(eErrorCode aErrorCode, const CloudBuilder::CCloudResult *aResult)
+    void PostMoveDone(XtraLife::eErrorCode aErrorCode, const XtraLife::CCloudResult *aResult)
     {
-        if(aErrorCode == eErrorCode::enNoErr)
+        if(aErrorCode == XtraLife::eErrorCode::enNoErr)
         {
-            const CHJSON* json = aResult->GetJSON();
+            const XtraLife::Helpers::CHJSON* json = aResult->GetJSON();
             printf("Move posted: %s\n", aResult->GetJSON()->print_formatted().c_str());
         }
         else
@@ -1431,10 +1557,10 @@ var gamer; // gamer was retrieved previously with a call to one of the Login met
 
 function PostMove()
 {
-    var id = "589df75598a6d4427971d66f";
-    var lastEventId = "58a2f0bdf5973cc2647e29ca";
-    var move = { pawn1 : "A2-A4" };
-    var globalState = { board : "the board content" };
+    const id = "589df75598a6d4427971d66f";
+    const lastEventId = "58a2f0bdf5973cc2647e29ca";
+    const move = { pawn1 : "A2-A4" };
+    const globalState = { board : "the board content" };
     clan.withGamer(gamer).matches("private").move(id, lastEventId, move, globalState, null, function(error, postMoveRes)
     {
       if(error)
@@ -1462,6 +1588,26 @@ BODY
         "board" : "the board content"
     }
 }
+```
+
+```javascript--server
+function __PostMove(params, customData, mod) {
+    "use strict";
+    // don't edit above this line // must be on line 3
+  
+    const id = "589df75598a6d4427971d66f";
+    const gamerId = "589df75598a6d4427971d66e";   // Id of the user making the move
+    const move = { pawn1 : "A2-A4" };
+    const lastEventId = "589df75598a6d4427971d66d";
+    return this.match.postMove(id, gamerId, move, lastEventId, null)
+    .then(res => {
+        mod.debug("Move posted: " + JSON.stringify(res));
+        return res;
+    })
+    .catch(error => {
+  	    throw new Error("Could not post move: " + error);
+    });
+} // must be on last line, no CR
 ```
 
 This function is used to send a move to a match in order to progress into the game. A move is propagated to all other players
@@ -1519,19 +1665,19 @@ class MyGame
 {
     void DrawFromShoe()
     {
-        CotCHelpers::CHJSON json;
+        XtraLife::Helpers::CHJSON json;
 
         json.Put("id", "589df75598a6d4427971d66f");
         json.Put("lastEventId", "58a2f0bdf5973cc2647e29ca");
         json.Put("count", 3);
-        CloudBuilder::CMatchManager::Instance()->DrawFromShoe(&json, MakeResultHandler(this, &MyGame::DrawFromShoeDone));
+        XtraLife::CMatchManager::Instance()->DrawFromShoe(&json, XtraLife::MakeResultHandler(this, &MyGame::DrawFromShoeDone));
     }
 
-    void DrawFromShoeDone(eErrorCode aErrorCode, const CloudBuilder::CCloudResult *aResult)
+    void DrawFromShoeDone(XtraLife::eErrorCode aErrorCode, const XtraLife::CCloudResult *aResult)
     {
-        if(aErrorCode == eErrorCode::enNoErr)
+        if(aErrorCode == XtraLife::eErrorCode::enNoErr)
         {
-            const CHJSON* json = aResult->GetJSON();
+            constXtraLife::Helpers::CHJSON* json = aResult->GetJSON();
             printf("Draw from shoe: %s\n", aResult->GetJSON()->print_formatted().c_str());
         }
         else
@@ -1587,8 +1733,8 @@ var gamer; // gamer was retrieved previously with a call to one of the Login met
 
 function DrawFromShoe()
 {
-    var id = "589df75598a6d4427971d66f";
-    var lastEventId = "58a2f0bdf5973cc2647e29ca";
+    const id = "589df75598a6d4427971d66f";
+    const lastEventId = "58a2f0bdf5973cc2647e29ca";
     clan.withGamer(gamer).matches("private").move(id, lastEventId, 3, null, function(error, drawFromShoeRes)
     {
       if(error)
@@ -1610,6 +1756,25 @@ Authorization: Basic gamer_id:gamer_secret
 BODY
 {
 }
+```
+
+```javascript--server
+function __DrawFromShoe(params, customData, mod) {
+    "use strict";
+    // don't edit above this line // must be on line 3
+  
+    const id = "589df75598a6d4427971d66f";
+    const gamerId = "589df75598a6d4427971d66e";   // Id of the user drawing the shoe
+    const lastEventId = "589df75598a6d4427971d66d";
+    return this.match.drawFromShoe(id, gamerId, null, lastEventId, 3)
+    .then(res => {
+        mod.debug("Draw from shoe: " + JSON.stringify(res));
+        return res;
+    })
+    .catch(error => {
+  	    throw new Error("Could not draw from shoe: " + error);
+    });
+} // must be on last line, no CR
 ```
 
 This function is used to draw objects from the shoe, provided that one was passed at the time of the creation.
@@ -1665,17 +1830,17 @@ class MyGame
 {
     void LeaveMatch()
     {
-        CotCHelpers::CHJSON json;
+        XtraLife::Helpers::CHJSON json;
 
         json.Put("id", "589df75598a6d4427971d66f");
-        CloudBuilder::CMatchManager::Instance()->LeaveMatch(&json, MakeResultHandler(this, &MyGame::LeaveMatchDone));
+        XtraLife::CMatchManager::Instance()->LeaveMatch(&json, XtraLife::MakeResultHandler(this, &MyGame::LeaveMatchDone));
     }
 
-    void LeaveMatchDone(eErrorCode aErrorCode, const CloudBuilder::CCloudResult *aResult)
+    void LeaveMatchDone(XtraLife::eErrorCode aErrorCode, const XtraLife::CCloudResult *aResult)
     {
-        if(aErrorCode == eErrorCode::enNoErr)
+        if(aErrorCode == XtraLife::eErrorCode::enNoErr)
         {
-            const CHJSON* json = aResult->GetJSON();
+            const XtraLife::Helpers::CHJSON* json = aResult->GetJSON();
             printf("Left the match: %s\n", aResult->GetJSON()->print_formatted().c_str());
         }
         else
@@ -1752,6 +1917,24 @@ Authorization: Basic gamer_id:gamer_secret
 BODY
 {
 }
+```
+
+```javascript--server
+function __LeaveMatch(params, customData, mod) {
+    "use strict";
+    // don't edit above this line // must be on line 3
+  
+    const id = "589df75598a6d4427971d66f";
+    const gamerId = "589df75598a6d4427971d66e";   // Id of the user drawing the shoe
+    return this.match.leaveMatch(id, gamerId, null)
+    .then(res => {
+        mod.debug("Left the match: " + JSON.stringify(res));
+        return res;
+    })
+    .catch(error => {
+  	    throw new Error("Could notleave the match: " + error);
+    });
+} // must be on last line, no CR
 ```
 
 This function is used to leave a match. This is only possible if the status of the match is still `running`. If it has

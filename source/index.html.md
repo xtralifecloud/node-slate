@@ -1,5 +1,5 @@
 ---
-title: API Reference
+title: XtraLife API Reference
 
 language_tabs:
   - cpp: C++

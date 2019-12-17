@@ -15,14 +15,14 @@ class MyGame
 {
     void ListFriends()
     {
-        CloudBuilder::CTribeManager::Instance()->ListFriends("private", MakeResultHandler(this, &MyGame::ListFriendsHandler);
+        XtraLife::CTribeManager::Instance()->ListFriends("private", XtraLife::MakeResultHandler(this, &MyGame::ListFriendsHandler);
     }
 
-    void ListFriendsHandler(eErrorCode aErrorCode, const CloudBuilder::CCloudResult *aResult)
+    void ListFriendsHandler(XtraLife::eErrorCode aErrorCode, const XtraLife::CCloudResult *aResult)
     {
         if(aErrorCode == eErrorCode::enNoErr)
         {
-            const CHJSON* json = aResult->GetJSON();
+            const XtraLife::Helpers::CHJSON* json = aResult->GetJSON();
             printf("List of friends: %s\n", aResult->GetJSON()->print_formatted().c_str());
         }
         else
@@ -80,6 +80,22 @@ x-apisecret:YourGameApiSecret
 Authorization: Basic gamer_id:gamer_secret
 ```
 
+```javascript--server
+function __ListFriends(params, customData, mod) {
+    "use strict";
+    // don't edit above this line // must be on line 3
+  
+    return this.user.relations.friends(this.game.getPrivateDomain(), params.user_id)
+    .then(res => {
+        mod.debug("List of friends: " + JSON.stringify(res));
+        return res;
+    })
+    .catch(error => {
+  	    throw new Error("Could not list friends: " + error);
+    });
+} // must be on last line, no CR
+```
+
 This function is used to get a list of all the user friends.
 
 Parameter | Type | Description
@@ -122,14 +138,14 @@ class MyGame
 {
     void Blacklisted()
     {
-        CloudBuilder::CTribeManager::Instance()->BlacklistFriends("private", MakeResultHandler(this, &MyGame::BlacklistedHandler);
+        XtraLife::CTribeManager::Instance()->BlacklistFriends("private", XtraLife::MakeResultHandler(this, &MyGame::BlacklistedHandler);
     }
 
-    void BlacklistedHandler(eErrorCode aErrorCode, const CloudBuilder::CCloudResult *aResult)
+    void BlacklistedHandler(XtraLife::eErrorCode aErrorCode, const XtraLife::CCloudResult *aResult)
     {
-        if(aErrorCode == eErrorCode::enNoErr)
+        if(aErrorCode == XtraLife::eErrorCode::enNoErr)
         {
-            const CHJSON* json = aResult->GetJSON();
+            const XtraLife::Helpers::CHJSON* json = aResult->GetJSON();
             printf("List of blacklisted users: %s\n", aResult->GetJSON()->print_formatted().c_str());
         }
         else
@@ -187,6 +203,22 @@ x-apisecret:YourGameApiSecret
 Authorization: Basic gamer_id:gamer_secret
 ```
 
+```javascript--server
+function __Blacklisted(params, customData, mod) {
+    "use strict";
+    // don't edit above this line // must be on line 3
+  
+    return this.user.relations.blacklist(this.game.getPrivateDomain(), params.user_id)
+    .then(res => {
+        mod.debug("List of blacklisted users: " + JSON.stringify(res));
+        return res;
+    })
+    .catch(error => {
+  	    throw new Error("Could not list blacklisted users: " + error);
+    });
+} // must be on last line, no CR
+```
+
 This function is used to get a list of all the blacklisted users.
 
 Parameter | Type | Description
@@ -229,18 +261,18 @@ class MyGame
 {
     void AddFriend()
     {
-        CHJSON json;
+        XtraLife::Helpers::CHJSON json;
         json.Put("id", "563a747bfcc7e918540a9937");
         json.Put("status", "add");
         json.Put("domain", "private");
-        CloudBuilder::CUserManager::Instance()->ChangeRelationshipStatus(&json, MakeResultHandler(this, &MyGame::AddFriendHandler));
+        XtraLife::CUserManager::Instance()->ChangeRelationshipStatus(&json, XtraLife::MakeResultHandler(this, &MyGame::AddFriendHandler));
     }
 
-    void AddFriendHandler(eErrorCode aErrorCode, const CloudBuilder::CCloudResult *aResult)
+    void AddFriendHandler(XtraLife::eErrorCode aErrorCode, const XtraLife::CCloudResult *aResult)
     {
-        if(aErrorCode == eErrorCode::enNoErr)
+        if(aErrorCode == XtraLife::eErrorCode::enNoErr)
         {
-            const CHJSON* json = aResult->GetJSON();
+            const XtraLife::Helpers::CHJSON* json = aResult->GetJSON();
             printf("Relationship modified: %s\n", aResult->GetJSON()->print_formatted().c_str());
         }
         else
@@ -298,6 +330,22 @@ x-apisecret:YourGameApiSecret
 Authorization: Basic gamer_id:gamer_secret
 ```
 
+```javascript--server
+function __AddFriend(params, customData, mod) {
+    "use strict";
+    // don't edit above this line // must be on line 3
+  
+    return this.user.relations.setFriendStatus(this.game.getPrivateDomain(), params.user_id, mod.ObjectID("563a747bfcc7e918540a9937"), "add")
+    .then(res => {
+        mod.debug("Relationship modified: " + JSON.stringify(res));
+        return res;
+    })
+    .catch(error => {
+  	    throw new Error("Could not modify relationship: " + error);
+    });
+} // must be on last line, no CR
+```
+
 This function is used to modify the relationship between two users. The different statuses are:
 
 1. No relationship
@@ -346,20 +394,20 @@ class MyGame
 {
     void ListNetworkFriends()
     {
-        CHJSON json, user, details;
+        XtraLife::Helpers::CHJSON json, user, details;
         details.Put("name", "John Doe");    // Put whatever you want in this JSON
         user.Put("Gcj0YsioS5Bj", details.Duplicate());  // Associate the previous JSON with the id from a social network
         json.Put("friends", user.Duplicate());   // Build your JSON with friends to send to our servers
         json.Put("domain", "private");
         json.Put("automatching", false);
-        CloudBuilder::CTribeManager::Instance()->ListNetworkFriends(&json, MakeResultHandler(this, &MyGame::ListNetworkFriendsHandler);
+        XtraLife::CTribeManager::Instance()->ListNetworkFriends(&json, XtraLife::MakeResultHandler(this, &MyGame::ListNetworkFriendsHandler);
     }
 
-    void ListNetworkFriendsHandler(eErrorCode aErrorCode, const CloudBuilder::CCloudResult *aResult)
+    void ListNetworkFriendsHandler(XtraLife::eErrorCode aErrorCode, const XtraLife::CCloudResult *aResult)
     {
-        if(aErrorCode == eErrorCode::enNoErr)
+        if(aErrorCode == XtraLife::eErrorCode::enNoErr)
         {
-            const CHJSON* json = aResult->GetJSON();
+            const XtraLife::Helpers::CHJSON* json = aResult->GetJSON();
             printf("Network friends: %s\n", aResult->GetJSON()->print_formatted().c_str());
         }
         else

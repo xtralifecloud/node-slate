@@ -22,20 +22,20 @@ class MyGame
 {
     void InvokeGameBatch()
     {
-        CHJSON config, param;
+        XtraLife::Helpers::CHJSON config, param;
 
         config.Put("domain", "private");
         config.Put("name", "myGameBatch");
         param.Put("myParam1", "Some value");
         param.Put("myParam2", 1000);
-        CloudBuilder::CGameManager::Instance()->Batch("private", MakeResultHandler(this, &MyGame::InvokeGameBatchHandler);
+        XtraLife::CGameManager::Instance()->Batch("private", XtraLife::MakeResultHandler(this, &MyGame::InvokeGameBatchHandler);
     }
 
-    void InvokeGameBatchHandler(eErrorCode aErrorCode, const CloudBuilder::CCloudResult *aResult)
+    void InvokeGameBatchHandler(XtraLife::eErrorCode aErrorCode, const XtraLife::CCloudResult *aResult)
     {
-        if(aErrorCode == eErrorCode::enNoErr)
+        if(aErrorCode == XtraLife::eErrorCode::enNoErr)
         {
-            const CHJSON* json = aResult->GetJSON();
+            const XtraLife::Helpers::CHJSON* json = aResult->GetJSON();
             printf("Result of game batch: %s\n", aResult->GetJSON()->print_formatted().c_str());
         }
         else
@@ -98,6 +98,38 @@ BODY
 }
 ```
 
+```javascript--server
+function __InvokeGameBatch(params, customData, mod) {
+    "use strict";
+    // don't edit above this line // must be on line 3
+  
+    return this.game.runBatch(this.game.getPrivateDomain(), "myGameBatch", { myParam1 : "Some value", myParam2 : 1000 })
+    .then(res => {
+        mod.debug("Result of game batch: " + JSON.stringify(res));
+        return res;
+    })
+    .catch(error => {
+  	    throw new Error("Could not invoke game batch: " + error);
+    });
+} // must be on last line, no CR
+
+// A variant of this feature is available in the server side scripts
+// which allows to lock a resource before calling the batch.
+function __InvokeGameBatchWithLock(params, customData, mod) {
+    "use strict";
+    // don't edit above this line // must be on line 3
+  
+    return this.game.runBatchWithLock(this.game.getPrivateDomain(), "myGameBatch", { myParam1 : "Some value", myParam2 : 1000 }, "resourceToLock")
+    .then(res => {
+        mod.debug("Result of game batch: " + JSON.stringify(res));
+        return res;
+    })
+    .catch(error => {
+  	    throw new Error("Could not invoke game batch: " + error);
+    });
+} // must be on last line, no CR
+```
+
 This function is used to invoke a game batch inside a domain. The batch will receive a JSON with two keys. First
 key is `domain` and the second key `request` contains the JSON which was passed as parameter to the function.
 
@@ -133,20 +165,20 @@ class MyGame
 {
     void InvokeUserBatch()
     {
-        CHJSON config, param;
+        XtraLife::Helpers::CHJSON config, param;
 
         config.Put("domain", "private");
         config.Put("name", "myUserBatch");
         param.Put("myParam1", "Some value");
         param.Put("myParam2", 1000);
-        CloudBuilder::CUserManager::Instance()->Batch("private", MakeResultHandler(this, &MyGame::InvokeUserBatchHandler);
+        XtraLife::CUserManager::Instance()->Batch("private", XtraLife::MakeResultHandler(this, &MyGame::InvokeUserBatchHandler);
     }
 
-    void InvokeUserBatchHandler(eErrorCode aErrorCode, const CloudBuilder::CCloudResult *aResult)
+    void InvokeUserBatchHandler(XtraLife::eErrorCode aErrorCode, const XtraLife::CCloudResult *aResult)
     {
-        if(aErrorCode == eErrorCode::enNoErr)
+        if(aErrorCode == XtraLife::eErrorCode::enNoErr)
         {
-            const CHJSON* json = aResult->GetJSON();
+            const XtraLife::Helpers::CHJSON* json = aResult->GetJSON();
             printf("Result of user batch: %s\n", aResult->GetJSON()->print_formatted().c_str());
         }
         else

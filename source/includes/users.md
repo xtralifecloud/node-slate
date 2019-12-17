@@ -13,14 +13,14 @@ class MyGame
 {
     void FindUsers()
     {
-      CloudBuilder::CTribeManager::Instance()->ListUsers("matchPattern", 10, 0, MakeResultHandler(this, &MyGame::FindUsersHandler));
+      XtraLife::CTribeManager::Instance()->ListUsers("matchPattern", 10, 0, XtraLife::MakeResultHandler(this, &MyGame::FindUsersHandler));
     }
 
-    void FindUsersHandler(eErrorCode aErrorCode, const CloudBuilder::CCloudResult *aResult)
+    void FindUsersHandler(XtraLife::eErrorCode aErrorCode, const XtraLife::CCloudResult *aResult)
     {
-        if(aErrorCode == eErrorCode::enNoErr)
+        if(aErrorCode == XtraLife::eErrorCode::enNoErr)
         {
-            const CHJSON* json = aResult->GetJSON();
+            const XtraLife::Helpers::CHJSON* json = aResult->GetJSON();
             printf("Matching profiles: %s\n", aResult->GetJSON()->print_formatted().c_str());
         }
         else
@@ -138,14 +138,14 @@ class MyGame
 {
     void CheckUser()
     {
-      CloudBuilder::CUserManager::Instance()->UserExist("myEmail@gmail.com", "email", MakeResultHandler(this, &MyGame::UserExistHandler));
+      XtraLife::CUserManager::Instance()->UserExist("myEmail@gmail.com", "email", XtraLife::MakeResultHandler(this, &MyGame::UserExistHandler));
     }
 
-    void UserExistHandler(eErrorCode aErrorCode, const CloudBuilder::CCloudResult *aResult)
+    void UserExistHandler(XtraLife::eErrorCode aErrorCode, const XtraLife::CCloudResult *aResult)
     {
-        if(aErrorCode == eErrorCode::enNoErr)
+        if(aErrorCode == XtraLife::eErrorCode::enNoErr)
         {
-            const CHJSON* json = aResult->GetJSON();
+            const XtraLife::Helpers::CHJSON* json = aResult->GetJSON();
             printf("User: %s\n", aResult->GetJSON()->print_formatted().c_str());
         }
         else

@@ -65,6 +65,22 @@ x-apisecret: YourGameApiSecret
 Authorization: Basic gamer_id:gamer_secret
 ```
 
+```javascript--server
+function __LeaveMatch(params, customData, mod) {
+    "use strict";
+    // don't edit above this line // must be on line 3
+  
+    return this.profile.read(params.user_id)
+    .then(res => {
+        mod.debug("Profile data: " + JSON.stringify(res));
+        return res;
+    })
+    .catch(error => {
+  	    throw new Error("Get profile data error: " + error);
+    });
+} // must be on last line, no CR
+```
+
 Retrieves player's profile data.
 
 <aside class="success">
@@ -147,6 +163,23 @@ Authorization: Basic gamer_id:gamer_secret
 
 BODY
 {"displayName":"New Nickname","firstName":"New Firstname"}
+```
+
+```javascript--server
+function __LeaveMatch(params, customData, mod) {
+    "use strict";
+    // don't edit above this line // must be on line 3
+  
+	const profileUpdates = { displayName: "New Nickname", firstName: "New Firstname" };
+    return this.profile.write(params.user_id, profileUpdates)
+    .then(res => {
+        mod.debug("Profile data: " + JSON.stringify(res));
+        return res;
+    })
+    .catch(error => {
+  	    throw new Error("Get profile data error: " + error);
+    });
+} // must be on last line, no CR
 ```
 
 Updates player's profile data. Only the given acceptable fields will be updated, the other ones will be kept untouched.

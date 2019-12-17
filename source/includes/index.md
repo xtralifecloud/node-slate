@@ -3,7 +3,7 @@
 If you want to search for something, you probably want to use the indexing API. You can use it to index gamers (for match making),
 or matches, or anything. It's free-form, so it can apply to every use case. It works in parallel to other APIs. For instance, you
 could create a match, then index it to allow searching matches. Or you could index gamer's properties for fast retrieval.So the API
-is very simple and quite generic.
+is very simple and quite generic. The indexing API is based on ElasticSearch.
 
 **Note:**<br>
 The indexing API is an unauthenticated API: you don't have to be logged in as a user to use it.
@@ -19,7 +19,7 @@ class MyGame
 {
     void SetIndex()
     {
-        CotCHelpers::CHJSON index, properties, payload;
+        XtraLife::Helpers::CHJSON index, properties, payload;
 
         properties.Put("ratioVictory", 50);
         properties.Put("XP", 325);
@@ -30,14 +30,14 @@ class MyGame
         index.Put("objectid", "587f5d844877a1734ec079e6");
         index.Put("properties", properties.Duplicate());
         index.Put("payload", payload.Duplicate());
-        CloudBuilder::CIndexManager::Instance()->IndexObject(&index, MakeResultHandler(this, &MyGame::SetIndexDone));
+        XtraLife::CIndexManager::Instance()->IndexObject(&index, XtraLife::MakeResultHandler(this, &MyGame::SetIndexDone));
     }
 
-    void SetIndexDone(eErrorCode aErrorCode, const CloudBuilder::CCloudResult *aResult)
+    void SetIndexDone(XtraLife::eErrorCode aErrorCode, const XtraLife::CCloudResult *aResult)
     {
-        if(aErrorCode == eErrorCode::enNoErr)
+        if(aErrorCode == XtraLife::eErrorCode::enNoErr)
         {
-            const CHJSON* json = aResult->GetJSON();
+            const XtraLife::Helpers::CHJSON* json = aResult->GetJSON();
             printf("Index set: %s\n", aResult->GetJSON()->print_formatted().c_str());
         }
         else
@@ -95,8 +95,8 @@ var clan; // clan was retrieved previously with a constructor to `Clan`
 
 function SetIndex()
 {
-    properties = { ratioVictory : 50, XP : 325, level : 12 };
-    payload = { someData, "playerData" };
+    const properties = { ratioVictory : 50, XP : 325, level : 12 };
+    const payload = { someData, "playerData" };
     clan.indexes("private").set("dummyIndex", "587f5d844877a1734ec079e6", properties, payload, function(error, setIndexRes)
     {
       if(error)
@@ -126,6 +126,24 @@ BODY
         "someData" : "playerData"
     }
 }
+```
+
+```javascript--server
+function __SetIndex(params, customData, mod) {
+    "use strict";
+    // don't edit above this line // must be on line 3
+  
+    const properties = { ratioVictory : 50, XP : 325, level : 12 };
+    const payload = { someData, "playerData" };
+    return this.index.index(this.game.getPrivateDomain(), "dummyIndex", "587f5d844877a1734ec079e6", properties, payload)
+    .then(res => {
+        mod.debug("Index set: " + JSON.stringify(res));
+        return res;
+    })
+    .catch(error => {
+  	    throw new Error("Could not set index: " + error);
+    });
+} // must be on last line, no CR
 ```
 
 This function is used to add or update an object in an index. You can have as many indexes as you need: one for gamers' properties,
@@ -173,7 +191,7 @@ Result JSON in case of failure:
 
 ## Get an index
 
-> To insert or modify an index, use this code:
+> To get an index, use this code:
 
 ```cpp
 #include "CIndexManager.h"
@@ -182,19 +200,19 @@ class MyGame
 {
     void GetIndex()
     {
-        CotCHelpers::CHJSON json;
+        XtraLife::Helpers::CHJSON json;
 
         json.Put("domain", "private");
         json.Put("index", "dummyIndex");
         json.Put("objectid", "587f5d844877a1734ec079e6");
-        CloudBuilder::CIndexManager::Instance()->IndexObject(&json, MakeResultHandler(this, &MyGame::GetIndexDone));
+        XtraLife::CIndexManager::Instance()->FetchObject(&json, XtraLife::MakeResultHandler(this, &MyGame::GetIndexDone));
     }
 
-    void GetIndexDone(eErrorCode aErrorCode, const CloudBuilder::CCloudResult *aResult)
+    void GetIndexDone(XtraLife::eErrorCode aErrorCode, const XtraLife::CCloudResult *aResult)
     {
-        if(aErrorCode == eErrorCode::enNoErr)
+        if(aErrorCode == XtraLife::eErrorCode::enNoErr)
         {
-            const CHJSON* json = aResult->GetJSON();
+            const XtraLife::Helpers::CHJSON* json = aResult->GetJSON();
             printf("Got index: %s\n", aResult->GetJSON()->print_formatted().c_str());
         }
         else
@@ -326,19 +344,19 @@ class MyGame
 {
     void DeleteIndex()
     {
-        CotCHelpers::CHJSON json;
+        XtraLife::Helpers::CHJSON json;
 
         json.Put("domain", "private");
         json.Put("index", "dummyIndex");
         json.Put("objectid", "587f5d844877a1734ec079e6");
-        CloudBuilder::CIndexManager::Instance()->DeleteObject(&json, MakeResultHandler(this, &MyGame::DeleteIndexDone));
+        XtraLife::CIndexManager::Instance()->DeleteObject(&json, XtraLife::MakeResultHandler(this, &MyGame::DeleteIndexDone));
     }
 
-    void DeleteIndexDone(eErrorCode aErrorCode, const CloudBuilder::CCloudResult *aResult)
+    void DeleteIndexDone(XtraLife::eErrorCode aErrorCode, const XtraLife::CCloudResult *aResult)
     {
-        if(aErrorCode == eErrorCode::enNoErr)
+        if(aErrorCode == XtraLife::eErrorCode::enNoErr)
         {
-            const CHJSON* json = aResult->GetJSON();
+            const XtraLife::Helpers::CHJSON* json = aResult->GetJSON();
             printf("Index deleted: %s\n", aResult->GetJSON()->print_formatted().c_str());
         }
         else
@@ -411,6 +429,22 @@ x-apikey: YourGameApiKey
 x-apisecret:YourGameApiSecret
 ```
 
+```javascript--server
+function __DeleteIndex(params, customData, mod) {
+    "use strict";
+    // don't edit above this line // must be on line 3
+  
+    return this.index.delete(this.game.getPrivateDomain(), "dummyIndex", "587f5d844877a1734ec079e6")
+    .then(res => {
+        mod.debug("Index deleted: " + JSON.stringify(res));
+        return res;
+    })
+    .catch(error => {
+  	    throw new Error("Could not delete index: " + error);
+    });
+} // must be on last line, no CR
+```
+
 This function is uded to delete a single index entry, by id.
 
 Parameter | Type | Description
@@ -449,9 +483,9 @@ Result JSON in case of failure:
 }
 ```
 
-## Search an index
+## Search an index (string query)
 
-> To search an index, use this code:
+> ElasticSearch provides a quick and easy to use way to search indices. It still allows to make complex queries. The complete syntax is available [here](https://www.elastic.co/guide/en/elasticsearch/reference/2.3/query-dsl-query-string-query.html#query-string-syntax). To perform a query string, use this code:
 
 ```cpp
 #include "CIndexManager.h"
@@ -460,7 +494,7 @@ class MyGame
 {
     void SearchIndex()
     {
-        CotCHelpers::CHJSON json, *sort;
+        XtraLife::Helpers::CHJSON json, *sort;
 
         sort = CotCHelpers::CHJSON::Array();
         sort->Add(new CotCHelpers::CHJSON("ratioVictory"));
@@ -471,14 +505,14 @@ class MyGame
         json.Put("sort", sort);
         json.Put("limit", 5);
         json.Put("skip", 0);
-        CloudBuilder::CIndexManager::Instance()->Search(&json, MakeResultHandler(this, &MyGame::SearchIndexDone));
+        XtraLife::CIndexManager::Instance()->Search(&json, XtraLife::MakeResultHandler(this, &MyGame::SearchIndexDone));
     }
 
-    void SearchIndexDone(eErrorCode aErrorCode, const CloudBuilder::CCloudResult *aResult)
+    void SearchIndexDone(XtraLife::eErrorCode aErrorCode, const XtraLife::CCloudResult *aResult)
     {
-        if(aErrorCode == eErrorCode::enNoErr)
+        if(aErrorCode == XtraLife::eErrorCode::enNoErr)
         {
-            const CHJSON* json = aResult->GetJSON();
+            const XtraLife::Helpers::CHJSON* json = aResult->GetJSON();
             printf("Index search: %s\n", aResult->GetJSON()->print_formatted().c_str());
         }
         else
@@ -501,7 +535,7 @@ public class MyClass
         sort.Add("level");
         cloud.Index("dummyIndex", "private").Search("XP:325", sort, 5, 0)
         .Done(searchIndexRes => {
-            Debug.Log("Index search: " + searchIndexRes.ToString());
+            Debug.Log("Index search: " + searchIndexRes.Hits.ToString());
         }, ex => {
             // The exception should always be CotcException
             CotcException error = (CotcException)ex;
@@ -558,8 +592,23 @@ BODY
 }
 ```
 
-This function is used to search through indexes. It allows you to make complex queries. See the Elastic documentation to learn the
-full syntax for the query parameter. It's easy and quite powerful.
+```javascript--server
+function __SearchIndex(params, customData, mod) {
+    "use strict";
+    // don't edit above this line // must be on line 3
+  
+    return this.index.search(this.game.getPrivateDomain(), "dummyIndex", "XP:325", ["ratioVictory", "level"], 0, 5)
+    .then(res => {
+        mod.debug("Index search: " + JSON.stringify(res));
+        return res;
+    })
+    .catch(error => {
+  	    throw new Error("Could not search index: " + error);
+    });
+} // must be on last line, no CR
+```
+
+This function is used to search through indexes. It allows you to make complex queries. It's easy and quite powerful.
 
 Parameter | Type | Description
 --------- | ---- | -----------
@@ -567,6 +616,230 @@ domain | String, required | the domain in which to search through indexes
 indexName | String, required | used to scope your index (for example `matchIndex`, `userIndex`, ...)
 query | String, required | the query used to search indexes
 sort | JSON, optional | a JSON array containing properties to use for sorting results
+from | Int, optional | the index of the first result
+max | Int, optional | the number of results to return
+
+This function returns a JSON with the following keys: `total` which is the total number of results, `max_score`, as returned by
+ElasticSearch and `hits`, a JSON array whose elements are the usual index description as well as a `sort` entry if you have
+provided a sort option in your query.
+
+---
+
+<aside class="success">
+Result JSON in case of success:
+</aside>
+
+```json
+{
+  "total": 6,
+  "max_score": null,
+  "hits": [
+    {
+      "_index": "com.yourcompany.yourgame.yourdomain",
+      "_type": "dummyIndex",
+      "_id": "1",
+      "_score": null,
+      "_source": {
+        "ratioVictory": 20,
+        "XP": 325,
+        "level": 12,
+        "payload": {
+          "name": "Captain America",
+          "lastPlayed": 1433428652428
+        }
+      },
+      "sort": [
+        20,
+        12
+      ]
+    },
+    {
+      "_index": "com.yourcompany.yourgame.yourdomain",
+      "_type": "dummyIndex",
+      "_id": "2",
+      "_score": null,
+      "_source": {
+        "ratioVictory": 20,
+        "XP": 325,
+        "level": 15,
+        "payload": {
+          "name": "Captain America",
+          "lastPlayed": 1433428652428
+        }
+      },
+      "sort": [
+        20,
+        15
+      ]
+    }
+  ]
+}
+```
+
+## Search an index (full query)
+> ElasticSearch provides a specific and comprehensive language to search indices, based on JSON. The complete syntax is available [here](https://www.elastic.co/guide/en/elasticsearch/reference/2.3/query-dsl.html). To perform a full query, use this code:
+
+
+```cpp
+#include "CIndexManager.h"
+
+class MyGame
+{
+    void SearchIndex()
+    {
+        XtraLife::Helpers::CHJSON json;
+        const char* fullQuery ="{"
+                                    "\"query\": {"
+                                        "\"bool\": {"
+                                            "\"must\": {"
+                                                "\"term\": { \"XP\": 325 }"
+                                            "}"
+                                        "}"
+                                    "}"
+                                "}";
+
+        json.Put("domain", "private");
+        json.Put("index", "dummyIndex");
+        json.Put("search", CotCHelpers::CHJSON::parse(fullQuery));
+        json.Put("limit", 5);
+        json.Put("skip", 0);
+        XtraLife::CIndexManager::Instance()->Search(&json, XtraLife::MakeResultHandler(this, &MyGame::SearchIndexDone));
+    }
+
+    void SearchIndexDone(XtraLife::eErrorCode aErrorCode, const XtraLife::CCloudResult *aResult)
+    {
+        if(aErrorCode == XtraLife::eErrorCode::enNoErr)
+        {
+            const XtraLife::Helpers::CHJSON* json = aResult->GetJSON();
+            printf("Index search: %s\n", aResult->GetJSON()->print_formatted().c_str());
+        }
+        else
+            printf("Could not search index due to error: %d - %s\n", aErrorCode, aResult->GetErrorString());
+    }
+};
+```
+
+```csharp
+using CotcSdk;
+
+public class MyClass
+{
+    void SearchIndex()
+    {
+        // cloud is an object retrieved at the beginning of the game through the CotcGameObject object.
+        Bundle termKey = Bundle.CreateObject("XP", new Bundle(325));
+        Bundle mustKey = Bundle.CreateObject("term", termKey);
+        Bundle boolKey = Bundle.CreateObject("must", mustKey);
+        Bundle queryKey = Bundle.CreateObject("bool", boolKey);
+        Bundle fullQuery = Bundle.CreateObject("query", queryKey);
+
+        cloud.Index("dummyIndex", "private").SearchExtended(fullQuery, 5, 0)
+        .Done(searchIndexRes => {
+            Debug.Log("Index search: " + searchIndexRes.Hits.ToString());
+        }, ex => {
+            // The exception should always be CotcException
+            CotcException error = (CotcException)ex;
+            Debug.LogError("Could not search index: " + error.ErrorCode + " (" + error.ErrorInformation + ")");
+        });
+    }
+}
+```
+
+```objective_c
+#import "XLIndex.h"
+
+void SearchIndex()
+{
+    XLIndex* index = [[XLIndex alloc] initWithDomain:@"private" name:@"dummyIndex"];
+
+    [index searchExtended:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:325], @"XP", nil] withLimit:5 withOffset:0 completionHandler:^(NSError *error, NSInteger statusCode, NSDictionary *searchIndexRes) {
+        if(error == nil)
+        {
+            NSLog(@"Index search: %@", [searchIndexRes description]);
+        }
+        else
+        {
+            NSLog(@"Could not search index: %@", [error description]);
+        }
+    }];
+}
+```
+
+```javascript--client
+var clan; // clan was retrieved previously with a constructor to `Clan`
+
+function SearchIndex()
+{
+    const fullQuery = {
+                        query: {
+                            bool: {
+                                must: {
+                                    term: { XP : 325 }
+                                }
+                            }
+                        }
+                    };
+    clan.indexes("private").query("dummyIndex", fullQuery, 0, 5, function(error, searchIndexRes)
+    {
+      if(error)
+		    ConsoleLog("Could not search index: " + JSON.stringify(error));
+	    else
+		    ConsoleLog("Index search: " + JSON.stringify(searchIndexRes));
+    });
+}
+```
+
+```http
+POST /v1/index/{domain}/{indexName}/search?{from}&{max} HTTP/1.1
+Host: https://sandbox-api01.clanofthecloud.mobi
+Content-Type: application/json
+x-apikey: YourGameApiKey
+x-apisecret:YourGameApiSecret
+
+BODY
+{
+    "query": {
+        "bool": {
+            "must": {
+                "term": { "XP" : 325 }
+            }
+        }
+    }
+}
+```
+
+```javascript--server
+function __QueryIndex(params, customData, mod) {
+    "use strict";
+    // don't edit above this line // must be on line 3
+  
+    const fullQuery = {
+                        query: {
+                            bool: {
+                                must: {
+                                    term: { XP : 325 }
+                                }
+                            }
+                        }
+                    };
+    return this.index.query(this.game.getPrivateDomain(), "dummyIndex", fullQuery, 0, 5)
+    .then(res => {
+        mod.debug("Index search: " + JSON.stringify(res));
+        return res;
+    })
+    .catch(error => {
+  	    throw new Error("Could not search index: " + error);
+    });
+} // must be on last line, no CR
+```
+
+This function is used to search through indexes. It allows you to make complex queries.
+
+Parameter | Type | Description
+--------- | ---- | -----------
+domain | String, required | the domain in which to search through indexes
+indexName | String, required | used to scope your index (for example `matchIndex`, `userIndex`, ...)
+query | JSON, required | the query used to search indexes
 from | Int, optional | the index of the first result
 max | Int, optional | the number of results to return
 

@@ -21,21 +21,21 @@ class MyGame
 {
     void PostTransaction()
     {
-        CHJSON json, transaction;
+        XtraLife::Helpers::CHJSON json, transaction;
         // This transaction sells 10 "Gold" from the wallet (negative value), and buys 50 "Silver" (positive value)
         transaction.Put("Gold", -10);
         transaction.Put("Silver", 50);
         json.Put("domain", "private");
         json.Put("description", "Swap of Gold and Silver");
         json.Put("transaction", transaction.Duplicate());
-        CloudBuilder::CUserManager::Instance()->TransactionExtended("matchPattern", 10, 0, MakeResultHandler(this, &MyGame::PostTransactionHandler));
+        XtraLife::CUserManager::Instance()->TransactionExtended("matchPattern", 10, 0, XtraLife::MakeResultHandler(this, &MyGame::PostTransactionHandler));
     }
 
-    void PostTransactionHandler(eErrorCode aErrorCode, const CloudBuilder::CCloudResult *aResult)
+    void PostTransactionHandler(XtraLife::eErrorCode aErrorCode, const XtraLife::CCloudResult *aResult)
     {
-        if(aErrorCode == eErrorCode::enNoErr)
+        if(aErrorCode == XtraLife::eErrorCode::enNoErr)
         {
-            const CHJSON* json = aResult->GetJSON();
+            const XtraLife::Helpers::CHJSON* json = aResult->GetJSON();
             printf("Transaction posted: %s\n", aResult->GetJSON()->print_formatted().c_str());
         }
         else
@@ -104,6 +104,22 @@ BODY
 }
 ```
 
+```javascript--server
+function __PostTransaction(params, customData, mod) {
+    "use strict";
+    // don't edit above this line // must be on line 3
+  
+    return this.tx.transaction(this.game.getPrivateDomain(), params.user_id, { Gold : -10, Silver : 50},  "Swap of Gold and Silver")
+    .then(res => {
+        mod.debug("Post transaction succeeded: " + JSON.stringify(res));
+        return res;
+    })
+    .catch(error => {
+  	    throw new Error("Post transaction error: " + error);
+    });
+} // must be on last line, no CR
+```
+
 This function is used to update the virtual currencies for the user. A transaction can be used to increment or decrement a single currency, for a buy or a sell.
 You can also buy several currencies at the same time, just provide a JSON transaction with as many currencies as you wish, with the different values for each
 currency. You can also do swaps of currencies if you pass several currencies, and some of them are negative. This way, you can in a single call, buy different
@@ -169,18 +185,18 @@ class MyGame
 {
     void ListTransactions()
     {
-        CHJSON json;
+        XtraLife::Helpers::CHJSON json;
         json.Put("unit", "Silver");
         json.Put("skip", 0);
         json.Put("limit", 4);
-        CloudBuilder::CUserManager::Instance()->TxHistory("private", &json, MakeResultHandler(this, &MyGame::ListTransactionsHandler));
+        XtraLife::CUserManager::Instance()->TxHistory("private", &json, XtraLife::MakeResultHandler(this, &MyGame::ListTransactionsHandler));
     }
 
-    void ListTransactionsHandler(eErrorCode aErrorCode, const CloudBuilder::CCloudResult *aResult)
+    void ListTransactionsHandler(XtraLife::eErrorCode aErrorCode, const XtraLife::CCloudResult *aResult)
     {
-        if(aErrorCode == eErrorCode::enNoErr)
+        if(aErrorCode == XtraLife::eErrorCode::enNoErr)
         {
-            const CHJSON* json = aResult->GetJSON();
+            const XtraLife::Helpers::CHJSON* json = aResult->GetJSON();
             printf("List of transactions: %s\n", aResult->GetJSON()->print_formatted().c_str());
         }
         else
@@ -317,14 +333,14 @@ class MyGame
 {
     void GetBalance()
     {
-        CloudBuilder::CUserManager::Instance()->Balance("private", MakeResultHandler(this, &MyGame::GetBalanceHandler));
+        XtraLife::CUserManager::Instance()->Balance("private", XtraLife::MakeResultHandler(this, &MyGame::GetBalanceHandler));
     }
 
-    void GetBalanceHandler(eErrorCode aErrorCode, const CloudBuilder::CCloudResult *aResult)
+    void GetBalanceHandler(XtraLife::eErrorCode aErrorCode, const XtraLife::CCloudResult *aResult)
     {
-        if(aErrorCode == eErrorCode::enNoErr)
+        if(aErrorCode == XtraLife::eErrorCode::enNoErr)
         {
-            const CHJSON* json = aResult->GetJSON();
+            const XtraLife::Helpers::CHJSON* json = aResult->GetJSON();
             printf("Current balance: %s\n", aResult->GetJSON()->print_formatted().c_str());
         }
         else
@@ -380,6 +396,22 @@ Content-Type: application/json
 x-apikey: YourGameApiKey
 x-apisecret:YourGameApiSecret
 Authorization: Basic gamer_id:gamer_secret
+```
+
+```javascript--server
+function __GetBalance(params, customData, mod) {
+    "use strict";
+    // don't edit above this line // must be on line 3
+  
+    return this.tx.balance(this.game.getPrivateDomain(), params.user_id)
+    .then(res => {
+        mod.debug("Current balance: " + JSON.stringify(res));
+        return res;
+    })
+    .catch(error => {
+  	    throw new Error("Balance error: " + error);
+    });
+} // must be on last line, no CR
 ```
 
 This function is used to fetch the balance of all currencies for a player. For each currency, the current amount is also returned.

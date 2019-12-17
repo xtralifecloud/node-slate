@@ -20,17 +20,17 @@ class MyGame
 {
     void GetUserValue()
     {
-        CHJSON json;
+        XtraLife::Helpers::CHJSON json;
         json.Put("key", "myKey");
         json.Put("domain", "private");
-        CloudBuilder::CUserManager::Instance()->GetValue(&json, MakeResultHandler(this, &MyGame::GetUserValueHandler));
+        XtraLife::CUserManager::Instance()->GetValue(&json, XtraLife::MakeResultHandler(this, &MyGame::GetUserValueHandler));
     }
 
-    void GetUserValueHandler(eErrorCode aErrorCode, const CloudBuilder::CCloudResult *aResult)
+    void GetUserValueHandler(XtraLife::eErrorCode aErrorCode, const XtraLife::CCloudResult *aResult)
     {
-        if(aErrorCode == eErrorCode::enNoErr)
+        if(aErrorCode == XtraLife::eErrorCode::enNoErr)
         {
-            const CHJSON* result = aResult->GetJSON()->Get("result");
+            const XtraLife::Helpers::CHJSON* result = aResult->GetJSON()->Get("result");
             printf("User data: %s\n", result->print_formatted().c_str());
         }
         else
@@ -107,6 +107,22 @@ x-apisecret:YourGameApiSecret
 Authorization: Basic gamer_id:gamer_secret
 ```
 
+```javascript--server
+function __GetUserValue(params, customData, mod) {
+    "use strict";
+    // don't edit above this line // must be on line 3
+  
+    return this.virtualfs.read(this.game.getPrivateDomain(), params.user_id, "myKey")
+    .then(res => {
+        mod.debug("User data: " + JSON.stringify(res));
+        return res;
+    })
+    .catch(error => {
+  	    throw new Error("Get user data error: " + error);
+    });
+} // must be on last line, no CR
+```
+
 This function is used to retrieve some user data stored in the User VFS. If you want to retrieve a binary object, you should use
 method GetBinary instead because otherwise you will only have the url to the binary object, not the binary object itself.
 
@@ -156,16 +172,16 @@ class MyGame
 {
     void SetUserValue()
     {
-        CHJSON json;
+        XtraLife::Helpers::CHJSON json;
         json.Put("key", "myKey");
-        json.Put("data", "myValue)
+        json.Put("data", "myValue");
         json.Put("domain", "private");
-        CloudBuilder::CUserManager::Instance()->SetValue(&json, MakeResultHandler(this, &MyGame::SetUserValueHandler));
+        XtraLife::CUserManager::Instance()->SetValue(&json, XtraLife::MakeResultHandler(this, &MyGame::SetUserValueHandler));
     }
 
-    void SetUserValueHandler(eErrorCode aErrorCode, const CloudBuilder::CCloudResult *aResult)
+    void SetUserValueHandler(XtraLife::eErrorCode aErrorCode, const XtraLife::CCloudResult *aResult)
     {
-        if(aErrorCode == eErrorCode::enNoErr)
+        if(aErrorCode == XtraLife::eErrorCode::enNoErr)
         {
             printf("User data set: %s\n", aResult->GetJSON()->print_formatted().c_str());
         }
@@ -246,6 +262,22 @@ BODY
 "myValue"
 ```
 
+```javascript--server
+function __SetUserValue(params, customData, mod) {
+    "use strict";
+    // don't edit above this line // must be on line 3
+  
+    return this.virtualfs.write(this.game.getPrivateDomain(), params.user_id, "myKey", "myValue")
+    .then(res => {
+        mod.debug("User data set: " + JSON.stringify(res));
+        return res;
+    })
+    .catch(error => {
+  	    throw new Error("Set user data error: " + error);
+    });
+} // must be on last line, no CR
+```
+
 This function is used to store some user data in the User VFS. Storage uses JSON objects, which means that you can also pass a string
 (like in the samples above) or a number, or a boolean. `CHJSON` in C++ can be used to store full JSON objects or simple types, just like
 the `Bundle` in C#. For ObjectiveC, `NSDictionary` can not store simple types, which is why the ObjectiveC method take a `(id)` parameter
@@ -287,15 +319,15 @@ class MyGame
 {
     void DeleteUserValue()
     {
-        CHJSON json;
+        XtraLife::Helpers::CHJSON json;
         json.Put("key", "myKey");
         json.Put("domain", "private");
-        CloudBuilder::CUserManager::Instance()->DeleteValue(&json, MakeResultHandler(this, &MyGame::DeleteUserValueHandler));
+        XtraLife::CUserManager::Instance()->DeleteValue(&json, XtraLife::MakeResultHandler(this, &MyGame::DeleteUserValueHandler));
     }
 
-    void DeleteUserValueHandler(eErrorCode aErrorCode, const CloudBuilder::CCloudResult *aResult)
+    void DeleteUserValueHandler(XtraLife::eErrorCode aErrorCode, const XtraLife::CCloudResult *aResult)
     {
-        if(aErrorCode == eErrorCode::enNoErr)
+        if(aErrorCode == XtraLife::eErrorCode::enNoErr)
         {
             printf("User data deleted: %s\n", aResult->GetJSON()->print_formatted().c_str());
         }
@@ -372,6 +404,22 @@ x-apisecret:YourGameApiSecret
 Authorization: Basic gamer_id:gamer_secret
 ```
 
+```javascript--server
+function __DeleteUserValue(params, customData, mod) {
+    "use strict";
+    // don't edit above this line // must be on line 3
+  
+    return this.virtualfs.delete(this.game.getPrivateDomain(), params.user_id, "myKey")
+    .then(res => {
+        mod.debug("User data deleted: " + JSON.stringify(res));
+        return res;
+    })
+    .catch(error => {
+  	    throw new Error("Delete user data error: " + error);
+    });
+} // must be on last line, no CR
+```
+
 This function is used to delete some user data stored in the User VFS.
 
 Parameter | Type | Description
@@ -408,15 +456,15 @@ class MyGame
 {
     void GetUserBinary()
     {
-        CHJSON json;
+        XtraLife::Helpers::CHJSON json;
         json.Put("key", "myBinaryKey");
         json.Put("domain", "private");
-        CloudBuilder::CUserManager::Instance()->GetBinary(&json, MakeResultHandler(this, &MyGame::GetUserBinaryHandler));
+        XtraLife::CUserManager::Instance()->GetBinary(&json, XtraLife::MakeResultHandler(this, &MyGame::GetUserBinaryHandler));
     }
 
-    void GetUserBinaryHandler(eErrorCode aErrorCode, const CloudBuilder::CCloudResult *aResult)
+    void GetUserBinaryHandler(XtraLife::eErrorCode aErrorCode, const XtraLife::CCloudResult *aResult)
     {
-        if(aErrorCode == eErrorCode::enNoErr)
+        if(aErrorCode == XtraLife::eErrorCode::enNoErr)
         {
             const void* buffer = result->BinaryPtr();
             size_t sizeBuffer = result->BinarySize();
@@ -550,16 +598,16 @@ class MyGame
 {
     void SetUserBinary()
     {
-        CHJSON json;
+        XtraLife::Helpers::CHJSON json;
         json.Put("key", "myBinaryKey");
         json.Put("domain", "private");
         const char* str = "This is some text that you want to store as binary. Could be a PNG, a MP3 or anything.";
-        CloudBuilder::CUserManager::Instance()->SetBinary(&json, str, strlen(str), MakeResultHandler(this, &MyGame::SetUserBinaryHandler));
+        XtraLife::CUserManager::Instance()->SetBinary(&json, str, strlen(str), XtraLife::MakeResultHandler(this, &MyGame::SetUserBinaryHandler));
     }
 
-    void SetUserBinaryHandler(eErrorCode aErrorCode, const CloudBuilder::CCloudResult *aResult)
+    void SetUserBinaryHandler(XtraLife::eErrorCode aErrorCode, const XtraLife::CCloudResult *aResult)
     {
-        if(aErrorCode == eErrorCode::enNoErr)
+        if(aErrorCode == XtraLife::eErrorCode::enNoErr)
         {
             printf("User binary data set: %s\n", aResult->GetJSON()->print_formatted().c_str());
         }
